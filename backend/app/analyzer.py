@@ -119,7 +119,10 @@ def call_llm(user_prompt: str) -> dict:
     """The only function that talks to OpenAI, so tests can replace it."""
     from openai import OpenAI
 
-    client = OpenAI(api_key=settings.openai_api_key, timeout=60, max_retries=2)
+    # Ask for gzip only: some environments ship an old brotli package that
+    # crashes the HTTP client when the API replies brotli-compressed.
+    client = OpenAI(api_key=settings.openai_api_key, timeout=60, max_retries=2,
+                    default_headers={"Accept-Encoding": "gzip, deflate"})
     resp = client.chat.completions.create(
         model=settings.openai_model,
         temperature=0.2,  # low = more consistent output across runs
