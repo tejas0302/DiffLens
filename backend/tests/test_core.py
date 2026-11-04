@@ -81,7 +81,7 @@ def test_analyze_uses_llm_output(monkeypatch):
             {"severity": "low", "path": "invented.py", "message": "hallucinated"},
         ],
     }
-    monkeypatch.setattr(analyzer, "call_llm", lambda prompt: fake)
+    monkeypatch.setattr(analyzer, "call_llm", lambda *args, **kwargs: fake)
     try:
         result = analyze("t", "b", parse_files(SAMPLE_FILES))
     finally:

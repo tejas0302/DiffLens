@@ -22,6 +22,19 @@ so no API access is needed. A PR is kept only if it is a clean test case:
 - commits that look like review fix-ups ("address review", "typo", "lint") never
   own a file another commit also changed
 
+**Held-out set.** `data/holdout.json` holds 48 more PRs from different projects
+(pytest, requests). The development set was inspected while improving the prompt;
+the held-out set never was, so **held-out scores are the honest result**.
+
+## Prompt versions
+
+Prompts are versioned in `backend/app/analyzer.py`. v1's errors on the development
+set had a clear pattern: it over-split PRs (3.5 groups on average vs 2.6 for the
+authors) and separated tests from the code they test (authors kept 79 of 113 test
+files with their code; v1 kept 48). v2 states the principle that fixes both: a group
+is a change you could review or revert on its own, so its tests, docs and changelog
+travel with it.
+
 ## The metrics
 
 A grouping is compared as **pairs of files**: a pair is "together" if both files are
@@ -40,13 +53,13 @@ including its own fallback (top-level folder).
 ## Run it
 
 ```bash
-python evals/run_eval.py                          # baselines only, free
-OPENAI_API_KEY=sk-... python evals/run_eval.py    # + DiffLens (about $0.10 on gpt-4.1-mini)
+python evals/run_eval.py                          # baselines + cached model runs, free
+OPENAI_API_KEY=sk-... python evals/run_eval.py    # + model calls for anything not cached (~$0.10 per prompt per set)
 pytest evals                                      # metric unit tests
 ```
 
 The model sees only the PR title and diff, never commit messages (that would leak
-the answer). Responses are cached in `results/cache_<model>.json`, so results are
+the answer). Responses are cached in `results/cache_<model>_<prompt>.json`, so results are
 reproducible and re-runs are free.
 
 ## Limitations
@@ -55,4 +68,5 @@ reproducible and re-runs are free.
   time, not by topic. Filtering removes the noisiest cases but not all.
 - Four projects from one organisation share conventions; results may not
   transfer to other codebases or languages.
-- 56 PRs is enough to compare methods, not to measure small differences.
+- About 50 PRs per set is enough to compare methods, not to measure small differences;
+  every comparison is reported with a bootstrap 95% confidence interval.

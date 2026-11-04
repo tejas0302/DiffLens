@@ -1,6 +1,10 @@
 # Grouping eval results
 
-56 merged pull requests from flask (15), click (15), werkzeug (15), jinja (11). Ground truth: each file's group is the author's commit that changed it most. Pairwise scores are micro-averaged over all file pairs; ARI is averaged per PR.
+Ground truth: each file's group is the PR author's commit that changed it most. Pairwise scores are micro-averaged over file pairs; ARI (1 = the author's grouping, 0 = chance) is averaged per PR. Intervals are paired bootstrap 95% CIs over PRs. Method and limitations: [../README.md](../README.md).
+
+## Development set
+
+56 PRs: flask (15), click (15), werkzeug (15), jinja (11). Inspected while developing prompt v2, so v2 scores here are optimistic.
 
 | Method | Pairwise precision | Pairwise recall | Pairwise F1 | Mean ARI | Exact match |
 | --- | --- | --- | --- | --- | --- |
@@ -9,6 +13,21 @@
 | Top-level folder (DiffLens fallback) | 0.79 | 0.60 | 0.68 | 0.23 | 7% |
 | Parent folder | 0.84 | 0.37 | 0.51 | 0.21 | 9% |
 | Parent folder + test pairing | 0.84 | 0.37 | 0.51 | 0.20 | 9% |
-| DiffLens (gpt-4.1-mini) | 0.86 | 0.60 | 0.71 | 0.33 | 12% |
+| DiffLens v1 (gpt-4.1-mini) | 0.86 | 0.60 | 0.71 | 0.33 | 12% |
 
-Regenerate: `python evals/run_eval.py` (see evals/README.md).
+- DiffLens v1 (gpt-4.1-mini) vs best baseline (Top-level folder (DiffLens fallback)): ARI +0.11, 95% CI [+0.02, +0.20]
+
+## Held-out set
+
+48 PRs: pytest (45), requests (3). Never inspected while developing prompts.
+
+| Method | Pairwise precision | Pairwise recall | Pairwise F1 | Mean ARI | Exact match |
+| --- | --- | --- | --- | --- | --- |
+| All files in one group | 0.49 | 1.00 | 0.65 | 0.00 | 0% |
+| One group per file | 1.00 | 0.00 | 0.00 | 0.08 | 8% |
+| Top-level folder (DiffLens fallback) | 0.69 | 0.63 | 0.66 | 0.17 | 17% |
+| Parent folder | 0.64 | 0.27 | 0.38 | 0.14 | 15% |
+| Parent folder + test pairing | 0.64 | 0.27 | 0.38 | 0.14 | 15% |
+
+
+Regenerate: `python evals/run_eval.py`.

@@ -16,7 +16,11 @@ from collections import defaultdict
 from .config import settings
 from .diff_parser import FileDiff
 
-SYSTEM_PROMPT = """You are a senior engineer helping a teammate review a pull request.
+# Prompts are versioned so the eval can compare them on identical data (evals/).
+# v1: first version. v2: fixes over-splitting and tests split from their code,
+# the two failure modes the eval found in v1.
+SYSTEM_PROMPTS = {
+    "v1": """You are a senior engineer helping a teammate review a pull request.
 Group the changed files into a small number (1-6) of LOGICAL changes, i.e. what the
 author was trying to do (e.g. "Add rate limiting to the login endpoint", "Update tests",
 "Bump dependencies"), not one group per file.
@@ -28,7 +32,28 @@ Rules:
 - "risks" are concrete things a reviewer should check (a missing null check, an unhandled
   error, a behaviour change for existing callers). Only report risks you can point to in
   the diff. If there are none, return an empty list. Do not invent problems.
-- "summary" at the top level is 1-2 sentences describing the whole PR."""
+- "summary" at the top level is 1-2 sentences describing the whole PR.""",
+    "v2": """You are a senior engineer helping a teammate review a pull request.
+Group the changed files into the LOGICAL changes the author made. A group is a change
+that could be reviewed, or reverted, on its own.
+
+Rules:
+- A change travels with its own tests, docs and changelog entry: put a test file in the
+  same group as the code it tests, and a changelog or docs update with the change it
+  describes. Never make a group that is only "tests" or only "docs" for code changed
+  in this PR.
+- Prefer fewer groups. Split only when two changes are independent of each other. Many
+  pull requests are a single logical change; most have at most three.
+- Every file path you are given must appear in exactly one group. Use paths exactly as given.
+- Order groups so a reviewer should read them in that order (the core change first).
+- Each group's "summary" is 1-2 plain sentences on what changed and why it matters.
+- "risks" are concrete things a reviewer should check (a missing null check, an unhandled
+  error, a behaviour change for existing callers). Only report risks you can point to in
+  the diff. If there are none, return an empty list. Do not invent problems.
+- "summary" at the top level is 1-2 sentences describing the whole PR.""",
+}
+DEFAULT_PROMPT_VERSION = "v2"
+SYSTEM_PROMPT = SYSTEM_PROMPTS[DEFAULT_PROMPT_VERSION]
 
 RESPONSE_SCHEMA = {
     "type": "object",
@@ -115,7 +140,7 @@ def validate_groups(groups: list[dict], files: list[FileDiff]) -> list[dict]:
     return cleaned
 
 
-def call_llm(user_prompt: str) -> dict:
+def call_llm(user_prompt: str, system_prompt: str = SYSTEM_PROMPT) -> dict:
     """The only function that talks to OpenAI, so tests can replace it."""
     from openai import OpenAI
 
@@ -127,7 +152,7 @@ def call_llm(user_prompt: str) -> dict:
         model=settings.openai_model,
         temperature=0.2,  # low = more consistent output across runs
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
         response_format={
@@ -138,13 +163,13 @@ def call_llm(user_prompt: str) -> dict:
     return json.loads(resp.choices[0].message.content)
 
 
-def analyze(title: str, body: str, files: list[FileDiff]) -> dict:
-    """Returns {summary, groups, llm_risks, model, latency_ms, used_fallback}."""
+def analyze(title: str, body: str, files: list[FileDiff], prompt_version: str = DEFAULT_PROMPT_VERSION) -> dict:
+    """Returns {summary, groups, llm_risks, model, prompt_version, latency_ms, used_fallback}."""
     start = time.perf_counter()
     try:
         if not settings.openai_api_key:
             raise RuntimeError("OPENAI_API_KEY not set")
-        raw = call_llm(build_user_prompt(title, body, files))
+        raw = call_llm(build_user_prompt(title, body, files), SYSTEM_PROMPTS[prompt_version])
         groups = validate_groups(raw.get("groups", []), files)
         real = {f.path for f in files}
         llm_risks = [
@@ -157,6 +182,7 @@ def analyze(title: str, body: str, files: list[FileDiff]) -> dict:
             "groups": groups,
             "llm_risks": llm_risks,
             "model": settings.openai_model,
+            "prompt_version": prompt_version,
             "latency_ms": int((time.perf_counter() - start) * 1000),
             "used_fallback": False,
         }
@@ -166,6 +192,7 @@ def analyze(title: str, body: str, files: list[FileDiff]) -> dict:
             "groups": fallback_groups(files),
             "llm_risks": [],
             "model": "fallback",
+            "prompt_version": prompt_version,
             "latency_ms": int((time.perf_counter() - start) * 1000),
             "used_fallback": True,
         }
