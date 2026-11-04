@@ -103,8 +103,14 @@ built-in example review (`/reviews/example`), so the public link never breaks.
 Render's free tier sleeps after 15 idle minutes, so the first webhook after a quiet spell can take
 about a minute; GitHub's "Redeliver" button on the App's Advanced tab retries it.
 
+## Evaluation
+
+Grouping is scored on 56 real merged PRs from Flask, Click, Werkzeug and Jinja, using each
+PR author's own commits as the answer key, against five baselines. Method, metrics and
+limitations: [evals/README.md](evals/README.md) · results: [evals/results/RESULTS.md](evals/results/RESULTS.md).
+
 ## Roadmap
-- Eval harness: run on PRs with known bugs and report precision/recall of the risk flags
+- Extend the eval to risk flags: precision/recall against PRs whose follow-up commits fixed a bug
 - Stream large PRs file-by-file and cache per commit to cut latency
 - Inline review comments on specific lines
 - A/B test two summary formats and measure which ones reviewers open
