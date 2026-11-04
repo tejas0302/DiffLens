@@ -142,7 +142,27 @@ h2 { font-size: 1rem; margin: 2rem 0 0.75rem; text-transform: uppercase; letter-
   background: var(--bg); color: var(--accent); font: inherit; cursor: pointer;
 }
 
+.hero { padding: 2.5rem 0 2rem; max-width: 720px; }
+.eyebrow { margin: 0 0 0.75rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; }
+.hero-title { font-size: 2.3rem; line-height: 1.15; letter-spacing: -0.025em; margin: 0 0 1rem; }
+.hero-lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 1.75rem; max-width: 62ch; }
+.cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 0.6rem 1.1rem; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95rem;
+}
+.btn:hover { border-color: var(--accent); text-decoration: none; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn.primary:hover { opacity: 0.92; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0 1.25rem; }
+.feature { padding: 1.1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.feature h3 { margin: 0 0 0.4rem; font-size: 1rem; }
+.feature p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.stack { margin-bottom: 1rem; }
+
 @media (max-width: 640px) {
+  .hero-title { font-size: 1.7rem; }
+  .features { grid-template-columns: 1fr; }
   .topbar .tagline { display: none; }
   .review-row { flex-direction: column; align-items: flex-start; }
 }
