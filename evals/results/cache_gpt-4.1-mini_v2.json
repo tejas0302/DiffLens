@@ -1287,6 +1287,1447 @@
   ],
   "latency_ms": 3074
  },
+ "pip#12308": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/metadata/importlib/_envs.py",
+     "src/pip/_internal/metadata/base.py",
+     "src/pip/_internal/req/req_uninstall.py",
+     "tests/functional/test_uninstall.py",
+     "news/12308.bugfix.rst"
+    ],
+    "summary": "The PR removes legacy code that detected installed egg distributions when using the importlib.metadata backend, replacing it with a simpler approach that no longer detects eggs not directly in sys.path. It also updates the BaseDistribution egg detection logic and related uninstall code to handle zipped eggs correctly.",
+    "title": "Remove egg distribution detection in importlib.metadata backend"
+   },
+   {
+    "files": [
+     "news/13010.removal.rst"
+    ],
+    "summary": "The changelog is updated to reflect that on Python 3.14+, the pkg_resources backend cannot be used anymore and that pip no longer attempts to detect installed egg distributions when using importlib.metadata.",
+    "title": "Update changelog for removal of pkg_resources backend and egg detection"
+   }
+  ],
+  "latency_ms": 2398
+ },
+ "pip#13213": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/commands/lock.py",
+     "src/pip/_internal/models/pylock.py",
+     "src/pip/_internal/commands/__init__.py"
+    ],
+    "summary": "Add the LockCommand class and related logic to generate pylock.toml files describing locked dependencies from various sources. This includes the core command implementation, the Pylock model for lock file structure, and integration into the pip command registry.",
+    "title": "Implement experimental `pip lock` command with dependency locking functionality"
+   },
+   {
+    "files": [
+     "tests/functional/test_lock.py"
+    ],
+    "summary": "Add comprehensive functional tests covering locking wheels, sdists, local directories, editable installs, and other scenarios to ensure the new command behaves as expected.",
+    "title": "Add functional tests for `pip lock` command"
+   },
+   {
+    "files": [
+     "docs/html/cli/pip_lock.rst",
+     "docs/man/commands/lock.rst",
+     "docs/html/cli/index.md",
+     "docs/man/index.rst"
+    ],
+    "summary": "Add new CLI and man page documentation for the `pip lock` command, and update CLI index and man index to include the new command.",
+    "title": "Add documentation and man pages for `pip lock` command"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/tomli_w/LICENSE",
+     "src/pip/_vendor/tomli_w/__init__.py",
+     "src/pip/_vendor/tomli_w/_writer.py",
+     "src/pip/_vendor/tomli_w/py.typed",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Add the tomli-w library as a vendored dependency to support writing TOML lock files, including license, source files, and update vendor list.",
+    "title": "Vendor tomli-w library for TOML writing"
+   },
+   {
+    "files": [
+     "tests/unit/test_commands.py",
+     "tests/functional/test_cli.py"
+    ],
+    "summary": "Update existing tests and command lists to include the new `lock` command where relevant, ensuring test coverage and command recognition are consistent.",
+    "title": "Update tests and command registry for `lock` command inclusion"
+   },
+   {
+    "files": [
+     "news/tomli-w.vendor.rst"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 3461
+ },
+ "pip#13219": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/commands/index.py",
+     "news/13188.feature.rst"
+    ],
+    "summary": "The warning message indicating that 'pip index' is experimental and may change or be removed is removed from the command implementation.",
+    "title": "Remove experimental warning from 'pip index versions' command"
+   },
+   {
+    "files": [
+     "docs/html/cli/index.md",
+     "docs/html/cli/pip_index.rst",
+     "docs/html/reference/pip_index.rst",
+     "docs/man/commands/index.rst"
+    ],
+    "summary": "New documentation files and updates are added to describe the usage, options, and examples of the 'pip index' command, reflecting its stable status.",
+    "title": "Add documentation for 'pip index' command"
+   }
+  ],
+  "latency_ms": 1644
+ },
+ "pip#13319": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/operations/build/wheel_legacy.py",
+     "src/pip/_internal/req/req_install.py",
+     "news/13319.removal.rst"
+    ],
+    "summary": "Added a deprecation warning when building wheels using the legacy setup.py bdist_wheel mechanism, guiding users to use the PEP 517 build interface or add a pyproject.toml file. Also updated a related warning about deprecated options and added a changelog entry describing this deprecation.",
+    "title": "Deprecate legacy setup.py bdist_wheel build path"
+   },
+   {
+    "files": [
+     "tests/functional/test_install_index.py"
+    ],
+    "summary": "Modified a functional test to include --use-pep517 and --no-build-isolation options to align with the new recommended build process and avoid triggering the deprecated legacy build path.",
+    "title": "Update functional test to use PEP 517 build options"
+   }
+  ],
+  "latency_ms": 2029
+ },
+ "pip#13332": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/locations/__init__.py"
+    ],
+    "summary": "Removed the unused _fix_abiflags function and cleaned up imports in the locations module to reduce dead code and improve maintainability.",
+    "title": "Remove dead code and unused imports in locations module"
+   },
+   {
+    "files": [
+     "src/pip/_internal/utils/packaging.py"
+    ],
+    "summary": "Removed the unused safe_extra function and unused imports from the packaging utilities module to clean up dead code.",
+    "title": "Remove dead code and unused imports in packaging utilities"
+   },
+   {
+    "files": [
+     "src/pip/_internal/commands/freeze.py"
+    ],
+    "summary": "Removed the unused log_streams attribute from the FreezeCommand class as it was dead code.",
+    "title": "Remove unused attribute in freeze command"
+   }
+  ],
+  "latency_ms": 1679
+ },
+ "pip#13373": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/dependency_groups/_implementation.py",
+     "src/pip/_vendor/vendor.txt",
+     "news/13372.bugfix.rst",
+     "news/dependency-groups.vendor.rst"
+    ],
+    "summary": "Updated the vendored dependency-groups package to version 1.3.1, which normalizes dependency group names before lookup to prevent erroneous 'Dependency group not found' errors. This includes changes to the normalization logic, the resolver to use normalized names, and updated vendored package version and changelog entries.",
+    "title": "Upgrade dependency-groups to v1.3.1 with name normalization fix"
+   }
+  ],
+  "latency_ms": 1777
+ },
+ "pip#13426": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "news/13426.trivial.rst",
+     "pyproject.toml"
+    ],
+    "summary": "Added a new Ruff linting rule PIE810 to detect and optimize multiple calls to str.startswith and str.endswith. Updated pyproject.toml to include the new rule and added a changelog entry describing the rule.",
+    "title": "Add Ruff linting rule PIE810 and update pyproject.toml"
+   },
+   {
+    "files": [
+     "src/pip/_internal/operations/freeze.py",
+     "src/pip/_internal/req/req_file.py",
+     "src/pip/_internal/utils/unpacking.py",
+     "src/pip/_internal/vcs/subversion.py",
+     "tests/conftest.py",
+     "tests/lib/__init__.py"
+    ],
+    "summary": "Updated multiple source files and tests to replace repeated calls to str.startswith and str.endswith with single calls using tuple arguments, improving code clarity and performance.",
+    "title": "Refactor string method calls to use tuple arguments for startswith and endswith"
+   }
+  ],
+  "latency_ms": 2390
+ },
+ "pip#13439": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/cachecontrol/__init__.py",
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/core.py",
+     "src/pip/_vendor/certifi/cacert.pem",
+     "src/pip/_vendor/msgpack/__init__.py",
+     "src/pip/_vendor/platformdirs/version.py",
+     "src/pip/_vendor/pygments/__init__.py",
+     "src/pip/_vendor/requests/__version__.py",
+     "src/pip/_vendor/requests/compat.py",
+     "src/pip/_vendor/requests/models.py",
+     "src/pip/_vendor/requests/utils.py",
+     "src/pip/_vendor/typing_extensions.py",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Updated the vendored packages to newer versions to keep dependencies up to date and secure. This includes version bumps in the source files and updates in the vendor manifest file.",
+    "title": "Upgrade CacheControl, certifi, msgpack, platformdirs, pygments, requests, and typing_extensions vendored packages"
+   },
+   {
+    "files": [
+     "news/CacheControl.vendor.rst",
+     "news/certifi.vendor.rst",
+     "news/msgpack.vendor.rst",
+     "news/platformdirs.vendor.rst",
+     "news/pygments.vendor.rst",
+     "news/requests.vendor.rst",
+     "news/typing_extensions.vendor.rst"
+    ],
+    "summary": "Added changelog entries documenting the upgrades of each vendored package to their new versions.",
+    "title": "Add changelog entries for vendored package upgrades"
+   },
+   {
+    "files": [
+     "tools/vendoring/patches/certifi.patch",
+     "tools/vendoring/patches/requests.patch"
+    ],
+    "summary": "Updated vendoring patches to reflect changes in certifi and requests packages for compatibility with the new versions.",
+    "title": "Update vendoring patches for certifi and requests"
+   }
+  ],
+  "latency_ms": 3394
+ },
+ "pip#13473": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "MANIFEST.in",
+     "build-project/build-requirements.in",
+     "build-project/build-requirements.txt",
+     "docs/html/development/architecture/anatomy.rst",
+     "news/13743.feature.rst",
+     "pyproject.toml",
+     ".github/workflows/ci.yml"
+    ],
+    "summary": "Replaces setuptools with flit-core as the build backend for pip, updating pyproject.toml, build requirements, and removing MANIFEST.in in favor of flit's sdist configuration. Adjusts CI workflow to check sdist with flit-core and updates documentation accordingly.",
+    "title": "Switch pip build system from setuptools to flit-core"
+   },
+   {
+    "files": [
+     "tests/functional/test_freeze.py",
+     "tests/functional/test_self_update.py"
+    ],
+    "summary": "Modifies functional tests to handle the new build system, including installing flit-core in self-update tests and adjusting freeze tests to reflect setuptools visibility changes depending on Python version.",
+    "title": "Update tests to reflect build system change"
+   }
+  ],
+  "latency_ms": 2202
+ },
+ "pip#13482": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/commands/download.py",
+     "src/pip/_internal/commands/install.py",
+     "src/pip/_internal/commands/wheel.py",
+     "src/pip/_internal/operations/prepare.py",
+     "src/pip/_internal/req/req_install.py",
+     "src/pip/_internal/resolution/resolvelib/resolver.py"
+    ],
+    "summary": "The core change introduces a new preparation step `prepare_linked_requirements_more` to handle requirements more efficiently by using metadata-only downloads when possible, avoiding full wheel downloads during dry-run or lock operations.",
+    "title": "Optimize preparation to avoid full downloads when PEP-658 metadata is available"
+   },
+   {
+    "files": [
+     "news/12603.feature.rst"
+    ],
+    "summary": "Adds a feature note describing that when PEP-658 metadata is available, full distribution files are no longer downloaded during `pip lock` or `pip install --dry-run`.",
+    "title": "Add changelog entry for PEP-658 metadata optimization"
+   }
+  ],
+  "latency_ms": 2850
+ },
+ "pip#13484": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "tests/functional/test_check.py",
+     "tests/functional/test_pep517.py",
+     "tests/functional/test_show.py",
+     "tests/lib/__init__.py"
+    ],
+    "summary": "The pip_install_local() helper was enhanced to accept find_links and build_isolation parameters, allowing more flexible local package installation in tests. Functional tests were updated to use this helper instead of direct pip install calls with manual arguments, improving test clarity and consistency.",
+    "title": "Extend pip_install_local() test helper and update functional tests"
+   }
+  ],
+  "latency_ms": 1742
+ },
+ "pip#13506": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/ci.yml",
+     "noxfile.py",
+     "pyproject.toml"
+    ],
+    "summary": "Updated GitHub Actions CI workflows, nox testing sessions, and pytest configuration to include Python 3.14, ensuring tests run on the new Python version.",
+    "title": "Add Python 3.14 support in CI and testing configurations"
+   },
+   {
+    "files": [
+     "docs/html/development/ci.rst",
+     "news/13506.feature.rst"
+    ],
+    "summary": "Added Python 3.14 to the supported Python versions in the documentation and added a changelog entry declaring Python 3.14 support.",
+    "title": "Update documentation and changelog to declare Python 3.14 support"
+   },
+   {
+    "files": [
+     "tests/functional/test_install.py",
+     "tests/functional/test_proxy.py",
+     "tests/unit/test_req.py"
+    ],
+    "summary": "Modified test_install.py to use path_to_url for file URLs, adjusted test_proxy.py to xfail on Python 3.14 due to intermittent failures, and updated test_req.py to use path_to_url and fix regex for file paths, ensuring compatibility and stability with Python 3.14.",
+    "title": "Code and test adjustments related to Python 3.14 support"
+   }
+  ],
+  "latency_ms": 2377
+ },
+ "pip#13530": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "pyproject.toml",
+     "docs/requirements.txt"
+    ],
+    "summary": "Moved docs dependencies from docs/requirements.txt to a 'docs' dependency group in pyproject.toml to modernize dependency management.",
+    "title": "Replace docs requirements.txt with dependency group in pyproject.toml"
+   },
+   {
+    "files": [
+     "noxfile.py"
+    ],
+    "summary": "Modified noxfile.py to install docs and tests dependencies using the new dependency groups instead of requirements files.",
+    "title": "Update nox sessions to use dependency groups for docs and tests"
+   },
+   {
+    "files": [
+     ".readthedocs.yml"
+    ],
+    "summary": "Changed .readthedocs.yml to install docs dependencies using the new dependency group instead of the requirements.txt file.",
+    "title": "Update ReadTheDocs configuration to use dependency groups for docs"
+   }
+  ],
+  "latency_ms": 1801
+ },
+ "pip#13581": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/models/wheel.py",
+     "tests/unit/test_models_wheel.py",
+     "news/13581.removal.rst"
+    ],
+    "summary": "The Wheel class no longer supports parsing legacy non-standard wheel filenames, removing deprecated regex parsing and related logic. This enforces stricter filename validation and simplifies the code.",
+    "title": "Remove legacy wheel filename support in Wheel model"
+   },
+   {
+    "files": [
+     "tests/functional/test_index_invalid_wheels.py"
+    ],
+    "summary": "New functional tests verify that pip index versions and pip install commands ignore invalid (legacy) wheel filenames, ensuring robustness after removal of legacy filename support.",
+    "title": "Add functional tests for handling invalid wheel filenames in index and install"
+   }
+  ],
+  "latency_ms": 1863
+ },
+ "pip#13596": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "news/certifi.vendor.rst",
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/cacert.pem"
+    ],
+    "summary": "Upgraded certifi to version 2025.8.3, including updated __version__ and removal of an obsolete certificate from cacert.pem. Added changelog entry for certifi upgrade.",
+    "title": "Update certifi vendored package to 2025.8.3"
+   },
+   {
+    "files": [
+     "news/platformdirs.vendor.rst",
+     "src/pip/_vendor/platformdirs/api.py",
+     "src/pip/_vendor/platformdirs/macos.py",
+     "src/pip/_vendor/platformdirs/version.py",
+     "tests/unit/test_appdirs.py"
+    ],
+    "summary": "Upgraded platformdirs to 4.4.0, updated version.py accordingly, fixed MacOS multipath directory handling for Homebrew Python installations, and improved splitting logic in api.py. Added changelog entry for platformdirs upgrade and updated related tests.",
+    "title": "Update platformdirs vendored package to 4.4.0 with Homebrew Python path fixes"
+   },
+   {
+    "files": [
+     "news/requests.vendor.rst",
+     "src/pip/_vendor/requests/__version__.py",
+     "src/pip/_vendor/requests/adapters.py",
+     "src/pip/_vendor/requests/sessions.py",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Upgraded requests to 2.32.5, updated __version__.py, refactored adapters.py to remove preloaded SSL context optimization and simplify certificate verification logic, and fixed a docstring typo in sessions.py. Added changelog entry for requests upgrade.",
+    "title": "Update requests vendored package to 2.32.5 with SSL context refactor"
+   }
+  ],
+  "latency_ms": 5520
+ },
+ "pip#13617": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/cacert.pem",
+     "news/certifi.vendor.rst"
+    ],
+    "summary": "Upgraded certifi to version 2025.10.5, updated the version string, replaced the certificate bundle, and added a changelog entry to reflect the update.",
+    "title": "Update certifi vendored package to 2025.10.5"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/msgpack/__init__.py",
+     "news/msgpack.vendor.rst"
+    ],
+    "summary": "Upgraded msgpack to version 1.1.2, updated version strings, and added a changelog entry.",
+    "title": "Update msgpack vendored package to 1.1.2"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/platformdirs/version.py",
+     "news/platformdirs.vendor.rst"
+    ],
+    "summary": "Upgraded platformdirs to version 4.5.0, updated version strings, and added a changelog entry.",
+    "title": "Update platformdirs vendored package to 4.5.0"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/resolvelib/__init__.py",
+     "src/pip/_vendor/resolvelib/resolvers/abstract.py",
+     "src/pip/_vendor/resolvelib/resolvers/resolution.py",
+     "news/resolvelib.vendor.rst"
+    ],
+    "summary": "Upgraded resolvelib to version 1.2.1, updated version strings, added changelog entry, and improved type annotations and added a guard condition in resolution logic.",
+    "title": "Update resolvelib vendored package to 1.2.1 with minor code improvements"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/rich/style.py",
+     "news/rich.vendor.rst"
+    ],
+    "summary": "Upgraded rich to version 14.2.0, updated version strings, added changelog entry, and optimized Style.__hash__ method by using attrgetter for better performance.",
+    "title": "Update rich vendored package to 14.2.0 with hash optimization"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/tomli/__init__.py",
+     "src/pip/_vendor/tomli/_parser.py",
+     "src/pip/_vendor/tomli/_re.py",
+     "src/pip/_vendor/tomli/LICENSE-HEADER",
+     "news/tomli.vendor.rst"
+    ],
+    "summary": "Upgraded tomli to version 2.3.0, updated version strings, removed license header file, added changelog entry, and improved code style and typing in parser and regex modules.",
+    "title": "Update tomli vendored package to 2.3.0 with code cleanup and typing improvements"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Updated vendor.txt to list the new versions of certifi, msgpack, platformdirs, resolvelib, rich, and tomli.",
+    "title": "Update vendor.txt to reflect new versions of vendored packages"
+   }
+  ],
+  "latency_ms": 4898
+ },
+ "pip#13649": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/cli/main_parser.py",
+     "src/pip/_internal/cli/parser.py",
+     "tests/unit/test_cli_colors.py"
+    ],
+    "summary": "Modified the help formatter to use Rich markup for coloring option strings, groups, and metavars, and updated the main parser to display command summaries with color. This makes the help output more visually distinct and easier to scan.",
+    "title": "Add color styling to pip command line help"
+   },
+   {
+    "files": [
+     "tests/functional/test_help.py",
+     "news/12134.feature.rst"
+    ],
+    "summary": "Added functional tests to verify that the help command outputs colored text correctly and respects environment variables that disable color. Also added a changelog entry describing the new colored help feature.",
+    "title": "Add functional tests for colored help output and changelog entry"
+   }
+  ],
+  "latency_ms": 2103
+ },
+ "pip#13711": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "tests/functional/test_build_constraints.py",
+     "tests/data/pypi_packages/INITools-0.1.tar.gz",
+     "tests/data/pypi_packages/INITools-0.2.tar.gz",
+     "tests/data/pypi_packages/django_devserver-0.8.0-py3-none-any.whl",
+     "tests/data/pypi_packages/six-1.17.0-py2.py3-none-any.whl",
+     "tests/lib/__init__.py"
+    ],
+    "summary": "Added local test package files and updated build constraint tests to use these local files for installation and constraints, removing network dependency.",
+    "title": "Use local test package files for build constraint tests"
+   },
+   {
+    "files": [
+     "tests/functional/test_freeze.py"
+    ],
+    "summary": "Modified freeze tests to install packages from local files instead of downloading from network, improving test isolation and speed.",
+    "title": "Update freeze tests to use local package files"
+   },
+   {
+    "files": [
+     "tests/functional/test_install.py",
+     "tests/functional/test_install_config.py",
+     "tests/functional/test_install_user.py",
+     "tests/functional/test_uninstall.py"
+    ],
+    "summary": "Changed install tests to use local package files and the pip_install_local helper method for installation, removing network dependency and improving test reliability.",
+    "title": "Update install tests to use local package files and pip_install_local helper"
+   },
+   {
+    "files": [
+     "pyproject.toml"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 2646
+ },
+ "pip#13714": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "tests/functional/test_download.py"
+    ],
+    "summary": "The download tests were changed to use local package files and test data instead of downloading from the network, removing the network dependency and making tests faster and more reliable.",
+    "title": "Refactor download tests to avoid network access"
+   },
+   {
+    "files": [
+     "tests/functional/test_install_upgrade.py"
+    ],
+    "summary": "Install and upgrade tests were modified to install local packages instead of fetching from the network, removing network dependency and improving test isolation and speed.",
+    "title": "Refactor install and upgrade tests to use local packages"
+   },
+   {
+    "files": [
+     "tests/functional/test_list.py"
+    ],
+    "summary": "List command tests were updated to install local packages rather than downloading from the network, eliminating network dependency and improving test stability.",
+    "title": "Refactor list command tests to avoid network access"
+   },
+   {
+    "files": [
+     "tests/lib/__init__.py"
+    ],
+    "summary": "The temporary_file method in the test helper was updated to accept pathlib.Path or str for the filename parameter, improving type flexibility.",
+    "title": "Add type hint update for temporary_file helper"
+   }
+  ],
+  "latency_ms": 2358
+ },
+ "pip#13733": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "tests/functional/test_download.py",
+     "tests/functional/test_install_reqs.py",
+     "tests/functional/test_install_upgrade.py",
+     "tests/functional/test_wheel.py"
+    ],
+    "summary": "Modified functional tests for download, install, and upgrade commands to use local wheels and package indexes instead of network access, improving test isolation and reliability.",
+    "title": "Use local wheels and local indexes in functional tests for download and install commands"
+   },
+   {
+    "files": [
+     "tests/lib/__init__.py"
+    ],
+    "summary": "Added a helper method temporary_multiline_file to PipTestEnvironment to simplify creating dedented multiline temporary files in tests.",
+    "title": "Add helper method for creating dedented multiline temporary files in test environment"
+   }
+  ],
+  "latency_ms": 1815
+ },
+ "pip#13778": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "docs/pip_sphinxext.py",
+     "docs/html/cli/pip_download.rst",
+     "docs/html/cli/pip_index.rst",
+     "docs/html/cli/pip_install.rst",
+     "docs/html/cli/pip_list.rst",
+     "docs/html/cli/pip_lock.rst",
+     "docs/html/cli/pip_wheel.rst"
+    ],
+    "summary": "Introduced a new Sphinx directive 'pip-package-selection-options' to document package selection group options and added this directive to multiple pip CLI command documentation files to re-expose these options.",
+    "title": "Add pip-package-selection-options directive and include it in CLI docs"
+   },
+   {
+    "files": [
+     "noxfile.py"
+    ],
+    "summary": "Modified the docs and docs-live nox sessions to install the current package in editable mode to ensure the documentation build environment has access to the latest code.",
+    "title": "Update nox sessions to install package in editable mode for docs"
+   }
+  ],
+  "latency_ms": 2115
+ },
+ "pip#13797": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/req/req_file.py"
+    ],
+    "summary": "Modify get_file_content to accept a constraint flag and update the error message to specify whether the file is a requirements or constraint file. Update the call site accordingly.",
+    "title": "Improve error message for constraint file open failures"
+   },
+   {
+    "files": [
+     "tests/unit/test_req_file.py",
+     "news/13226.bugfix.rst"
+    ],
+    "summary": "Add a test to verify that the error message when a constraint file is missing correctly mentions 'constraint file'.",
+    "title": "Add test for missing constraint file error message"
+   }
+  ],
+  "latency_ms": 1602
+ },
+ "pip#13804": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".devcontainer/devcontainer.json",
+     ".devcontainer/postCreate.sh",
+     "pyproject.toml"
+    ],
+    "summary": "Updated the devcontainer.json to improve environment setup, added a postCreate.sh script to handle Python environment setup and dependencies installation, and adjusted the .gitignore to include devcontainer files.",
+    "title": "Enhance devcontainer configuration and setup script"
+   },
+   {
+    "files": [
+     "noxfile.py"
+    ],
+    "summary": "Refactored noxfile.py to separate common wheels building into its own session and updated the test session to reuse this functionality, improving build efficiency and clarity.",
+    "title": "Refactor nox sessions for common wheels and testing"
+   }
+  ],
+  "latency_ms": 1821
+ },
+ "pip#13817": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/models/direct_url.py",
+     "src/pip/_internal/utils/direct_url_helpers.py",
+     "src/pip/_internal/operations/prepare.py",
+     "src/pip/_internal/utils/pylock.py",
+     "src/pip/_internal/models/installation_report.py",
+     "src/pip/_internal/commands/inspect.py",
+     "src/pip/_internal/utils/hashes.py"
+    ],
+    "summary": "The core change replaces the custom DirectUrl, ArchiveInfo, DirInfo, and VcsInfo classes in pip with those from the packaging library. This simplifies the codebase by delegating direct_url.json parsing and validation to packaging, while maintaining compatibility with existing pip functionality.",
+    "title": "Replace pip's DirectUrl model with packaging's implementation"
+   },
+   {
+    "files": [
+     "tests/unit/test_direct_url_helpers.py",
+     "tests/unit/test_direct_url.py",
+     "tests/unit/test_req.py",
+     "tests/functional/test_freeze.py",
+     "tests/functional/test_install_direct_url.py",
+     "tests/functional/test_list.py",
+     "tests/unit/metadata/test_metadata.py",
+     "tests/unit/test_wheel.py"
+    ],
+    "summary": "Test files are updated to reflect the new DirectUrl model usage, replacing references to the old classes and adjusting test code to work with the new attributes and methods. This ensures tests remain valid and cover the updated implementation.",
+    "title": "Update tests to use packaging's DirectUrl model and adjust test logic"
+   },
+   {
+    "files": [
+     "NEWS.rst",
+     "news/13817.vendor.rst"
+    ],
+    "summary": "The changelog and vendor news files are updated to document the switch to packaging's DirectUrl model, noting that user-visible changes are minimal aside from validation error messages.",
+    "title": "Update changelog and vendor news for packaging DirectUrl usage"
+   }
+  ],
+  "latency_ms": 3776
+ },
+ "pip#13845": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/ci.yml",
+     "noxfile.py",
+     "news/13845.trivial.rst"
+    ],
+    "summary": "Updated GitHub Actions CI workflow and noxfile.py to include Python 3.15 in the testing environments to ensure compatibility and coverage.",
+    "title": "Add Python 3.15 to CI and nox test sessions"
+   },
+   {
+    "files": [
+     "src/pip/_internal/metadata/importlib/_dists.py"
+    ],
+    "summary": "Modified importlib metadata handling to accommodate the new behavior in Python 3.15 where metadata can be None if no metadata file exists, preventing potential errors.",
+    "title": "Fix importlib.metadata compatibility for Python 3.15"
+   }
+  ],
+  "latency_ms": 1797
+ },
+ "pip#13859": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/resolution/resolvelib/provider.py",
+     "tests/unit/resolution_resolvelib/test_provider.py",
+     "docs/html/topics/more-dependency-resolution.md",
+     "news/13859.feature.rst"
+    ],
+    "summary": "Implemented tracking of packages that repeatedly appear in backtrack conflicts and promote their resolution priority to speed up dependency resolution. Updated the provider logic to reorder identifiers accordingly and adjusted preference scoring to reflect this promotion.",
+    "title": "Add conflict-driven priority reordering in dependency resolution"
+   }
+  ],
+  "latency_ms": 2287
+ },
+ "pip#13882": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "news/certifi.vendor.rst",
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/cacert.pem"
+    ],
+    "summary": "Upgraded certifi to version 2026.2.25, updated the version string and CA certificates bundle, and added a changelog entry to document the upgrade.",
+    "title": "Update certifi vendored dependency"
+   },
+   {
+    "files": [
+     "news/requests.vendor.rst",
+     "src/pip/_vendor/requests/__init__.py",
+     "src/pip/_vendor/requests/__version__.py",
+     "src/pip/_vendor/requests/_internal_utils.py",
+     "src/pip/_vendor/requests/adapters.py",
+     "src/pip/_vendor/requests/auth.py",
+     "src/pip/_vendor/requests/certs.py",
+     "src/pip/_vendor/requests/exceptions.py",
+     "src/pip/_vendor/requests/help.py",
+     "src/pip/_vendor/requests/hooks.py",
+     "src/pip/_vendor/requests/models.py",
+     "src/pip/_vendor/requests/sessions.py",
+     "src/pip/_vendor/requests/utils.py"
+    ],
+    "summary": "Upgraded requests to version 2.33.1, updated version strings, adjusted internal utility regexes, imports, warnings formatting, and other minor code improvements. Added changelog entry for the upgrade.",
+    "title": "Update requests vendored dependency"
+   },
+   {
+    "files": [
+     "news/tomli.vendor.rst",
+     "src/pip/_vendor/tomli/__init__.py",
+     "src/pip/_vendor/tomli/_parser.py"
+    ],
+    "summary": "Upgraded tomli to version 2.3.1, updated version string, added recursion limit checks in parsing, and added changelog entry for the upgrade.",
+    "title": "Update tomli vendored dependency"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Updated the vendor.txt file to reflect the new versions of requests, certifi, and tomli.",
+    "title": "Update vendored dependencies list"
+   }
+  ],
+  "latency_ms": 3488
+ },
+ "pip#13905": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/ci.yml",
+     "noxfile.py",
+     "tests/functional/test_uninstall_user.py",
+     "tests/functional/test_warning.py"
+    ],
+    "summary": "Python 3.9 is removed from the CI workflows, nox test sessions, and Windows testing matrix to stop running tests on this EOL version.",
+    "title": "Remove Python 3.9 support from CI, tests, and nox sessions"
+   },
+   {
+    "files": [
+     "docs/html/development/ci.rst",
+     "docs/html/development/getting-started.rst",
+     "docs/html/installation.md",
+     "docs/html/topics/https-certificates.md",
+     "news/13795.removal.rst"
+    ],
+    "summary": "All references to Python 3.9 are removed from documentation files and installation instructions, and a changelog entry is added to announce the removal of Python 3.9 support.",
+    "title": "Update documentation and changelog to reflect dropping Python 3.9 support"
+   },
+   {
+    "files": [
+     "pyproject.toml",
+     "src/pip/__pip-runner__.py",
+     "src/pip/_internal/cli/index_command.py",
+     "src/pip/_internal/commands/debug.py",
+     "src/pip/_internal/locations/__init__.py",
+     "src/pip/_internal/utils/filesystem.py",
+     "tests/unit/test_locations.py"
+    ],
+    "summary": "The Python version requirement is updated in pyproject.toml and __pip-runner__.py. Runtime code removes Python 3.9-specific conditionals and adjusts sysconfig usage logic to always use sysconfig, reflecting the new minimum Python version.",
+    "title": "Update project metadata and runtime code to require Python 3.10+"
+   }
+  ],
+  "latency_ms": 3152
+ },
+ "pip#13913": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/models/candidate.py",
+     "src/pip/_internal/models/release_control.py",
+     "src/pip/_internal/models/scheme.py",
+     "src/pip/_internal/models/search_scope.py",
+     "src/pip/_internal/models/selection_prefs.py",
+     "src/pip/_internal/req/req_file.py"
+    ],
+    "summary": "Updated dataclasses InstallationCandidate, ReleaseControl, Scheme, SearchScope, ParsedRequirement, ParsedLine, and refactored SelectionPreferences to use slots=True for improved memory usage and performance.",
+    "title": "Add slots=True to dataclasses for memory optimization"
+   },
+   {
+    "files": [
+     "src/pip/_internal/cli/req_command.py",
+     "src/pip/_internal/commands/index.py",
+     "src/pip/_internal/index/package_finder.py"
+    ],
+    "summary": "Modified method signatures in req_command.py, index.py, package_finder.py to set ignore_requires_python default to False instead of None, simplifying parameter handling and removing redundant None checks.",
+    "title": "Change ignore_requires_python default from None to False in method signatures"
+   },
+   {
+    "files": [
+     "news/13913.feature.rst"
+    ],
+    "summary": "Added a news entry to document the use of slots=True for dataclasses now that Python 3.9 support is dropped.",
+    "title": "Add changelog entry for slots=True usage in dataclasses"
+   }
+  ],
+  "latency_ms": 2751
+ },
+ "pip#13917": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/req/req_dependency_group.py",
+     "src/pip/_vendor/dependency_groups/LICENSE.txt",
+     "src/pip/_vendor/dependency_groups/__init__.py",
+     "src/pip/_vendor/dependency_groups/__main__.py",
+     "src/pip/_vendor/dependency_groups/_implementation.py",
+     "src/pip/_vendor/dependency_groups/_lint_dependency_groups.py",
+     "src/pip/_vendor/dependency_groups/_pip_wrapper.py",
+     "src/pip/_vendor/dependency_groups/_toml_compat.py",
+     "src/pip/_vendor/dependency_groups/py.typed",
+     "news/dependency-groups.vendor.rst",
+     "news/13917.bugfix.rst",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "The vendored dependency-groups module is removed and replaced by importing DependencyGroupResolver and ExceptionGroup from packaging 26.1's dependency_groups module. Error handling is enhanced to catch ExceptionGroup and aggregate all error messages into a single InstallationError, providing better diagnostics for faulty dependency_groups definitions.",
+    "title": "Replace vendored dependency-groups with packaging 26.1 dependency_groups and improve error handling"
+   }
+  ],
+  "latency_ms": 2787
+ },
+ "pip#13932": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/resolution/resolvelib/base.py",
+     "src/pip/_internal/resolution/resolvelib/candidates.py",
+     "src/pip/_internal/resolution/resolvelib/factory.py",
+     "src/pip/_internal/resolution/resolvelib/reporter.py"
+    ],
+    "summary": "Added a method to format constraints with URLs and updated candidate and factory classes to use this method, improving clarity of conflict reports involving direct URLs and editable installs.",
+    "title": "Enhance error message formatting for constraints and candidates"
+   },
+   {
+    "files": [
+     "news/13932.feature.rst"
+    ],
+    "summary": "Added a changelog entry describing the improvement to conflict reports involving direct URLs.",
+    "title": "Add changelog entry for improved conflict reports"
+   }
+  ],
+  "latency_ms": 1751
+ },
+ "pip#13973": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/req/req_uninstall.py",
+     "tests/unit/test_req_uninstall.py",
+     "news/13973.bugfix.rst"
+    ],
+    "summary": "Revert the behavior of adding the entire __pycache__ directory to the uninstall path set when a .py file is removed, and instead only add the specific .pyc file corresponding to the .py file. This prevents leftover empty directories after uninstall.",
+    "title": "Revert removal of entire __pycache__ directory on uninstall"
+   }
+  ],
+  "latency_ms": 1708
+ },
+ "pip#14001": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/operations/install/wheel.py",
+     "src/pip/_internal/utils/unpacking.py",
+     "tests/unit/test_utils_unpacking.py",
+     "tests/unit/test_wheel.py",
+     "news/14001.bugfix.rst"
+    ],
+    "summary": "The is_within_directory function was corrected to properly handle cases where the target path equals the directory or involves doubled-slash roots. The wheel entry point validation was updated to use this logic, ensuring scripts are installed only within the scripts directory, including cases with doubled-slash roots.",
+    "title": "Fix is_within_directory to handle doubled-slash roots and update wheel entry point validation"
+   }
+  ],
+  "latency_ms": 1755
+ },
+ "pip#14012": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/network/session.py",
+     "tests/unit/test_network_session.py",
+     "news/14012.bugfix.rst"
+    ],
+    "summary": "Set the Accept-Encoding header to 'gzip, deflate' in PipSession to avoid cache misses and deserialization warnings caused by varying Accept-Encoding values.",
+    "title": "Fix Accept-Encoding header to a fixed value"
+   }
+  ],
+  "latency_ms": 1268
+ },
+ "pip#14016": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "noxfile.py",
+     "pyproject.toml",
+     "src/pip/_vendor/bom.cdx.json",
+     "news/13894.process.rst"
+    ],
+    "summary": "The vendoring tool version was updated from 1.2.0 to 1.4.0 in the noxfile.py, and a new CycloneDX SBOM JSON file was added to list all vendored dependencies. The pyproject.toml was updated to include the SBOM file path and adjust vendoring-related settings. A news entry was added to document the inclusion of the SBOM file.",
+    "title": "Update vendoring tool to 1.4.x and add CycloneDX SBOM file"
+   }
+  ],
+  "latency_ms": 1836
+ },
+ "pip#14033": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/build_env.py",
+     "tests/lib/venv.py",
+     "news/14033.bugfix.rst"
+    ],
+    "summary": "Adjust the logic in BuildEnvironment to clear sys.path before calling site.addsitedir to correctly discover system site-packages paths, addressing changes in Python 3.15 that affect .pth file processing. Update related test code to match this new approach and add a changelog entry describing the fix.",
+    "title": "Fix system site-packages path discovery in build isolation for Python 3.15+"
+   }
+  ],
+  "latency_ms": 1573
+ },
+ "pip#14055": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/vcs/git.py",
+     "tests/functional/test_vcs_git.py",
+     "news/14055.bugfix.rst"
+    ],
+    "summary": "Modify Git.has_commit to use 'rev-parse' with the '^{}' suffix to verify commit existence locally, avoiding unnecessary fetches.",
+    "title": "Fix Git.has_commit to detect local commits correctly"
+   }
+  ],
+  "latency_ms": 1205
+ },
+ "pip#14062": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/utils/virtualenv.py",
+     "tests/unit/test_utils_virtualenv.py",
+     "tests/functional/test_cli.py",
+     "src/pip/_internal/build_env.py",
+     "news/14062.removal.rst"
+    ],
+    "summary": "The code for detecting and handling legacy virtualenv environments has been removed from pip's internal utilities, including related tests and fallback logic. This simplifies virtual environment detection to only support PEP 405 compliant virtual environments.",
+    "title": "Remove legacy virtualenv (<20) runtime support"
+   }
+  ],
+  "latency_ms": 1746
+ },
+ "pip#14080": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/cache.py",
+     "src/pip/_internal/wheel_builder.py",
+     "tests/unit/test_cache.py",
+     "tests/unit/test_wheel_builder.py"
+    ],
+    "summary": "Modify wheel cache and wheel builder logic to never use the persistent wheel cache for local directory requirements, ensuring they are always rebuilt. This prevents stale wheels from being reused when installing from local directories.",
+    "title": "Skip wheel cache for local directory requirements"
+   },
+   {
+    "files": [
+     "tests/functional/test_install.py",
+     "tests/functional/test_wheel.py"
+    ],
+    "summary": "Add functional tests to verify that pip does not reuse cached wheels for local directory requirements during install and wheel commands, ensuring wheels are rebuilt from source instead of using stale cached wheels.",
+    "title": "Add functional tests for local directory wheel caching behavior"
+   },
+   {
+    "files": [
+     "news/14044.bugfix.rst",
+     "news/14080.bugfix.rst"
+    ],
+    "summary": "Add two changelog entries documenting the fix that prevents persistent wheel cache usage for local directory requirements and the bug fix for directory names containing dashes.",
+    "title": "Add changelog entries for local directory wheel cache fix"
+   }
+  ],
+  "latency_ms": 3013
+ },
+ "pip#14205": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/cli/cmdoptions.py",
+     "src/pip/_internal/cli/req_command.py",
+     "src/pip/_internal/utils/pylock.py",
+     "src/pip/_internal/utils/urls.py",
+     "tests/functional/test_install_pylock_reqs.py",
+     "tests/data/lockfiles/pylock.withextras.toml",
+     "news/14205.feature.rst"
+    ],
+    "summary": "Implemented parsing of extras from pylock.toml requirement file paths and passed the extras to the pylock selection logic. Updated CLI options and requirement command to handle extras, and added tests and a lockfile fixture to verify the new behavior.",
+    "title": "Add extras selection support for pylock.toml requirements files"
+   },
+   {
+    "files": [
+     "src/pip/_internal/req/constructors.py"
+    ],
+    "summary": "Removed the duplicate strip_extras function from constructors.py and imported it from utils.urls instead to avoid code duplication.",
+    "title": "Remove redundant strip_extras function from constructors.py"
+   }
+  ],
+  "latency_ms": 2335
+ },
+ "pip#14225": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "news/certifi.vendor.rst",
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/cacert.pem",
+     "src/pip/_vendor/certifi/tests/__init__.py",
+     "src/pip/_vendor/certifi/tests/test_certify.py",
+     "src/pip/_vendor/bom.cdx.json",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Updated certifi to version 2026.7.22 including the certificate bundle, version string, and added tests to verify the bundle's existence and contents.",
+    "title": "Upgrade certifi vendored package to 2026.7.22"
+   },
+   {
+    "files": [
+     "news/distlib.vendor.rst",
+     "src/pip/_vendor/distlib/__init__.py",
+     "src/pip/_vendor/distlib/resources.py"
+    ],
+    "summary": "Bumped distlib version to 0.4.3 and updated resource handling code to relax a previous restriction on resource path resolution.",
+    "title": "Upgrade distlib vendored package to 0.4.3"
+   },
+   {
+    "files": [
+     "news/msgpack.vendor.rst",
+     "src/pip/_vendor/msgpack/__init__.py",
+     "src/pip/_vendor/msgpack/ext.py",
+     "src/pip/_vendor/msgpack/fallback.py"
+    ],
+    "summary": "Upgraded msgpack to version 1.2.1 with fixes in timestamp handling, unpacker buffer extension, map key strictness, and packer auto-reset behavior.",
+    "title": "Upgrade msgpack vendored package to 1.2.1"
+   },
+   {
+    "files": [
+     "news/platformdirs.vendor.rst",
+     "src/pip/_vendor/platformdirs/__init__.py",
+     "src/pip/_vendor/platformdirs/__main__.py",
+     "src/pip/_vendor/platformdirs/_xdg.py",
+     "src/pip/_vendor/platformdirs/android.py",
+     "src/pip/_vendor/platformdirs/api.py",
+     "src/pip/_vendor/platformdirs/macos.py",
+     "src/pip/_vendor/platformdirs/unix.py",
+     "src/pip/_vendor/platformdirs/version.py",
+     "src/pip/_vendor/platformdirs/windows.py"
+    ],
+    "summary": "Updated platformdirs to version 4.11.0 with extensive docstring improvements, minor code cleanup, and version bump across multiple platform-specific modules and API.",
+    "title": "Upgrade platformdirs vendored package to 4.11.0"
+   }
+  ],
+  "latency_ms": 4914
+ },
+ "pip#14254": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "pyproject.toml",
+     "build-project/pyproject.toml"
+    ],
+    "summary": "Updated pip's build-system and dependency groups to accept flit-core versions >=3.11 and <5, replacing the previous upper bound of <4. This includes changes to pyproject.toml and build-project/pyproject.toml to reflect the new version range.",
+    "title": "Allow building pip with flit-core 4"
+   },
+   {
+    "files": [
+     "build-project/pylock.toml"
+    ],
+    "summary": "Updated build-project/pylock.toml to upgrade flit-core from 3.12.0 to 4.0.2 and packaging from 26.2 to 26.3, including wheel URLs and sha256 hashes to match the new versions.",
+    "title": "Update lockfile to use flit-core 4 and packaging 26.3"
+   },
+   {
+    "files": [
+     "news/14254.process.rst"
+    ],
+    "summary": "Added a new changelog entry in news/14254.process.rst to document that pip can now be built with flit-core 4.",
+    "title": "Add changelog entry for flit-core 4 support"
+   }
+  ],
+  "latency_ms": 2337
+ },
+ "pip#14293": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/resolution/resolvelib/reporter.py",
+     "news/12928.bugfix.rst",
+     "tests/unit/resolution_resolvelib/test_reporter.py"
+    ],
+    "summary": "Changed PipReporter to only log the 'looking at multiple versions' message after the second candidate rejection for a package, preventing premature log noise.",
+    "title": "Delay multiple versions log message until second rejection"
+   },
+   {
+    "files": [
+     "tests/functional/test_new_resolver.py"
+    ],
+    "summary": "Modified functional test to check that the 'looking at multiple versions' message is not logged on the first rejection but appears starting from the second rejection, matching the new behavior.",
+    "title": "Update functional test to reflect new logging behavior"
+   }
+  ],
+  "latency_ms": 1671
+ },
+ "pip#14298": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "tests/unit/test_base_command.py",
+     "tests/lib/test_lib.py"
+    ],
+    "summary": "Added fixtures and test code to save and restore the root logger's level and handlers to prevent side effects from commands that configure logging during tests.",
+    "title": "Restore logging level and handlers in tests"
+   },
+   {
+    "files": [
+     "tests/lib/venv.py",
+     "pyproject.toml"
+    ],
+    "summary": "Modified virtual environment creation to disable logging setup to avoid changing logging state, and updated the virtualenv dependency version in pyproject.toml.",
+    "title": "Disable logging setup in virtual environment creation and update virtualenv dependency"
+   },
+   {
+    "files": [
+     "news/4842f4c6-2f77-4cc9-b5ee-5f764fd286bb.trivial.rst"
+    ],
+    "summary": "Added a trivial changelog entry for this change.",
+    "title": "Add trivial changelog entry"
+   }
+  ],
+  "latency_ms": 1977
+ },
+ "pip#14324": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/cli/parser.py",
+     "src/pip/_internal/commands/__init__.py",
+     "src/pip/_internal/configuration.py",
+     "tests/functional/test_help.py"
+    ],
+    "summary": "The PipConsole import from the rich logging stack is deferred until help output is rendered, speeding up commands that don't require rich logging such as `pip --version`. This change updates the CLI parser to import PipConsole lazily and adjusts type checking imports accordingly.",
+    "title": "Defer importing rich logging stack until needed"
+   },
+   {
+    "files": [
+     "news/14324.trivial.rst"
+    ],
+    "summary": "Adds a trivial changelog entry noting the speedup of `pip --version` by deferring imports of the rich logging stack.",
+    "title": "Add changelog entry for deferred rich logging import"
+   }
+  ],
+  "latency_ms": 1903
+ },
+ "pip#14372": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/bom.cdx.json",
+     "src/pip/_vendor/pyproject_hooks/__init__.py",
+     "src/pip/_vendor/pyproject_hooks/_impl.py",
+     "src/pip/_vendor/pyproject_hooks/_in_process/_in_process.py",
+     "src/pip/_internal/req/req_install.py",
+     "src/pip/_internal/utils/deprecation.py",
+     "src/pip/_internal/utils/misc.py"
+    ],
+    "summary": "Vendored pyproject-hooks is upgraded to 1.3.3, introducing BuildBackendWarning to represent backend UserWarnings. Pip is modified to catch these warnings during build backend hook calls, log them appropriately, and show them to users when building from local source directories. The in-process backend hook runner is updated to capture and report warnings. This improves user visibility into backend warnings during builds.",
+    "title": "Upgrade pyproject-hooks to 1.3.3 and integrate build backend warning reporting"
+   },
+   {
+    "files": [
+     "docs/html/reference/build-system.md",
+     "news/14372.feature.rst",
+     "news/pyproject-hooks.vendor.rst"
+    ],
+    "summary": "Documentation is updated to describe the new build backend warning reporting behavior. Changelog entries are added to record the new feature and the pyproject-hooks upgrade.",
+    "title": "Add documentation and changelog entries for build backend warnings and pyproject-hooks upgrade"
+   },
+   {
+    "files": [
+     "tests/functional/test_freeze.py",
+     "tests/functional/test_install.py",
+     "tests/functional/test_install_direct_url.py",
+     "tests/functional/test_install_reqs.py",
+     "tests/functional/test_install_vcs_git.py",
+     "tests/functional/test_list.py",
+     "tests/functional/test_vcs_git.py",
+     "tests/functional/test_vcs_mercurial.py",
+     "tests/functional/test_warning.py",
+     "tests/lib/__init__.py",
+     "tests/lib/git_submodule_helpers.py",
+     "tests/unit/test_logging.py",
+     "tests/unit/test_wheel_builder.py"
+    ],
+    "summary": "Test helper functions are renamed from _create_test_package to create_test_package for consistency. Tests are updated accordingly. New functional tests are added to verify that build backend warnings are shown or logged correctly depending on source type and verbosity. Unit tests verify the scoped warning level behavior.",
+    "title": "Update tests to use create_test_package and add tests for build backend warnings"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 4453
+ },
+ "pip#14401": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/certifi/__init__.py",
+     "src/pip/_vendor/certifi/cacert.pem",
+     "src/pip/_vendor/bom.cdx.json",
+     "src/pip/_vendor/vendor.txt"
+    ],
+    "summary": "The vendored certifi package is upgraded to version 2026.10.23, including updating the certificate bundle, version string, BOM metadata, and vendor manifest to reflect the new version.",
+    "title": "Upgrade vendored certifi to 2026.10.23"
+   },
+   {
+    "files": [
+     "pyproject.toml",
+     "tools/constraints.txt",
+     "noxfile.py"
+    ],
+    "summary": "Updated pyproject.toml to require certifi >= 2026.10.23 for typechecking and docs, added a constraints file to enforce certifi version in reused environments, and modified noxfile.py to install dependencies with constraints to ensure consistent certifi version usage.",
+    "title": "Enforce certifi 2026.10.23 usage in test and dev environments"
+   },
+   {
+    "files": [
+     "news/certifi.vendor.rst"
+    ],
+    "summary": "Added a changelog entry documenting the upgrade of certifi to 2026.10.23.",
+    "title": "Update documentation for certifi vendoring"
+   },
+   {
+    "files": [
+     "tools/update-rtd-redirects.py"
+    ],
+    "summary": "Added certifi>=2026.10.23 as a dependency comment in the update-rtd-redirects.py script to reflect the new certifi version requirement.",
+    "title": "Update dependencies for update-rtd-redirects.py script"
+   }
+  ],
+  "latency_ms": 3276
+ },
+ "pip#14415": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_vendor/urllib3/_collections.py",
+     "src/pip/_vendor/urllib3/_version.py",
+     "src/pip/_vendor/urllib3/connection.py",
+     "src/pip/_vendor/urllib3/connectionpool.py",
+     "src/pip/_vendor/urllib3/contrib/pyopenssl.py",
+     "src/pip/_vendor/urllib3/contrib/socks.py",
+     "src/pip/_vendor/urllib3/http2/connection.py",
+     "src/pip/_vendor/urllib3/poolmanager.py",
+     "src/pip/_vendor/urllib3/response.py",
+     "src/pip/_vendor/urllib3/util/request.py",
+     "src/pip/_vendor/urllib3/util/retry.py",
+     "src/pip/_vendor/urllib3/util/ssl_.py",
+     "src/pip/_vendor/urllib3/util/url.py"
+    ],
+    "summary": "Updated the vendored urllib3 package to version 2.8.0, including fixes for HTTP header normalization, connection pooling, SSL context handling for proxies, HTTP/2 connection authority formatting, chunked response reading, retry logic, URL parsing enhancements, and PyOpenSSL integration improvements. These changes improve security, compatibility, and robustness of HTTP connections in pip.",
+    "title": "Vendor urllib3 2.8.0 with improvements and fixes"
+   },
+   {
+    "files": [
+     "src/pip/_internal/cli/index_command.py",
+     "src/pip/_internal/network/session.py"
+    ],
+    "summary": "Modified pip's network session and index command to handle the new use_ssl_context_for_proxy flag, allowing pip to avoid using the SSL context for HTTPS proxy connections when a custom CA bundle is provided. This prevents conflicts with urllib3's handling of proxy SSL contexts and improves proxy TLS connection handling.",
+    "title": "Adapt pip network session to support urllib3 2.8.0 proxy SSL context behavior"
+   },
+   {
+    "files": [
+     "src/pip/_vendor/bom.cdx.json",
+     "src/pip/_vendor/vendor.txt",
+     "news/urllib3.vendor.rst"
+    ],
+    "summary": "Updated the BOM JSON and vendor.txt files to reflect the new urllib3 version 2.8.0 vendored in this release, and added a changelog entry noting the upgrade.",
+    "title": "Update vendored metadata and vendor list for urllib3 2.8.0"
+   },
+   {
+    "files": [
+     "tests/unit/test_network_session.py"
+    ],
+    "summary": "Added parametrized tests to verify that pip correctly handles HTTPS proxies when a custom CA bundle is provided via CLI option or environment variables, ensuring the new use_ssl_context_for_proxy flag behavior is exercised and errors are raised appropriately.",
+    "title": "Add tests for HTTPS proxy with custom CA bundle support"
+   }
+  ],
+  "latency_ms": 5571
+ },
+ "pip#2846077b": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/exceptions.py",
+     "src/pip/_internal/resolution/resolvelib/resolver.py"
+    ],
+    "summary": "Introduce a new ResolutionTooDeepError exception to represent when the dependency resolver exceeds maximum depth, and update the resolver to raise this error when the underlying library signals it.",
+    "title": "Add ResolutionTooDeepError diagnostic and handle it in resolver"
+   },
+   {
+    "files": [
+     "docs/html/topics/dependency-resolution.md",
+     "news/13282.feature.rst"
+    ],
+    "summary": "Add detailed documentation on how to handle ResolutionTooDeepError in dependency resolution, including strategies and examples, and add a changelog entry describing the new feature.",
+    "title": "Add documentation and changelog for ResolutionTooDeepError"
+   }
+  ],
+  "latency_ms": 1812
+ },
+ "pip#8796": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/pip/_internal/commands/install.py",
+     "tests/functional/test_install_user.py",
+     "news/8794.bugfix.rst"
+    ],
+    "summary": "Added a check in the install command to raise an error if --user install is requested but site.ENABLE_USER_SITE is False, preventing unsupported user installs.",
+    "title": "Disallow --user installs when user site-packages are disabled"
+   }
+  ],
+  "latency_ms": 1434
+ },
  "pytest#11295": {
   "fallback": false,
   "groups": [
@@ -1316,6 +2757,152 @@
    }
   ],
   "latency_ms": 3220
+ },
+ "pytest#11914": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "pyproject.toml"
+    ],
+    "summary": "Enabled flake8-bugbear and flake8-pyi in pyproject.toml with appropriate ignores and per-file ignores to improve static analysis and type checking.",
+    "title": "Activate flake8-bugbear and flake8-pyi linters and update configuration"
+   },
+   {
+    "files": [
+     "src/_pytest/_io/terminalwriter.py",
+     "src/_pytest/capture.py",
+     "src/_pytest/config/__init__.py",
+     "src/_pytest/unittest.py",
+     "testing/_py/test_local.py",
+     "testing/code/test_excinfo.py",
+     "testing/python/raises.py",
+     "testing/test_assertion.py",
+     "testing/test_compat.py",
+     "testing/test_legacypath.py",
+     "testing/test_mark.py",
+     "testing/test_recwarn.py",
+     "testing/test_terminal.py",
+     "testing/test_warnings.py",
+     "scripts/prepare-release-pr.py",
+     "scripts/update-plugin-list.py"
+    ],
+    "summary": "Added explicit exception chaining with 'from None' or 'from e' where exceptions are re-raised, replaced unused expressions with assignments to underscore to satisfy bugbear, and converted namedtuple definitions to NamedTuple classes for better typing and lint compliance.",
+    "title": "Refactor code to fix linting issues and improve exception chaining"
+   },
+   {
+    "files": [
+     "src/_pytest/compat.py"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 2733
+ },
+ "pytest#11956": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "bench/bench.py",
+     "doc/en/example/assertion/failure_demo.py",
+     "src/_pytest/_py/path.py",
+     "src/_pytest/assertion/rewrite.py",
+     "testing/python/fixtures.py",
+     "testing/test_assertion.py",
+     "testing/test_assertrewrite.py",
+     "testing/test_collection.py",
+     "testing/test_skipping.py",
+     "testing/test_warnings.py"
+    ],
+    "summary": "Updated noqa comments throughout the codebase to use the new ruff syntax (e.g., noqa: F401) to fix deprecation warnings and ensure compatibility with the latest ruff version.",
+    "title": "Fix ruff deprecation warnings and update noqa comments"
+   },
+   {
+    "files": [
+     "pyproject.toml"
+    ],
+    "summary": "Added new linting rules PIE and PGH004 to the ruff configuration and cleaned up duplicate format section in pyproject.toml to improve linting coverage and code formatting consistency.",
+    "title": "Enable additional ruff linting rules and configure formatting"
+   },
+   {
+    "files": [
+     "testing/test_config.py"
+    ],
+    "summary": "Fixed minor code style issues in tests such as simplifying range expressions and correcting indentation in test_config.py for better readability and consistency.",
+    "title": "Fix minor test code style issues"
+   }
+  ],
+  "latency_ms": 2522
+ },
+ "pytest#11959": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/_pytest/recwarn.py",
+     "testing/test_recwarn.py",
+     "changelog/10865.improvement.rst"
+    ],
+    "summary": "Modified WarningsChecker to validate that warnings.warn is called with either a string or a Warning instance, preventing TypeErrors caused by non-string warning messages and improving pytest's warning handling robustness.",
+    "title": "Support warnings.warn() with Warning instances or strings"
+   },
+   {
+    "files": [
+     "AUTHORS"
+    ],
+    "summary": "Added Eero Vaher to the AUTHORS file to credit contribution.",
+    "title": "Add new author to AUTHORS file"
+   }
+  ],
+  "latency_ms": 2068
+ },
+ "pytest#12096": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "src/_pytest/fixtures.py",
+     "src/_pytest/python.py",
+     "src/_pytest/unittest.py"
+    ],
+    "summary": "Changed how the instance property is computed and how fixture functions are resolved to correctly handle static and class methods, ensuring they get a fresh instance and avoid None instances.",
+    "title": "Fix instance property and fixture function binding for static and class methods"
+   },
+   {
+    "files": [
+     "testing/python/fixtures.py",
+     "testing/python/integration.py",
+     "changelog/12065.bugfix.rst"
+    ],
+    "summary": "Added a regression test to verify that static and class methods receive a fresh instance and that setup_method and fixtures work correctly, along with a changelog entry describing the fix.",
+    "title": "Add tests and changelog for static and class method instance handling fix"
+   }
+  ],
+  "latency_ms": 2637
+ },
+ "pytest#12170": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".pre-commit-config.yaml",
+     "pyproject.toml"
+    ],
+    "summary": "Added a pylint hook to the pre-commit configuration for manual runs and added a detailed pylint configuration section in pyproject.toml with many disabled warnings to customize linting behavior.",
+    "title": "Add pylint hook and configuration for manual linting"
+   },
+   {
+    "files": [
+     "src/_pytest/junitxml.py",
+     "src/_pytest/terminal.py"
+    ],
+    "summary": "Changed dictionary iteration from using .keys() to direct iteration over the dictionary, improving performance and readability in junitxml.py and terminal.py.",
+    "title": "Improve dictionary iteration in junitxml and terminal modules"
+   }
+  ],
+  "latency_ms": 1694
  },
  "pytest#12256": {
   "fallback": false,
@@ -2533,6 +4120,1360 @@
    }
   ],
   "latency_ms": 4120
+ },
+ "setuptools#0588af03": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".coveragerc",
+     ".pre-commit-config.yaml",
+     "mypy.ini",
+     "pyproject.toml",
+     "tox.ini"
+    ],
+    "summary": "This group updates configuration files (.coveragerc, mypy.ini, pyproject.toml, tox.ini) to improve coverage exclusions, mypy settings, and dependency management for testing and type checking tools. It also updates the pre-commit hook for ruff to a newer version.",
+    "title": "Update testing and type checking configurations and dependencies"
+   }
+  ],
+  "latency_ms": 1368
+ },
+ "setuptools#164f2768": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".coveragerc",
+     ".pre-commit-config.yaml",
+     "mypy.ini",
+     "pyproject.toml",
+     "tox.ini"
+    ],
+    "summary": "This group updates configuration files (.coveragerc, mypy.ini, pyproject.toml, tox.ini, .pre-commit-config.yaml) to enhance code coverage exclusions, type checking strictness, dependency management, and pre-commit hook versions for better development workflow and code quality.",
+    "title": "Update testing, type checking, and linting configurations"
+   }
+  ],
+  "latency_ms": 1501
+ },
+ "setuptools#265": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/archive_util.py",
+     "distutils/command/build_ext.py",
+     "distutils/command/install.py",
+     "distutils/cygwinccompiler.py",
+     "distutils/dist.py"
+    ],
+    "summary": "Replaced explicit loops with more efficient constructs such as set() and list.extend() to improve performance and readability in distutils modules.",
+    "title": "Refactor distutils code to enforce Ruff PERF rules"
+   },
+   {
+    "files": [
+     "ruff.toml"
+    ],
+    "summary": "Updated ruff.toml to include the PERF rule set and ignore specific local PERF rules, enabling enforcement of performance-related linting.",
+    "title": "Add PERF rules to Ruff configuration"
+   }
+  ],
+  "latency_ms": 1806
+ },
+ "setuptools#266": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/command/install_lib.py",
+     "distutils/cygwinccompiler.py",
+     "distutils/extension.py",
+     "distutils/file_util.py",
+     "distutils/msvc9compiler.py"
+    ],
+    "summary": "Refactor error handling in distutils/command/install_lib.py and distutils/cygwinccompiler.py to properly catch exceptions and raise appropriate errors. Add noqa comments to suppress false positive lint errors in distutils/extension.py and distutils/msvc9compiler.py. Fix logic in distutils/file_util.py to correctly return after hard link creation.",
+    "title": "Improve error handling and lint compliance in distutils modules"
+   },
+   {
+    "files": [
+     "ruff.toml"
+    ],
+    "summary": "Add the TRY linting rules to the Ruff configuration and ignore TRY003 warnings locally to enforce stricter linting standards while avoiding noise from known false positives.",
+    "title": "Update ruff.toml to enable TRY rules and ignore specific TRY warnings"
+   }
+  ],
+  "latency_ms": 2522
+ },
+ "setuptools#267": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/sysconfig.py",
+     "distutils/tests/test_mingwccompiler.py"
+    ],
+    "summary": "Modify sysconfig.customize_compiler() to avoid customization when the compiler type is mingw32 but the environment is MSVC Python, preventing errors in such cases.",
+    "title": "Skip customize_compiler() for MSVC Python in mingw32 compiler type"
+   },
+   {
+    "files": [
+     ".github/workflows/main.yml"
+    ],
+    "summary": "Add CC and CXX environment variables to the MSYS2 install dependencies step in the GitHub Actions main workflow to ensure correct compiler usage during CI runs.",
+    "title": "Set CC and CXX environment variables in GitHub Actions workflow"
+   }
+  ],
+  "latency_ms": 2017
+ },
+ "setuptools#270": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/tests/test_mingwccompiler.py",
+     "distutils/tests/test_unixccompiler.py"
+    ],
+    "summary": "Skip a test in test_mingwccompiler.py on Cygwin to fix CI failures. Add new tests in test_unixccompiler.py for UnixCCompiler.find_library_file to verify correct library file detection, including Cygwin-specific DLL naming.",
+    "title": "Fix Cygwin test and add UnixCCompiler find_library_file tests"
+   },
+   {
+    "files": [
+     "distutils/unixccompiler.py"
+    ],
+    "summary": "Remove the old doctest from UnixCCompiler.find_library_file that was no longer valid or needed, cleaning up the code and relying on the new pytest-based tests instead.",
+    "title": "Remove outdated doctest from UnixCCompiler.find_library_file"
+   }
+  ],
+  "latency_ms": 2011
+ },
+ "setuptools#274": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/cygwinccompiler.py",
+     "distutils/tests/test_cygwinccompiler.py",
+     "distutils/_collections.py"
+    ],
+    "summary": "The get_msvcr() function is simplified to return an empty list unconditionally, removing the previous MSVC version mapping logic and related tests. This change reflects that the MSVC runtime library inclusion is no longer needed.",
+    "title": "Make get_msvcr() a no-op in distutils.cygwinccompiler"
+   },
+   {
+    "files": [
+     ".github/workflows/main.yml",
+     "conftest.py",
+     "tox.ini"
+    ],
+    "summary": "A new GitHub Actions job is added to run tests on Windows using MSVC Python but compiling with mingw32 (GCC). A pytest fixture is added to monkeypatch distutils' get_default_compiler to allow overriding the default compiler for testing purposes. tox.ini is updated to pass the environment variable controlling this override.",
+    "title": "Add CI job to test MSVC Python with mingw32 compiler and monkeypatch default compiler in tests"
+   }
+  ],
+  "latency_ms": 2360
+ },
+ "setuptools#287": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/msvc9compiler.py",
+     "distutils/tests/test_msvc9compiler.py"
+    ],
+    "summary": "The entire distutils.msvc9compiler module and its tests are removed to eliminate deprecated support for MSVC 2008 and related versions.",
+    "title": "Remove legacy MSVC 9 compiler module and its tests"
+   },
+   {
+    "files": [
+     "distutils/msvccompiler.py"
+    ],
+    "summary": "The entire distutils.msvccompiler module is removed to eliminate deprecated support for older Microsoft Visual Studio compilers.",
+    "title": "Remove legacy MSVC compiler module"
+   }
+  ],
+  "latency_ms": 1748
+ },
+ "setuptools#339": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/compilers/C/base.py"
+    ],
+    "summary": "Changed the return type annotation of runtime_library_dir_option in the base Compiler class to str | list[str] to reflect that implementations may return either a string or a list of strings.",
+    "title": "Widen return type of runtime_library_dir_option in base Compiler class"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/unix.py"
+    ],
+    "summary": "Updated the return type annotation of runtime_library_dir_option in the Unix Compiler subclass to str | list[str], removing the type ignore comment and aligning with the base class.",
+    "title": "Widen return type of runtime_library_dir_option in Unix Compiler subclass"
+   },
+   {
+    "files": [
+     "newsfragments/4902.bugfix.rst"
+    ],
+    "summary": "Added a bugfix changelog entry noting the reversion of distutils changes that broke monkey patching of command classes.",
+    "title": "Add changelog entry for reverted distutils changes"
+   }
+  ],
+  "latency_ms": 2263
+ },
+ "setuptools#353": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/command/build.py",
+     "distutils/command/install.py",
+     "distutils/dist.py",
+     "distutils/fancy_getopt.py",
+     "distutils/util.py"
+    ],
+    "summary": "Changed all 'has_*' methods in distutils.command.build, distutils.command.install, distutils.dist, distutils.fancy_getopt, and distutils.util to explicitly return a boolean value and added type annotations for better type safety and clarity.",
+    "title": "Make 'has_*' predicate methods explicitly return bool and add type annotations"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/cygwin.py"
+    ],
+    "summary": "Added 'from __future__ import annotations' and added type annotations to the is_cygwincc function in distutils.compilers.C.cygwin for improved type hinting and forward compatibility.",
+    "title": "Add type annotation to is_cygwincc function and import future annotations"
+   }
+  ],
+  "latency_ms": 2138
+ },
+ "setuptools#363": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/sysconfig.py",
+     "newsfragments/+ba538b6e.removal.rst"
+    ],
+    "summary": "Introduced _get_str_config_vars to ensure compiler-related config variables are strings and updated customize_compiler to use this function, improving type safety and error clarity.",
+    "title": "Add _get_str_config_vars to assert string config vars and update customize_compiler to use it"
+   },
+   {
+    "files": [
+     "distutils/util.py"
+    ],
+    "summary": "Changed change_root function to accept and return str paths only, removing support for bytes paths in one branch and updating related type annotations for clarity and correctness.",
+    "title": "Update type annotations and logic in distutils.util.change_root to use str paths only"
+   },
+   {
+    "files": [
+     "mypy.ini"
+    ],
+    "summary": "Removed 'index' from the list of disabled mypy error codes to enable index error checking, reflecting fixes made in the code.",
+    "title": "Remove 'index' from mypy.ini disable_error_code list"
+   }
+  ],
+  "latency_ms": 2016
+ },
+ "setuptools#367": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/archive_util.py"
+    ],
+    "summary": "Added type: ignore to suppress call-overload errors in tarfile.open call and improved type annotations for ARCHIVE_FORMATS dictionary to fix mypy errors.",
+    "title": "Fix call-overload mypy errors and improve type annotations in distutils/archive_util.py"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/base.py"
+    ],
+    "summary": "Updated the compiler_type attribute to be a ClassVar[str] without default None and added a detailed docstring to clarify its purpose and usage.",
+    "title": "Refine type annotations and docstrings in distutils/compilers/C/base.py"
+   },
+   {
+    "files": [
+     "distutils/dist.py",
+     "distutils/filelist.py"
+    ],
+    "summary": "Corrected overload signatures for get_command_obj in distutils/dist.py and include_pattern/exclude_pattern methods in distutils/filelist.py to properly accept None and bool types, improving type safety and mypy compatibility.",
+    "title": "Fix overload signatures in distutils/dist.py and distutils/filelist.py"
+   },
+   {
+    "files": [
+     "mypy.ini"
+    ],
+    "summary": "Removed 'call-overload' from the disabled error codes in mypy.ini to re-enable checking for call-overload errors, ensuring stricter type checking.",
+    "title": "Update mypy.ini to re-enable call-overload error checking"
+   }
+  ],
+  "latency_ms": 2482
+ },
+ "setuptools#371": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/command/build_ext.py",
+     "distutils/command/build_py.py",
+     "distutils/command/config.py",
+     "distutils/command/sdist.py"
+    ],
+    "summary": "Improved code clarity and fixed minor logic issues in build_ext, build_py, config, and sdist commands, including better handling of package directories and string formatting.",
+    "title": "Fix logic and style issues in distutils build and config commands"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/base.py",
+     "distutils/compilers/C/msvc.py",
+     "distutils/compilers/C/unix.py"
+    ],
+    "summary": "Refactored compiler base, msvc, and unix compiler modules for better iteration, list comprehension usage, and consistent return statements.",
+    "title": "Refactor and clean up compiler-related code"
+   },
+   {
+    "files": [
+     "distutils/core.py",
+     "distutils/dist.py",
+     "distutils/log.py"
+    ],
+    "summary": "Updated logging level constants and error message formatting for consistency and correctness in distutils core and dist modules.",
+    "title": "Improve logging and error message formatting in core and dist modules"
+   },
+   {
+    "files": [
+     "distutils/tests/test_core.py",
+     "distutils/versionpredicate.py"
+    ],
+    "summary": "Minor improvements including string method usage in tests and better string formatting in versionpredicate module.",
+    "title": "Miscellaneous minor improvements and test cleanup"
+   }
+  ],
+  "latency_ms": 2717
+ },
+ "setuptools#402": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/compat/py39.py",
+     "distutils/_modified.py",
+     "conftest.py",
+     "distutils/compilers/C/tests/test_unix.py",
+     "distutils/tests/test_build_ext.py",
+     "distutils/tests/test_filelist.py",
+     "distutils/tests/test_spawn.py",
+     "distutils/sysconfig.py"
+    ],
+    "summary": "Removed the entire distutils.compat.py39 module and all references to it, replacing imports from distutils.tests.compat.py39 with imports from test.support modules. This cleans up legacy compatibility code and aligns the codebase with newer Python versions.",
+    "title": "Remove Python 3.9 compatibility code and update related imports"
+   },
+   {
+    "files": [
+     ".pre-commit-config.yaml"
+    ],
+    "summary": "Updated the ruff pre-commit hook version from v0.12.0 to v0.15.12 to keep tooling up to date.",
+    "title": "Update pre-commit configuration to use newer ruff version"
+   },
+   {
+    "files": [
+     "distutils/tests/compat/__init__.py",
+     "distutils/tests/compat/py39.py"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 2015
+ },
+ "setuptools#403": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/command/config.py",
+     "distutils/dist.py",
+     "distutils/tests/test_core.py"
+    ],
+    "summary": "The code was refactored to use more idiomatic Python constructs such as using writelines with a generator expression, replacing tuple membership checks with equality checks, and using the removesuffix string method. These changes improve readability and maintainability.",
+    "title": "Refactor code to comply with ruff/refurb rules"
+   },
+   {
+    "files": [
+     "ruff.toml"
+    ],
+    "summary": "The FURB linting rules were added to the ruff.toml configuration file to enforce refurb rules in the codebase going forward.",
+    "title": "Enable FURB linting rules in ruff configuration"
+   }
+  ],
+  "latency_ms": 1592
+ },
+ "setuptools#40ee2212": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/_msvccompiler.py",
+     "distutils/tests/test_msvccompiler.py"
+    ],
+    "summary": "Improved error logging in _msvccompiler.py to suppress linter warnings and refactored the test for missing MSVC compiler to use pytest's monkeypatch for cleaner test code and better isolation.",
+    "title": "Fix MSVC compiler environment error logging and improve test for missing compiler"
+   },
+   {
+    "files": [
+     "distutils/command/sdist.py"
+    ],
+    "summary": "Updated sdist command to use os.fspath for build_base prefix in exclude_pattern to ensure correct path handling across different path-like objects.",
+    "title": "Fix path handling in sdist command exclude patterns"
+   }
+  ],
+  "latency_ms": 1703
+ },
+ "setuptools#420": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/compilers/C/base.py",
+     "distutils/compilers/C/cygwin.py",
+     "distutils/compilers/C/errors.py",
+     "distutils/compilers/C/msvc.py",
+     "distutils/compilers/C/unix.py",
+     "distutils/compilers/errors.py",
+     "distutils/errors.py"
+    ],
+    "summary": "Created a new language-agnostic exception module distutils.compilers.errors with Error, UnknownFileType, and PlatformError. Updated distutils.compilers.C.errors to inherit from these new exceptions and removed redundant definitions. Changed all compiler code to raise the new PlatformError instead of DistutilsPlatformError or DistutilsModuleError, and updated imports accordingly.",
+    "title": "Introduce native compiler exception hierarchy and update C compiler exceptions"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/tests/test_mingw.py",
+     "distutils/compilers/C/tests/test_msvc.py"
+    ],
+    "summary": "Modified tests for MinGW and MSVC compilers to expect the new PlatformError exception instead of DistutilsPlatformError, reflecting the new exception hierarchy.",
+    "title": "Update tests to expect new compiler exceptions"
+   },
+   {
+    "files": [
+     "distutils/compilers/_modified.py",
+     "newsfragments/5270.removal.rst"
+    ],
+    "summary": "Changed distutils.compilers._modified.newer to raise FileNotFoundError instead of DistutilsFileError. Added a news fragment documenting the new exception hierarchy and changes in exception usage.",
+    "title": "Miscellaneous cleanup and documentation"
+   }
+  ],
+  "latency_ms": 2934
+ },
+ "setuptools#423": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/compilers/C/base.py",
+     "distutils/ccompiler.py",
+     "distutils/compilers/C/cygwin.py",
+     "distutils/compilers/C/msvc.py",
+     "distutils/compilers/C/unix.py",
+     "distutils/compilers/C/zos.py"
+    ],
+    "summary": "Replace static compiler_class mapping with a dynamic registry using get_compilers() that imports concrete compiler modules and collects subclasses. Add descriptions to compiler classes and update new_compiler and show_compilers accordingly.",
+    "title": "Implement dynamic compiler registry and update compiler classes"
+   },
+   {
+    "files": [
+     "distutils/compat/numpy.py"
+    ],
+    "summary": "Retain the compiler_class mapping in distutils.compat.numpy.py for compatibility with older numpy versions, mapping compiler short names to module and class names with descriptions.",
+    "title": "Update numpy compatibility mapping for compiler_class"
+   },
+   {
+    "files": [
+     "distutils/compilers/C/tests/conftest.py",
+     "distutils/compilers/C/tests/test_cygwin.py",
+     "distutils/compilers/C/tests/test_mingw.py",
+     "distutils/compilers/C/tests/test_msvc.py",
+     "distutils/compilers/C/tests/test_unix.py"
+    ],
+    "summary": "Modify compiler tests to remove dependencies on distutils internal test support, use pytest fixtures and tmp_path, and update test code to use new compiler classes and methods.",
+    "title": "Refactor and improve compiler tests to decouple from distutils internals"
+   }
+  ],
+  "latency_ms": 2998
+ },
+ "setuptools#4306": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/easy_install.py"
+    ],
+    "summary": "Changed all .pth file read/write operations in setuptools/command/easy_install.py to use UTF-8 encoding for Python 3.13 and later, falling back to locale encoding for earlier versions. Added a helper function to read .pth files with the correct encoding.",
+    "title": "Adopt UTF-8 encoding for .pth files in Python 3.13 in easy_install.py"
+   },
+   {
+    "files": [
+     "setuptools/command/editable_wheel.py"
+    ],
+    "summary": "Modified setuptools/command/editable_wheel.py to use the new py312.PTH_ENCODING for .pth file encoding, aligning with the new UTF-8 adoption for Python 3.13.",
+    "title": "Update encoding usage for .pth files in editable_wheel.py"
+   },
+   {
+    "files": [
+     "setuptools/compat/py312.py"
+    ],
+    "summary": "Introduced setuptools/compat/py312.py to define PTH_ENCODING as 'utf-8' for Python 3.13 and later, otherwise fallback to locale encoding from py39 module.",
+    "title": "Add py312 compatibility module for .pth file encoding"
+   },
+   {
+    "files": [
+     "setuptools/namespaces.py"
+    ],
+    "summary": "Updated setuptools/namespaces.py to use the new py312.PTH_ENCODING for writing .pth files, ensuring consistent encoding handling across the project.",
+    "title": "Use py312.PTH_ENCODING for .pth file operations in namespaces.py"
+   }
+  ],
+  "latency_ms": 2790
+ },
+ "setuptools#4522": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/test.py",
+     "newsfragments/4520.feature.rst"
+    ],
+    "summary": "Added a stub 'test' command that emits a deprecation warning when accessed and raises a RuntimeError if run, to guide users away from using the removed test command.",
+    "title": "Restore and deprecate the 'test' command in setuptools"
+   },
+   {
+    "files": [
+     "setuptools/tests/integration/test_pip_install_sdist.py"
+    ],
+    "summary": "Modified integration test to add 'requests' and 'celery' packages to the list of examples tested for pip install from sdist.",
+    "title": "Update integration tests to include additional packages"
+   }
+  ],
+  "latency_ms": 1782
+ },
+ "setuptools#4566": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/_validate_pyproject/formats.py",
+     "setuptools/config/setuptools.schema.json",
+     "setuptools/tests/config/test_apply_pyprojecttoml.py"
+    ],
+    "summary": "Introduces a new relaxed format for Python module names that permits dashes except in certain positions and updates the JSON schema to use this relaxed format for py-modules and namespace-packages. This allows dash-separated module names in pyproject.toml.",
+    "title": "Relax Python module name validation to allow dash-separated names"
+   },
+   {
+    "files": [
+     "tox.ini"
+    ],
+    "summary": "Bumps the validate-pyproject dependency version from 0.18 to 0.19 in tox.ini to ensure compatibility with the updated validation logic.",
+    "title": "Update validation code dependency version in tox.ini"
+   },
+   {
+    "files": [
+     "setuptools/config/_validate_pyproject/error_reporting.py"
+    ],
+    "summary": "Simplifies a conditional expression in error_reporting.py for clarity without changing behavior.",
+    "title": "Minor cleanup in error reporting code"
+   },
+   {
+    "files": [
+     "setuptools/config/_validate_pyproject/fastjsonschema_validations.py"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 2423
+ },
+ "setuptools#4568": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/_apply_pyprojecttoml.py",
+     "setuptools/config/_validate_pyproject/fastjsonschema_validations.py",
+     "setuptools/config/pyprojecttoml.py",
+     "setuptools/config/setuptools.schema.json",
+     "setuptools/tests/config/test_apply_pyprojecttoml.py"
+    ],
+    "summary": "Adds support for specifying extension modules in `pyproject.toml` under `[tool.setuptools]` using the `ext-modules` key, which maps to setuptools.Extension objects. This includes schema validation, parsing logic, and integration with the Distribution object.",
+    "title": "Implement declarative ext-modules support in pyproject.toml"
+   },
+   {
+    "files": [
+     "docs/userguide/ext_modules.rst",
+     "docs/userguide/pyproject_config.rst",
+     "newsfragments/4568.feature.rst"
+    ],
+    "summary": "Updates user guide docs to show how to declare extension modules in `pyproject.toml` and notes the feature as experimental. Adds a news fragment announcing the new feature.",
+    "title": "Update documentation and changelog for ext-modules feature"
+   },
+   {
+    "files": [
+     "setuptools/extension.py"
+    ],
+    "summary": "Fixes docstring formatting for `runtime_library_dirs` parameter in setuptools.extension.Extension class.",
+    "title": "Minor docstring formatting fix in setuptools.extension"
+   }
+  ],
+  "latency_ms": 2520
+ },
+ "setuptools#4574": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/_vendor/ordered_set-4.1.0.dist-info/INSTALLER",
+     "setuptools/_vendor/ordered_set-4.1.0.dist-info/METADATA",
+     "setuptools/_vendor/ordered_set-4.1.0.dist-info/RECORD",
+     "setuptools/_vendor/ordered_set-4.1.0.dist-info/REQUESTED",
+     "setuptools/_vendor/ordered_set-4.1.0.dist-info/WHEEL",
+     "setuptools/_vendor/ordered_set/__init__.py",
+     "setuptools/_vendor/ordered_set/py.typed"
+    ],
+    "summary": "Removed the vendored ordered_set package and all its references, replacing usage of OrderedSet with dict to maintain insertion order. This simplifies the codebase by removing an external dependency.",
+    "title": "Remove ordered_set dependency and replace with dict"
+   },
+   {
+    "files": [
+     "setuptools/dist.py"
+    ],
+    "summary": "Modified Distribution class and related code to use dict instead of OrderedSet for provides_extras, reflecting the removal of ordered_set dependency.",
+    "title": "Update Distribution code to use dict instead of OrderedSet"
+   },
+   {
+    "files": [
+     "setuptools/tests/config/test_setupcfg.py",
+     "setuptools/tests/test_core_metadata.py",
+     "setuptools/tests/test_dist.py",
+     "setuptools/tests/test_extern.py"
+    ],
+    "summary": "Adjusted tests to expect dict instead of OrderedSet and removed tests related to ordered_set. This ensures tests align with the new implementation using dict.",
+    "title": "Update tests to reflect removal of ordered_set and use dict"
+   },
+   {
+    "files": [
+     "newsfragments/4574.removal.rst"
+    ],
+    "summary": "Added a news fragment documenting the removal of the ordered_set dependency and the replacement with dict for insertion order preservation.",
+    "title": "Add news fragment for removal of ordered_set dependency"
+   },
+   {
+    "files": [
+     "pyproject.toml"
+    ],
+    "summary": "Removed ordered-set from the core dependencies in pyproject.toml to reflect the removal of the dependency.",
+    "title": "Remove ordered_set from pyproject.toml dependencies"
+   }
+  ],
+  "latency_ms": 3281
+ },
+ "setuptools#4600": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/monkey.py",
+     "newsfragments/4600.removal.rst"
+    ],
+    "summary": "The patch_for_msvc_specialized_compiler function and its usage in setuptools.monkey are removed to stop monkeypatching distutils._msvccompiler, consolidating compiler logic in distutils.",
+    "title": "Remove monkeypatching of distutils._msvccompiler"
+   },
+   {
+    "files": [
+     "setuptools/msvc.py",
+     "setuptools/tests/test_msvc14.py"
+    ],
+    "summary": "The entire setuptools.msvc module and its corresponding test file test_msvc14.py are deleted, removing the custom MSVC compiler support implementation and tests from setuptools.",
+    "title": "Remove setuptools.msvc module and its tests"
+   }
+  ],
+  "latency_ms": 1818
+ },
+ "setuptools#4603": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "MANIFEST.in",
+     "setuptools/command/egg_info.py",
+     "setuptools/command/sdist.py"
+    ],
+    "summary": "Modified sdist command to prune top-level .tox, .nox, and .venv directories from the file list to avoid including development environment caches in source distributions. Removed older prune logic from egg_info and updated MANIFEST.in accordingly.",
+    "title": "Exclude top-level .tox, .nox, and .venv folders from sdist"
+   },
+   {
+    "files": [
+     "setuptools/tests/test_sdist.py"
+    ],
+    "summary": "Added tests to verify that .tox, .nox, and .venv folders at the project root are excluded from the sdist manifest, while similarly named files or folders are not excluded erroneously.",
+    "title": "Add tests for excluding dev-only cache folders from sdist"
+   }
+  ],
+  "latency_ms": 2175
+ },
+ "setuptools#4604": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "mypy.ini",
+     "pyproject.toml"
+    ],
+    "summary": "Re-enable mypy static type checking by syncing the mypy.ini configuration with the upstream skeleton project, including enabling error codes, adjusting excludes, and fixing import follow settings. This improves type safety and developer experience.",
+    "title": "Re-enable mypy and update mypy.ini configuration"
+   },
+   {
+    "files": [
+     "setuptools/build_meta.py",
+     "setuptools/config/expand.py",
+     "setuptools/config/pyprojecttoml.py",
+     "setuptools/config/setupcfg.py",
+     "setuptools/msvc.py",
+     "pkg_resources/__init__.py"
+    ],
+    "summary": "Apply minor type hint fixes, add missing asserts, fix type ignore comments, and improve code clarity in setuptools modules such as build_meta.py, config/expand.py, config/pyprojecttoml.py, config/setupcfg.py, and msvc.py.",
+    "title": "Minor type hint and code quality improvements in setuptools modules"
+   },
+   {
+    "files": [
+     "setuptools/tests/config/test_setupcfg.py",
+     "setuptools/tests/test_build_ext.py",
+     "setuptools/tests/test_editable_install.py"
+    ],
+    "summary": "Update test files to use better type hints, remove unnecessary type ignores, and improve code clarity in tests related to config and editable install.",
+    "title": "Fix and improve test code type hints and usage"
+   }
+  ],
+  "latency_ms": 2512
+ },
+ "setuptools#4611": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/pyprojecttoml.py",
+     "setuptools/tests/config/test_pyprojecttoml.py",
+     "newsfragments/4611.feature.rst"
+    ],
+    "summary": "Introduced support for the SETUPTOOLS_DANGEROUSLY_SKIP_PYPROJECT_VALIDATION environment variable to bypass pyproject.toml validation, emitting a warning when used to inform users of potential risks.",
+    "title": "Add environment variable to skip pyproject.toml validation"
+   }
+  ],
+  "latency_ms": 1642
+ },
+ "setuptools#4617": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/bdist_wheel.py",
+     "newsfragments/4617.feature.rst"
+    ],
+    "summary": "The `universal` option in the `bdist_wheel` command is deprecated with a warning emitted when used. The default wheel tag no longer includes Python 2 compatibility, reflecting the end-of-life of Python 2. This change includes updating the command implementation and adding a news fragment for the deprecation.",
+    "title": "Deprecate `bdist_wheel.universal` option in bdist_wheel command"
+   },
+   {
+    "files": [
+     "setuptools/tests/test_bdist_wheel.py",
+     "setuptools/tests/test_build_meta.py"
+    ],
+    "summary": "Tests were updated to remove the `universal=True` argument from wheel builds and to expect the new wheel tags without Python 2 compatibility. A new test was added to verify that using the deprecated `universal` option emits the appropriate deprecation warning.",
+    "title": "Update tests to remove use of deprecated `universal` option and add deprecation warning test"
+   }
+  ],
+  "latency_ms": 2134
+ },
+ "setuptools#4680": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/egg_info.py",
+     "newsfragments/4680.bugfix.rst"
+    ],
+    "summary": "Changed the egg_info command to preload entry points before creating the .egg-info directory to avoid integration problems with importlib.metadata and pyproject-hooks.",
+    "title": "Avoid iterating over entry-points while an empty .egg-info exists"
+   },
+   {
+    "files": [
+     "pyproject.toml",
+     ".github/workflows/main.yml"
+    ],
+    "summary": "Modified pyproject-hooks dependency version specifier to exclude version 1.1, which causes issues with egg-info handling.",
+    "title": "Update pyproject-hooks dependency to avoid problematic version"
+   }
+  ],
+  "latency_ms": 1797
+ },
+ "setuptools#4682": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/_shutil.py",
+     "setuptools/tests/test_shutil_wrapper.py"
+    ],
+    "summary": "Introduced a new _shutil module that wraps shutil.rmtree with an onexc callback to automatically chmod files on Windows when removal fails due to permissions, and added helper functions for this behavior.",
+    "title": "Add _shutil module to unify rmtree and chmod error handling"
+   },
+   {
+    "files": [
+     "setuptools/command/bdist_wheel.py",
+     "setuptools/tests/test_bdist_wheel.py"
+    ],
+    "summary": "Replaced direct shutil.rmtree calls and custom chmod error handlers in bdist_wheel with the new _shutil.rmtree to unify behavior and remove redundant code.",
+    "title": "Refactor bdist_wheel to use _shutil.rmtree and remove redundant chmod callbacks"
+   },
+   {
+    "files": [
+     "setuptools/command/dist_info.py",
+     "setuptools/command/editable_wheel.py",
+     "setuptools/command/rotate.py"
+    ],
+    "summary": "Updated dist_info, editable_wheel, and rotate commands to use _shutil.rmtree instead of shutil.rmtree for consistent error handling and permission fixes during directory removals.",
+    "title": "Refactor other commands to use _shutil.rmtree for consistent directory removal"
+   },
+   {
+    "files": [
+     "setuptools/command/easy_install.py"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 2601
+ },
+ "setuptools#4696": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/_apply_pyprojecttoml.py",
+     "setuptools/tests/config/test_pyprojecttoml_dynamic_deps.py",
+     "newsfragments/4696.bugfix.rst"
+    ],
+    "summary": "Modify the _optional_dependencies function to overwrite extras_require instead of merging, and emit a warning if extras_require is already set, ensuring compliance with PEP 621.",
+    "title": "Fix optional-dependencies handling in pyproject.toml"
+   }
+  ],
+  "latency_ms": 1670
+ },
+ "setuptools#4740": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/_vendor/packaging-24.1.dist-info/INSTALLER",
+     "setuptools/_vendor/packaging-24.1.dist-info/LICENSE",
+     "setuptools/_vendor/packaging-24.1.dist-info/LICENSE.APACHE",
+     "setuptools/_vendor/packaging-24.1.dist-info/LICENSE.BSD",
+     "setuptools/_vendor/packaging-24.1.dist-info/METADATA",
+     "setuptools/_vendor/packaging-24.1.dist-info/RECORD",
+     "setuptools/_vendor/packaging-24.1.dist-info/REQUESTED",
+     "setuptools/_vendor/packaging-24.1.dist-info/WHEEL",
+     "setuptools/_vendor/packaging-24.2.dist-info/INSTALLER",
+     "setuptools/_vendor/packaging-24.2.dist-info/LICENSE",
+     "setuptools/_vendor/packaging-24.2.dist-info/LICENSE.APACHE",
+     "setuptools/_vendor/packaging-24.2.dist-info/LICENSE.BSD",
+     "setuptools/_vendor/packaging-24.2.dist-info/METADATA",
+     "setuptools/_vendor/packaging-24.2.dist-info/RECORD",
+     "setuptools/_vendor/packaging-24.2.dist-info/REQUESTED",
+     "setuptools/_vendor/packaging-24.2.dist-info/WHEEL",
+     "setuptools/_vendor/packaging/__init__.py",
+     "setuptools/_vendor/packaging/_elffile.py",
+     "setuptools/_vendor/packaging/_manylinux.py",
+     "setuptools/_vendor/packaging/licenses/__init__.py",
+     "setuptools/_vendor/packaging/licenses/_spdx.py",
+     "setuptools/_vendor/packaging/markers.py",
+     "setuptools/_vendor/packaging/metadata.py",
+     "setuptools/_vendor/packaging/specifiers.py",
+     "setuptools/_vendor/packaging/tags.py",
+     "setuptools/_vendor/packaging/utils.py",
+     "setuptools/_vendor/packaging/version.py"
+    ],
+    "summary": "Replaces the vendored packaging library version 24.1 with 24.2, updating all related files, metadata, licenses, and internal packaging modules accordingly. This ensures setuptools uses the latest packaging utilities and bug fixes.",
+    "title": "Update vendored packaging library to version 24.2"
+   },
+   {
+    "files": [
+     "pyproject.toml",
+     "newsfragments/4740.feature.rst"
+    ],
+    "summary": "Updates the packaging dependency version in pyproject.toml to 24.2 and adds a news fragment to document the vendored packaging version update.",
+    "title": "Update dependency version and changelog"
+   },
+   {
+    "files": [
+     "setuptools/tests/test_dist.py"
+    ],
+    "summary": "Files not grouped by the model.",
+    "title": "Other changes"
+   }
+  ],
+  "latency_ms": 4529
+ },
+ "setuptools#4746": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/pyprojecttoml.py"
+    ],
+    "summary": "Removed support for the environment variable SETUPTOOLS_DANGEROUSLY_SKIP_PYPROJECT_VALIDATION that allowed skipping validation of pyproject.toml, including the associated warning and logic in the validation function.",
+    "title": "Revert skipping pyproject.toml validation via env var"
+   },
+   {
+    "files": [
+     "setuptools/tests/config/test_pyprojecttoml.py"
+    ],
+    "summary": "Deleted tests that checked the behavior of skipping pyproject.toml validation via the environment variable, as this feature is removed.",
+    "title": "Remove tests related to skipping pyproject.toml validation"
+   },
+   {
+    "files": [
+     "newsfragments/4746.feature.rst"
+    ],
+    "summary": "Added a news fragment documenting the removal of support for skipping pyproject.toml validation via the environment variable due to error-proneness.",
+    "title": "Add news fragment for removal of skipping pyproject.toml validation"
+   }
+  ],
+  "latency_ms": 2386
+ },
+ "setuptools#4840": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/_apply_pyprojecttoml.py",
+     "newsfragments/4840.feature.rst"
+    ],
+    "summary": "Emit a deprecation warning when `project.license` is used as a TOML table, guiding users to use SPDX expressions or `project.license-files` instead. This change updates the core logic in `_apply_pyprojecttoml.py` and adds a news fragment documenting the deprecation.",
+    "title": "Deprecate `project.license` as a TOML table and add warning"
+   },
+   {
+    "files": [
+     "setuptools/tests/config/test_apply_pyprojecttoml.py",
+     "setuptools/tests/test_build_meta.py",
+     "setuptools/tests/test_sdist.py"
+    ],
+    "summary": "Modify existing tests to expect the deprecation warning for `project.license` as a TOML table, update license-related test data to use the new recommended format, and add filters to suppress warnings where appropriate. This ensures tests remain valid and reflect the new deprecation policy.",
+    "title": "Update tests to reflect deprecation and new license handling"
+   }
+  ],
+  "latency_ms": 2405
+ },
+ "setuptools#4849": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/_static.py",
+     "setuptools/command/editable_wheel.py",
+     "setuptools/command/install.py",
+     "setuptools/unicode_utils.py"
+    ],
+    "summary": "Corrected spelling errors and standardized American English spelling in code comments and strings to improve readability and maintain consistency.",
+    "title": "Fix typos and normalize orthography in code and comments"
+   },
+   {
+    "files": [
+     "setuptools/tests/test_build_py.py",
+     "NEWS.rst"
+    ],
+    "summary": "Corrected spelling errors in test files and documentation changelog entries to maintain professionalism and clarity.",
+    "title": "Fix typos in tests and documentation"
+   }
+  ],
+  "latency_ms": 1645
+ },
+ "setuptools#4898": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/_normalization.py",
+     "setuptools/dist.py",
+     "newsfragments/4898.bugfix.rst"
+    ],
+    "summary": "Moved the import of packaging.licenses.canonicalize_license_expression into a try-except block to defer ImportError until the function is actually used, providing a clearer error message for users with packaging<24.2. Updated setuptools/dist.py to use the deferred import function.",
+    "title": "Defer import and improve error handling for packaging.licenses"
+   },
+   {
+    "files": [
+     "pyproject.toml"
+    ],
+    "summary": "Removed the direct dependency on packaging from pyproject.toml as it is no longer required explicitly due to deferred import handling.",
+    "title": "Remove packaging from pyproject.toml dependencies"
+   }
+  ],
+  "latency_ms": 1828
+ },
+ "setuptools#4911": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/dist.py",
+     "setuptools/tests/config/test_setupcfg.py",
+     "newsfragments/4911.bugfix.rst"
+    ],
+    "summary": "Reintroduce support for deprecated dash-separated and uppercase keys in setup.cfg with deprecation warnings and postpone their removal until 2026 to give users more time to migrate.",
+    "title": "Revert removal of deprecated dash-separated and uppercase keys in setup.cfg"
+   },
+   {
+    "files": [
+     ".github/workflows/main.yml"
+    ],
+    "summary": "Update GitHub Actions workflow to allow continue-on-error for PyPy 3.10 due to flaky unrelated tests, improving CI stability.",
+    "title": "Add PyPy to CI continue-on-error matrix"
+   }
+  ],
+  "latency_ms": 1790
+ },
+ "setuptools#4975": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "LICENSE",
+     "pyproject.toml",
+     "setuptools/dist.py",
+     "setuptools/tests/fixtures.py"
+    ],
+    "summary": "The LICENSE file is removed and the license is declared in pyproject.toml using the SPDX identifier. The Distribution class pattern matching tests are updated to reflect the new LICENSE filename and usage.",
+    "title": "Remove LICENSE file and rely on SPDX license identifier"
+   },
+   {
+    "files": [
+     "newsfragments/4956.feature.rst"
+    ],
+    "summary": "A news fragment is added to document the restoration of license declaration in package metadata.",
+    "title": "Add news fragment for license declaration restoration"
+   }
+  ],
+  "latency_ms": 1578
+ },
+ "setuptools#4982": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "newsfragments/4982.misc.rst",
+     "setuptools/tests/integration/test_pbr.py",
+     "setuptools/tests/test_develop.py",
+     "setuptools/tests/test_editable_install.py"
+    ],
+    "summary": "Added the `uses_network` pytest marker to tests that fail without internet access and added a newsfragment to document this change.",
+    "title": "Mark tests that require network access with `uses_network` marker"
+   }
+  ],
+  "latency_ms": 1337
+ },
+ "setuptools#4985": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/editable_wheel.py",
+     "setuptools/compat/py310.py",
+     "setuptools/tests/test_editable_install.py"
+    ],
+    "summary": "Replaces the verbose _DebuggingTips warning with a concise exception note containing a link to debugging tips, improving error clarity during editable installs.",
+    "title": "Simplify error reporting in editable wheel installation"
+   },
+   {
+    "files": [
+     "docs/userguide/development_mode.rst",
+     "newsfragments/4984.feature.rst"
+    ],
+    "summary": "Adds a new 'Debugging Tips' section to the user guide with recommended steps to diagnose editable installation issues, referenced by the new concise error message.",
+    "title": "Add debugging tips documentation for editable installs"
+   }
+  ],
+  "latency_ms": 1924
+ },
+ "setuptools#4997": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/installer.py",
+     "setuptools/dist.py",
+     "setuptools/_reqs.py",
+     "setuptools/tests/test_dist.py"
+    ],
+    "summary": "Replaced pkg_resources with packaging and importlib.metadata in installer.py and related modules to modernize dependency resolution and egg handling. This includes changes to fetch_build_eggs, egg caching, and requirement parsing.",
+    "title": "Remove pkg_resources usage from installer and related modules"
+   },
+   {
+    "files": [
+     "setuptools/_path.py"
+    ],
+    "summary": "Introduced a _cygwin_patch helper in _path.py to fix path normalization on Cygwin platforms, ensuring consistent path comparisons.",
+    "title": "Refactor path normalization to handle Cygwin symlink behavior"
+   },
+   {
+    "files": [
+     "setuptools/_normalization.py"
+    ],
+    "summary": "Removed commented references to pkg_resources in _normalization.py to clean up the codebase.",
+    "title": "Minor cleanup in normalization module"
+   },
+   {
+    "files": [
+     "newsfragments/4997.feature.rst"
+    ],
+    "summary": "Added a news fragment announcing the removal of pkg_resources usage from the installer and setting an official deprecation deadline for the installer feature.",
+    "title": "Add deprecation notice for installer usage"
+   }
+  ],
+  "latency_ms": 3251
+ },
+ "setuptools#4e1e8939": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/main.yml",
+     ".pre-commit-config.yaml"
+    ],
+    "summary": "Removed a deprecated pip environment variable from the GitHub Actions workflow and upgraded the ruff pre-commit hook to a newer version with additional fix options.",
+    "title": "Update GitHub Actions workflow and pre-commit configuration"
+   },
+   {
+    "files": [
+     "README.rst",
+     "pyproject.toml"
+    ],
+    "summary": "Changed the README badge URL to point to the upstream 'astral-sh/ruff' repository and removed the MIT license classifier from pyproject.toml to match upstream metadata.",
+    "title": "Update project metadata and badges to reflect upstream project"
+   },
+   {
+    "files": [
+     "ruff.toml"
+    ],
+    "summary": "Removed the 'extend' directive and some ignored linting codes from ruff.toml to better align with the upstream project's linting configuration.",
+    "title": "Simplify and align linting configuration with upstream"
+   }
+  ],
+  "latency_ms": 2104
+ },
+ "setuptools#5014": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "pkg_resources/__init__.py"
+    ],
+    "summary": "The pkg_resources module now emits a UserWarning instead of a DeprecationWarning, specifying a removal date of 2025-11-30 and advising users to avoid it or pin setuptools to a version before 81.",
+    "title": "Set removal deadline and update deprecation warning for pkg_resources"
+   },
+   {
+    "files": [
+     "pytest.ini"
+    ],
+    "summary": "The pytest.ini warning filter for pkg_resources deprecation was updated to ignore the new UserWarning instead of the old DeprecationWarning, preventing test noise.",
+    "title": "Update warning filters in pytest.ini to match new pkg_resources warning"
+   },
+   {
+    "files": [
+     "newsfragments/3085.feature.1.rst"
+    ],
+    "summary": "A newsfragment was added to announce the deadline for pkg_resources removal later this year (December), informing users of the upcoming change.",
+    "title": "Add newsfragment announcing pkg_resources removal deadline"
+   }
+  ],
+  "latency_ms": 2197
+ },
+ "setuptools#5047": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/command/launcher manifest.xml",
+     "setuptools/launcher manifest.xml"
+    ],
+    "summary": "Moved the launcher manifest.xml file from setuptools/command/ to setuptools/ to ensure load_launcher_manifest() can find it correctly.",
+    "title": "Fix launcher manifest.xml file location"
+   },
+   {
+    "files": [
+     "newsfragments/5047.bugfix.rst"
+    ],
+    "summary": "Added a newsfragment to document the fix for loading the launcher manifest.xml file.",
+    "title": "Document the fix in changelog"
+   }
+  ],
+  "latency_ms": 1531
+ },
+ "setuptools#5157": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "setuptools/config/_validate_pyproject/error_reporting.py",
+     "setuptools/config/_validate_pyproject/fastjsonschema_validations.py",
+     "setuptools/config/_validate_pyproject/formats.py",
+     "setuptools/config/_validate_pyproject/NOTICE",
+     "setuptools/config/setuptools.schema.json",
+     "tox.ini"
+    ],
+    "summary": "Updated the setuptools JSON schema and fastjsonschema validation code to the latest version from validate-pyproject, improving validation accuracy and error reporting.",
+    "title": "Sync setuptools schema and validation code with validate-pyproject"
+   },
+   {
+    "files": [
+     "setuptools/config/_validate_pyproject/extra_validations.py"
+    ],
+    "summary": "Added new validation functions to enforce uniqueness and parent listing of import-names and import-namespaces as specified in PEP 794, raising errors if violated.",
+    "title": "Add extra validations for import-names and import-namespaces per PEP 794"
+   },
+   {
+    "files": [
+     "setuptools/config/pyprojecttoml.py",
+     "setuptools/tests/config/test_pyprojecttoml.py",
+     "newsfragments/5157.misc.rst"
+    ],
+    "summary": "Prevent usage of import-names and import-namespaces in pyproject.toml with a NotImplementedError, and add tests to verify this behavior.",
+    "title": "Disallow use of import-names and import-namespaces in setuptools config and add tests"
+   }
+  ],
+  "latency_ms": 3208
+ },
+ "setuptools#5220": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/main.yml",
+     ".github/workflows/pyright.yml",
+     "README.rst",
+     "newsfragments/+0af71c41.feature.rst",
+     "pyproject.toml"
+    ],
+    "summary": "The project now requires Python 3.10 or later. CI workflows have been updated to test on Python 3.10 and newer versions, including 3.15, and removed older versions like 3.9. The changelog and README badge reflect this change.",
+    "title": "Update Python version requirement and CI workflows"
+   },
+   {
+    "files": [
+     "setuptools/_importlib.py",
+     "setuptools/_path.py",
+     "setuptools/_reqs.py",
+     "setuptools/_shutil.py",
+     "setuptools/build_meta.py",
+     "setuptools/command/bdist_egg.py",
+     "setuptools/compat/py311.py",
+     "setuptools/config/__init__.py",
+     "setuptools/config/_apply_pyprojecttoml.py",
+     "setuptools/config/expand.py",
+     "setuptools/config/pyprojecttoml.py",
+     "setuptools/config/setupcfg.py",
+     "setuptools/dist.py",
+     "setuptools/tests/test_build_meta.py",
+     "setuptools/warnings.py",
+     "towncrier.toml",
+     "tox.ini"
+    ],
+    "summary": "Type annotations have been modernized to use PEP 604 union syntax and standard library typing imports instead of typing_extensions. Imports of collections.abc and typing have been cleaned up for consistency and clarity across multiple modules.",
+    "title": "Modernize type annotations and imports across the codebase"
+   }
+  ],
+  "latency_ms": 3152
+ },
+ "setuptools#5cc83046": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/main.yml",
+     "pyproject.toml"
+    ],
+    "summary": "The project now requires Python 3.9 or higher, and the CI workflow has been updated to test on Python 3.9 instead of 3.8. This ensures compatibility with newer Python features and dependencies.",
+    "title": "Update Python version requirements and CI configuration"
+   },
+   {
+    "files": [
+     ".pre-commit-config.yaml",
+     "ruff.toml"
+    ],
+    "summary": "The ruff pre-commit hook version has been upgraded to v0.7.1, and the linter configuration (ruff.toml) has been updated to include pyproject.toml to respect the requires-python setting. This improves linting accuracy and fixes a known issue.",
+    "title": "Upgrade ruff pre-commit hook and adjust linter configuration"
+   }
+  ],
+  "latency_ms": 1954
+ },
+ "setuptools#ad611bca": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/_modified.py",
+     "distutils/tests/test_modified.py"
+    ],
+    "summary": "The newer_group function was corrected to properly handle the case when the target does not exist, ensuring it returns True in that case. Corresponding tests were added to verify behavior when no sources and no target exist.",
+    "title": "Fix distutils newer_group logic and add related tests"
+   },
+   {
+    "files": [
+     "distutils/dist.py"
+    ],
+    "summary": "Changed the iteration from self.commands to commands to correctly iterate over the provided commands list, fixing a potential bug in command processing.",
+    "title": "Fix iteration over commands in distutils.dist.py"
+   },
+   {
+    "files": [
+     "ruff.toml"
+    ],
+    "summary": "Added local linting rules to the extend-select and ignore lists in ruff.toml to customize linting behavior for the project.",
+    "title": "Update ruff.toml to extend and ignore additional linting rules"
+   }
+  ],
+  "latency_ms": 2269
+ },
+ "setuptools#b01183c1": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     "distutils/sysconfig.py",
+     "distutils/tests/test_mingwccompiler.py"
+    ],
+    "summary": "Modified the customize_compiler function to better handle mingw32 compiler type when using mingw, and added tests to ensure compatibility with MSVC Python builds using Mingw32CCompiler.",
+    "title": "Update compiler customization logic and add tests for mingw compiler"
+   },
+   {
+    "files": [
+     ".github/workflows/main.yml"
+    ],
+    "summary": "Added environment variables CC and CXX to the GitHub Actions workflow to ensure the correct compilers are used during the build matrix runs.",
+    "title": "Set CC and CXX environment variables in CI workflow"
+   }
+  ],
+  "latency_ms": 1736
+ },
+ "setuptools#e47994c8": {
+  "fallback": false,
+  "groups": [
+   {
+    "files": [
+     ".github/workflows/main.yml",
+     "pyproject.toml"
+    ],
+    "summary": "The minimum required Python version is raised from 3.8 to 3.9 in pyproject.toml, and the GitHub Actions workflow is updated to test on Python 3.9 instead of 3.8. This ensures compatibility with newer Python features and dependencies.",
+    "title": "Update Python version requirements and CI configuration"
+   },
+   {
+    "files": [
+     ".pre-commit-config.yaml",
+     "ruff.toml"
+    ],
+    "summary": "The pre-commit configuration is updated to use a newer version of the ruff linter, and the ruff.toml configuration is modified to include pyproject.toml for requires-python compatibility, improving linting accuracy and fixing known issues.",
+    "title": "Upgrade ruff linter and adjust lint configuration"
+   }
+  ],
+  "latency_ms": 1993
  },
  "werkzeug#2323": {
   "fallback": false,

@@ -22,20 +22,20 @@ Ground truth: each file's group is the PR author's commit that changed it most. 
 
 ## Held-out set
 
-48 PRs: pytest (45), requests (3). Never inspected while developing prompts.
+153 PRs: pytest (50), requests (3), pip (50), setuptools (50). Never inspected while developing prompts.
 
 | Method | Pairwise precision | Pairwise recall | Pairwise F1 | Mean ARI | Exact match |
 | --- | --- | --- | --- | --- | --- |
-| All files in one group | 0.49 | 1.00 | 0.65 | 0.00 | 0% |
+| All files in one group | 0.45 | 1.00 | 0.62 | 0.00 | 0% |
 | One group per file | 1.00 | 0.00 | 0.00 | 0.08 | 8% |
-| Top-level folder (DiffLens fallback) | 0.69 | 0.63 | 0.66 | 0.17 | 17% |
-| Parent folder | 0.64 | 0.27 | 0.38 | 0.14 | 15% |
-| Parent folder + test pairing | 0.64 | 0.27 | 0.38 | 0.14 | 15% |
-| DiffLens v1 (gpt-4.1-mini) | 0.80 | 0.62 | 0.70 | 0.20 | 12% |
-| DiffLens v2 (gpt-4.1-mini) | 0.70 | 0.79 | 0.74 | 0.25 | 15% |
+| Top-level folder (DiffLens fallback) | 0.59 | 0.70 | 0.64 | 0.21 | 16% |
+| Parent folder | 0.68 | 0.28 | 0.40 | 0.18 | 10% |
+| Parent folder + test pairing | 0.66 | 0.29 | 0.41 | 0.20 | 12% |
+| DiffLens v1 (gpt-4.1-mini) | 0.71 | 0.55 | 0.62 | 0.24 | 12% |
+| DiffLens v2 (gpt-4.1-mini) | 0.69 | 0.75 | 0.72 | 0.25 | 10% |
 
-- DiffLens v1 (gpt-4.1-mini) vs best baseline (Top-level folder (DiffLens fallback)): ARI +0.03, 95% CI [-0.12, +0.17]
-- DiffLens v2 (gpt-4.1-mini) vs best baseline (Top-level folder (DiffLens fallback)): ARI +0.08, 95% CI [-0.07, +0.24]
-- DiffLens v2 (gpt-4.1-mini) vs DiffLens v1 (gpt-4.1-mini): ARI +0.06, 95% CI [-0.06, +0.17]
+- DiffLens v1 (gpt-4.1-mini) vs best baseline (Top-level folder (DiffLens fallback)): ARI +0.04, 95% CI [-0.04, +0.12]
+- DiffLens v2 (gpt-4.1-mini) vs best baseline (Top-level folder (DiffLens fallback)): ARI +0.04, 95% CI [-0.04, +0.12]
+- DiffLens v2 (gpt-4.1-mini) vs DiffLens v1 (gpt-4.1-mini): ARI +0.01, 95% CI [-0.06, +0.07]
 
 Regenerate: `python evals/run_eval.py`.
