@@ -1,0 +1,2104 @@
+{
+ "flask#6096": {
+  "groups": [
+   {
+    "title": "Fix server name parsing to support IPv6 addresses",
+    "summary": "Replaces the use of string.partition(\":\") with urllib.parse.urlsplit to correctly parse host and port from server names, including IPv6 addresses enclosed in brackets. This prevents incorrect splitting and ensures proper host and port extraction.",
+    "files": [
+     "src/flask/app.py"
+    ]
+   },
+   {
+    "title": "Update FlaskClient cookie handling to support IPv6 hosts",
+    "summary": "Changes cookie domain extraction in FlaskClient from naive partitioning to using urlsplit to correctly handle IPv6 hostnames, ensuring cookies are set properly for IPv6 addresses.",
+    "files": [
+     "src/flask/testing.py"
+    ]
+   },
+   {
+    "title": "Add tests for IPv6 address handling in server and client",
+    "summary": "Adds test cases to verify that the server correctly parses IPv6 addresses with ports and that session transactions work correctly when using IPv6 base URLs. This validates the correctness of the parsing changes.",
+    "files": [
+     "tests/test_basic.py",
+     "tests/test_testing.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 6143
+ },
+ "flask#5627": {
+  "groups": [
+   {
+    "title": "Add SQLite timestamp converter to tutorial database code",
+    "summary": "Added a converter for SQLite timestamp fields to the tutorial's database code to correctly parse datetime values, ensuring the tutorial works as intended with datetime data.",
+    "files": [
+     "docs/tutorial/database.rst",
+     "examples/tutorial/flaskr/db.py"
+    ]
+   },
+   {
+    "title": "Update example project metadata and dependencies",
+    "summary": "Modified pyproject.toml files in example projects to update dependencies, add classifiers, and fix license file references for better project metadata and packaging consistency.",
+    "files": [
+     "examples/celery/pyproject.toml",
+     "examples/javascript/pyproject.toml",
+     "examples/tutorial/pyproject.toml"
+    ]
+   },
+   {
+    "title": "Replace license files from .rst to .txt in examples",
+    "summary": "Replaced LICENSE.rst files with LICENSE.txt in the examples/javascript and examples/tutorial directories to standardize license file formats.",
+    "files": [
+     "examples/javascript/LICENSE.rst",
+     "examples/javascript/LICENSE.txt",
+     "examples/tutorial/LICENSE.rst",
+     "examples/tutorial/LICENSE.txt"
+    ]
+   },
+   {
+    "title": "Fix template name in JavaScript example test",
+    "summary": "Corrected the expected template name in a test for the JavaScript example to match the actual template used, ensuring test accuracy.",
+    "files": [
+     "examples/javascript/tests/test_js_example.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 6417
+ },
+ "flask#5177": {
+  "groups": [
+   {
+    "title": "Switch build backend from setuptools to flit_core",
+    "summary": "Updated pyproject.toml and example project configurations to use flit_core as the build backend instead of setuptools. This change affects the core packaging and build system of the project.",
+    "files": [
+     "examples/celery/pyproject.toml",
+     "examples/javascript/pyproject.toml",
+     "examples/tutorial/pyproject.toml",
+     "pyproject.toml",
+     "docs/patterns/packages.rst",
+     "docs/tutorial/install.rst"
+    ]
+   },
+   {
+    "title": "Update project documentation and changelog for build backend change",
+    "summary": "Modified CHANGES.rst, CONTRIBUTING.rst, and documentation files to reflect the switch to flit_core as the build backend and remove references to setuptools and MANIFEST.in where no longer needed.",
+    "files": [
+     "CHANGES.rst",
+     "CONTRIBUTING.rst"
+    ]
+   },
+   {
+    "title": "Remove MANIFEST.in files no longer needed with flit_core",
+    "summary": "Deleted MANIFEST.in files from example projects since flit_core handles file inclusion differently and does not require these manifest files.",
+    "files": [
+     "examples/javascript/MANIFEST.in",
+     "examples/tutorial/MANIFEST.in"
+    ]
+   },
+   {
+    "title": "Update development environment setup scripts",
+    "summary": "Modified .devcontainer/on-create-command.sh and requirements files to remove setuptools and wheel from installation, aligning with the new build backend requirements.",
+    "files": [
+     ".devcontainer/on-create-command.sh",
+     "requirements/typing.in",
+     "requirements/typing.txt"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 6865
+ },
+ "flask#5624": {
+  "groups": [
+   {
+    "title": "Update minimum dependency versions",
+    "summary": "The core dependencies Werkzeug, ItsDangerous, and Blinker have their minimum required versions bumped to newer feature releases to ensure compatibility and leverage new features. The pyproject.toml and changelog reflect these changes.",
+    "files": [
+     "CHANGES.rst",
+     "pyproject.toml"
+    ]
+   },
+   {
+    "title": "Remove old pinned requirements and add updated ones",
+    "summary": "Old pinned requirement files under requirements-skip/ have been removed and replaced with updated requirement files under requirements/ to reflect the new minimum dependency versions. This keeps the dependency management consistent and up to date.",
+    "files": [
+     "requirements-skip/README.md",
+     "requirements-skip/tests-dev.txt",
+     "requirements-skip/tests-min.in",
+     "requirements-skip/tests-min.txt",
+     "requirements/tests-dev.txt",
+     "requirements/tests-min.in",
+     "requirements/tests-min.txt"
+    ]
+   },
+   {
+    "title": "Update development dependencies and tooling",
+    "summary": "The dev.txt and typing.txt requirement files have been updated to newer versions of some tools like pyright. The tox.ini configuration has been updated to use the new minimum requirement files and to add a pip-compile command for tests-min.in, ensuring the test environments are consistent with the updated dependencies.",
+    "files": [
+     "requirements/dev.txt",
+     "requirements/typing.txt",
+     "tox.ini"
+    ]
+   },
+   {
+    "title": "Update GitHub Actions workflows to use newer action versions",
+    "summary": "The pre-commit and publish GitHub Actions workflows have been updated to use newer versions of actions for checkout, setup-python, pre-commit, and PyPI publishing. This helps keep the CI/CD pipeline up to date and secure.",
+    "files": [
+     ".github/workflows/pre-commit.yaml",
+     ".github/workflows/publish.yaml"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 7105
+ },
+ "flask#5383": {
+  "groups": [
+   {
+    "title": "Enable mypy strict mode and fix typing issues in core Flask modules",
+    "summary": "Enabled strict mypy checking in pyproject.toml and fixed typing errors and annotations in core Flask modules such as app.py, sansio/app.py, blueprints.py, config.py, ctx.py, debughelpers.py, helpers.py, json/provider.py, json/tag.py, logging.py, sansio/blueprints.py, sansio/scaffold.py, sessions.py, templating.py, testing.py, typing.py, views.py, and wrappers.py. These changes improve type safety and correctness throughout the codebase.",
+    "files": [
+     "src/flask/app.py",
+     "src/flask/blueprints.py",
+     "src/flask/config.py",
+     "src/flask/ctx.py",
+     "src/flask/debughelpers.py",
+     "src/flask/helpers.py",
+     "src/flask/json/provider.py",
+     "src/flask/json/tag.py",
+     "src/flask/logging.py",
+     "src/flask/sansio/app.py",
+     "src/flask/sansio/blueprints.py",
+     "src/flask/sansio/scaffold.py",
+     "src/flask/sessions.py",
+     "src/flask/templating.py",
+     "src/flask/testing.py",
+     "src/flask/typing.py",
+     "src/flask/views.py",
+     "src/flask/wrappers.py"
+    ]
+   },
+   {
+    "title": "Update development dependencies and tooling configurations",
+    "summary": "Updated various development dependencies in requirements files and bumped versions of pre-commit and related tools. Also updated .pre-commit-config.yaml to use a newer ruff version. These updates ensure compatibility with the stricter typing and improve the development environment.",
+    "files": [
+     ".pre-commit-config.yaml",
+     "pyproject.toml",
+     "requirements/dev.txt",
+     "requirements/docs.txt",
+     "requirements/tests.txt",
+     "requirements/typing.in",
+     "requirements/typing.txt"
+    ]
+   },
+   {
+    "title": "Add changelog entry for mypy strict mode improvements",
+    "summary": "Added a changelog entry noting the addressing of mypy strict mode findings, highlighting the improved type safety in the codebase.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Other changes",
+    "summary": "Files not grouped by the model.",
+    "files": [
+     "src/flask/cli.py",
+     "src/flask/json/__init__.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 7750
+ },
+ "flask#4997": {
+  "groups": [
+   {
+    "title": "Deprecate `got_first_request` property on Flask app",
+    "summary": "The `got_first_request` property is now deprecated with a warning emitted when accessed, indicating it will be removed in Flask 2.4. This change is reflected in the app.py source and the changelog.",
+    "files": [
+     "src/flask/app.py",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Change blueprint setup method calls after registration from warning to error",
+    "summary": "Calling setup methods on blueprints after they have been registered now raises an AssertionError instead of issuing a warning. This enforces stricter usage and prevents inconsistent blueprint setup. The blueprint source and related test have been updated accordingly.",
+    "files": [
+     "src/flask/blueprints.py",
+     "tests/test_basic.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2668
+ },
+ "flask#5157": {
+  "groups": [
+   {
+    "title": "Update module loader usage for Python 3.12 compatibility",
+    "summary": "Replaced deprecated pkgutil.get_loader calls with importlib.util.find_spec to ensure compatibility with Python 3.12, which affects how module loaders are retrieved in helpers.py and scaffold.py.",
+    "files": [
+     "src/flask/helpers.py",
+     "src/flask/scaffold.py"
+    ]
+   },
+   {
+    "title": "Bump Werkzeug dependency to version 2.3.5",
+    "summary": "Updated the Werkzeug dependency version from 2.3.3 to 2.3.5 in pyproject.toml and requirements files to support Python 3.12 compatibility and ensure dependencies are up to date.",
+    "files": [
+     "pyproject.toml",
+     "requirements/tests-pallets-min.in",
+     "requirements/tests-pallets-min.txt"
+    ]
+   },
+   {
+    "title": "Document Python 3.12 compatibility and dependency update",
+    "summary": "Added notes in CHANGES.rst about Python 3.12 compatibility and the Werkzeug version bump to keep changelog accurate and informative.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3046
+ },
+ "flask#4949": {
+  "groups": [
+   {
+    "title": "Add Publish GitHub Actions Workflow",
+    "summary": "A new workflow is added to automate building, generating provenance, creating draft releases, and publishing packages to PyPI with manual approval. This improves release automation and security by requiring approval before publishing.",
+    "files": [
+     ".github/workflows/publish.yaml",
+     "requirements/build.in",
+     "requirements/build.txt"
+    ]
+   },
+   {
+    "title": "Update Existing GitHub Actions Workflows",
+    "summary": "The lock and test workflows are updated to use specific action versions, improve permissions, concurrency, and caching. These changes enhance workflow reliability and security.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Add flake8 Configuration for Code Quality",
+    "summary": "A new .flake8 config file is added to define linting rules and ignore patterns, replacing the previous inline setup.cfg configuration. This centralizes linting settings for better maintainability.",
+    "files": [
+     ".flake8",
+     "setup.cfg"
+    ]
+   },
+   {
+    "title": "Minor Code Style Fixes in Examples and Tests",
+    "summary": "Minor fixes include correcting import style warnings in example and blueprint app __init__.py files, and updating exception types and assertion error expectations in tests for accuracy and clarity.",
+    "files": [
+     "examples/javascript/js_example/__init__.py",
+     "tests/test_appctx.py",
+     "tests/test_apps/blueprintapp/__init__.py",
+     "tests/test_basic.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2968
+ },
+ "flask#4968": {
+  "groups": [
+   {
+    "title": "Rewrite Celery documentation",
+    "summary": "The Celery documentation in docs/patterns/celery.rst was extensively rewritten to improve clarity, add detailed explanations, and provide a better integration example with Flask. This makes it easier for users to understand and implement Celery in their Flask applications.",
+    "files": [
+     "docs/patterns/celery.rst"
+    ]
+   },
+   {
+    "title": "Add example Flask application with Celery integration",
+    "summary": "A new example Flask application demonstrating Celery integration was added under examples/celery. It includes application code, tasks, views, templates, and configuration files to show how to submit and poll background tasks using Celery and Flask.",
+    "files": [
+     "examples/celery/src/task_app/__init__.py",
+     "examples/celery/src/task_app/tasks.py",
+     "examples/celery/src/task_app/views.py",
+     "examples/celery/src/task_app/templates/index.html"
+    ]
+   },
+   {
+    "title": "Add example application support files",
+    "summary": "Support files for the example application were added, including a README with setup instructions, a Celery app launcher, dependency files (requirements.txt and pyproject.toml) to manage the example's environment and dependencies.",
+    "files": [
+     "examples/celery/README.md",
+     "examples/celery/make_celery.py",
+     "examples/celery/pyproject.toml",
+     "examples/celery/requirements.txt"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3832
+ },
+ "flask#4779": {
+  "groups": [
+   {
+    "title": "Add `--debug` option to `flask run` command",
+    "summary": "Introduces a new `--debug` option to the `flask run` CLI command, enabling debug mode through the command line interface for easier and more consistent usage.",
+    "files": [
+     "src/flask/cli.py"
+    ]
+   },
+   {
+    "title": "Update documentation and examples to use `flask run --debug`",
+    "summary": "Revises multiple documentation files and example README to replace previous usage of `--debug` before `run` with the new recommended usage `flask run --debug`. This ensures consistency and clarity for users.",
+    "files": [
+     "docs/cli.rst",
+     "docs/config.rst",
+     "docs/debugging.rst",
+     "docs/quickstart.rst",
+     "docs/server.rst",
+     "docs/tutorial/factory.rst",
+     "examples/tutorial/README.rst",
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2945
+ },
+ "flask#4947": {
+  "groups": [
+   {
+    "title": "Add pyproject.toml and remove setup.cfg/setup.py files",
+    "summary": "Replaces all setup.cfg and setup.py files in the main project and examples with pyproject.toml files to adopt modern Python packaging standards. This change centralizes project metadata, dependencies, build system, and tool configurations in pyproject.toml.",
+    "files": [
+     "pyproject.toml",
+     "examples/javascript/pyproject.toml",
+     "examples/tutorial/pyproject.toml",
+     "setup.cfg",
+     "setup.py",
+     "examples/javascript/setup.cfg",
+     "examples/javascript/setup.py",
+     "examples/tutorial/setup.cfg",
+     "examples/tutorial/setup.py"
+    ]
+   },
+   {
+    "title": "Update documentation to reflect pyproject.toml usage",
+    "summary": "Modifies multiple documentation files to replace references from setup.py and setup.cfg to pyproject.toml, including instructions for virtual environment naming, packaging, entry points, testing configuration, and deployment. This ensures users follow the updated packaging and environment setup conventions.",
+    "files": [
+     "docs/cli.rst",
+     "docs/deploying/eventlet.rst",
+     "docs/deploying/gevent.rst",
+     "docs/deploying/gunicorn.rst",
+     "docs/deploying/mod_wsgi.rst",
+     "docs/deploying/uwsgi.rst",
+     "docs/deploying/waitress.rst",
+     "docs/installation.rst",
+     "docs/patterns/packages.rst",
+     "docs/tutorial/deploy.rst",
+     "docs/tutorial/install.rst",
+     "docs/tutorial/layout.rst",
+     "docs/tutorial/tests.rst",
+     "CONTRIBUTING.rst",
+     "CHANGES.rst",
+     "examples/javascript/README.rst",
+     "examples/tutorial/README.rst"
+    ]
+   },
+   {
+    "title": "Add .flake8 configuration file",
+    "summary": "Adds a new .flake8 file with customized linting rules and ignores, replacing the previous flake8 configuration from setup.cfg. This helps maintain code quality with updated linting settings.",
+    "files": [
+     ".flake8"
+    ]
+   },
+   {
+    "title": "Update GitHub Actions workflow to use pyproject.toml for caching",
+    "summary": "Modifies the GitHub Actions test workflow to use pyproject.toml instead of setup.cfg as the cache key for mypy caching, aligning with the new packaging configuration.",
+    "files": [
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Update tests for exception type and assertion errors",
+    "summary": "Changes test_appctx.py to raise and check for ValueError instead of Exception, and updates test_basic.py to expect AssertionError instead of generic Exception for certain Flask constructor errors. These changes improve test specificity and correctness.",
+    "files": [
+     "tests/test_appctx.py",
+     "tests/test_basic.py"
+    ]
+   },
+   {
+    "title": "Other changes",
+    "summary": "Files not grouped by the model.",
+    "files": [
+     "examples/javascript/.gitignore",
+     "examples/tutorial/.gitignore"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5210
+ },
+ "flask#4629": {
+  "groups": [
+   {
+    "title": "Core support for generator/iterator return values in views",
+    "summary": "Modify Flask's response handling to accept generators or iterators as return values from view functions, converting them into streaming responses automatically. This simplifies streaming large responses or templates.",
+    "files": [
+     "src/flask/app.py",
+     "src/flask/typing.py"
+    ]
+   },
+   {
+    "title": "Add streaming template rendering functions",
+    "summary": "Introduce stream_template and stream_template_string functions to render Jinja2 templates as streams, enabling incremental template rendering and streaming responses.",
+    "files": [
+     "src/flask/templating.py",
+     "src/flask/__init__.py"
+    ]
+   },
+   {
+    "title": "Update documentation to describe streaming support and new functions",
+    "summary": "Enhance multiple documentation files to explain how to use streaming responses and the new streaming template functions, including usage examples and context management.",
+    "files": [
+     "docs/patterns/streaming.rst",
+     "docs/templating.rst",
+     "docs/api.rst",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Add tests for streaming responses and streaming templates",
+    "summary": "Add tests that verify the new ability to return generators from views and to stream templates, ensuring the new streaming features work as expected.",
+    "files": [
+     "tests/test_basic.py",
+     "tests/test_templating.py",
+     "tests/typing/typing_route.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2850
+ },
+ "flask#4720": {
+  "groups": [
+   {
+    "title": "Deprecate FLASK_ENV and app.env in Flask core and helpers",
+    "summary": "The core Flask app and helper functions are updated to deprecate `FLASK_ENV` and the `app.env` attribute, encouraging use of `app.debug` and the `FLASK_DEBUG` environment variable instead. This simplifies debug mode control and removes environment-based behavior.",
+    "files": [
+     "src/flask/app.py",
+     "src/flask/helpers.py"
+    ]
+   },
+   {
+    "title": "Update CLI to remove --env option and related environment variable usage",
+    "summary": "The Flask CLI is modified to remove the `--env` option and references to `FLASK_ENV`, focusing on the `--debug` option for debug mode control. The server banner and CLI options are updated accordingly.",
+    "files": [
+     "src/flask/cli.py"
+    ]
+   },
+   {
+    "title": "Revise documentation to remove FLASK_ENV and environment-based debug mode",
+    "summary": "Documentation files are extensively updated to remove references to `FLASK_ENV` and environment-based debug mode, replacing them with guidance to use the `--debug` option. This includes CLI, config, debugging, quickstart, server, and tutorial docs to align with the new debug mode control approach.",
+    "files": [
+     "docs/cli.rst",
+     "docs/config.rst",
+     "docs/debugging.rst",
+     "docs/quickstart.rst",
+     "docs/server.rst",
+     "docs/tutorial/factory.rst",
+     "examples/tutorial/README.rst"
+    ]
+   },
+   {
+    "title": "Update CHANGES.rst to document deprecation of FLASK_ENV and app.env",
+    "summary": "The changelog is updated to note the deprecation of `FLASK_ENV` and `app.env`, explaining the removal of the distinction between development and debug mode and the new recommended debug mode control.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Remove tests for deprecated get_env function",
+    "summary": "Tests related to the deprecated `get_env` helper function are removed, reflecting its deprecation and removal from the public API.",
+    "files": [
+     "tests/test_helpers.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 4877
+ },
+ "flask#4682": {
+  "groups": [
+   {
+    "title": "Replace LocalStack with contextvars for context management",
+    "summary": "The core application and request context management is changed from using Werkzeug's LocalStack to Python's contextvars. This improves performance and memory usage and changes how contexts are pushed, popped, and accessed internally.",
+    "files": [
+     "src/flask/ctx.py",
+     "src/flask/globals.py",
+     "src/flask/app.py",
+     "src/flask/__init__.py"
+    ]
+   },
+   {
+    "title": "Update Flask core and helpers to use new contextvars-based context management",
+    "summary": "Flask core modules such as helpers, templating, debughelpers, testing, and scaffold are updated to use the new contextvars-based context management instead of LocalStack. This ensures consistent context handling throughout the framework.",
+    "files": [
+     "src/flask/helpers.py",
+     "src/flask/templating.py",
+     "src/flask/debughelpers.py",
+     "src/flask/testing.py",
+     "src/flask/scaffold.py",
+     "src/flask/cli.py"
+    ]
+   },
+   {
+    "title": "Update documentation to reflect removal of LocalStack and new context management",
+    "summary": "Documentation files are updated to remove references to Werkzeug's LocalStack and instead describe the new contextvars-based context management. Deprecated APIs are noted and guidance for extension authors is updated.",
+    "files": [
+     "docs/api.rst",
+     "docs/appcontext.rst",
+     "docs/extensiondev.rst",
+     "docs/patterns/sqlite3.rst",
+     "docs/reqcontext.rst",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Update tests to use new contextvars-based context management",
+    "summary": "Test files and fixtures are updated to use the new contextvars-based context management APIs instead of the deprecated LocalStack-based ones, ensuring tests remain accurate and functional.",
+    "files": [
+     "tests/conftest.py",
+     "tests/test_appctx.py",
+     "tests/test_basic.py",
+     "tests/test_reqctx.py",
+     "tests/test_session_interface.py",
+     "tests/test_testing.py"
+    ]
+   },
+   {
+    "title": "Update setup.py to require Werkzeug >= 2.2.0a1",
+    "summary": "The setup.py dependency on Werkzeug is updated to require version 2.2.0a1 or newer, likely to support the new contextvars-based features.",
+    "files": [
+     "setup.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5428
+ },
+ "click#3866": {
+  "groups": [
+   {
+    "title": "Deprecate invalid and keyword parameter names in core logic",
+    "summary": "Added checks in Click's core parameter classes to warn when parameter names are not valid Python identifiers or are Python keywords, which will raise TypeError in Click 9.0. This ensures better compatibility and clearer error messages for users.",
+    "files": [
+     "src/click/core.py"
+    ]
+   },
+   {
+    "title": "Update documentation and changelog for deprecations",
+    "summary": "Updated CHANGES.md and docs/upgrade-guides.md to document the new deprecations and guide users on migrating their code accordingly.",
+    "files": [
+     "CHANGES.md",
+     "docs/upgrade-guides.md"
+    ]
+   },
+   {
+    "title": "Bump version for upcoming release",
+    "summary": "Updated pyproject.toml to set the development version to 8.6.0.dev reflecting the new changes.",
+    "files": [
+     "pyproject.toml"
+    ]
+   },
+   {
+    "title": "Add comprehensive tests for parameter name deprecations and normalization",
+    "summary": "Added extensive tests covering argument and option parameter naming, including warnings for invalid names, normalization behavior, and environment variable handling. This ensures the new deprecations and behaviors are well-tested and stable.",
+    "files": [
+     "tests/test_arguments.py",
+     "tests/test_deprecations.py",
+     "tests/test_options.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3168
+ },
+ "click#3672": {
+  "groups": [
+   {
+    "title": "Restructure test utilities into a module",
+    "summary": "The large monolithic test_utils.py file was removed and replaced by a test_utils module containing multiple smaller test files, each focusing on a specific utility or feature. This modularization enhances readability and maintainability of the test suite.",
+    "files": [
+     "tests/test_utils.py",
+     "tests/test_utils/__init__.py",
+     "tests/test_utils/test_KeepOpenFile.py",
+     "tests/test_utils/test_LazyFile.py",
+     "tests/test_utils/test__detect_program_name.py",
+     "tests/test_utils/test__expand_args.py",
+     "tests/test_utils/test_confirm.py",
+     "tests/test_utils/test_echo.py",
+     "tests/test_utils/test_echo_via_pager.py",
+     "tests/test_utils/test_format_filename.py",
+     "tests/test_utils/test_make_default_short_help.py",
+     "tests/test_utils/test_open_file.py",
+     "tests/test_utils/test_prompt.py",
+     "tests/test_utils/test_sentinel.py",
+     "tests/test_utils/test_style.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2791
+ },
+ "click#3581": {
+  "groups": [
+   {
+    "title": "Add `custom_version_option` decorator and freeze `version_option` parameters",
+    "summary": "Introduces `custom_version_option` to allow fully customizable version output via a callback, while freezing the parameter set of `version_option` to keep it simple and predictable. This change is implemented in `decorators.py` and exposed in the package's `__init__.py`.",
+    "files": [
+     "src/click/__init__.py",
+     "src/click/decorators.py"
+    ]
+   },
+   {
+    "title": "Update documentation to include `custom_version_option` and clarify usage",
+    "summary": "Adds documentation entries for `custom_version_option` in the API docs and updates the changelog and utils documentation to reflect the new feature and minor improvements.",
+    "files": [
+     "docs/api.md",
+     "docs/utils.md",
+     "CHANGES.md"
+    ]
+   },
+   {
+    "title": "Add tests for `custom_version_option` behavior",
+    "summary": "Adds tests to verify that `custom_version_option` correctly calls the callback, supports multiple option names, and receives the context object as expected.",
+    "files": [
+     "tests/test_basic.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2472
+ },
+ "flask#4646": {
+  "groups": [
+   {
+    "title": "Add CLI options for app, environment, debug, and dotenv file",
+    "summary": "The core CLI logic is enhanced to support --app, --env, --debug, and --env-file options, allowing users to specify the Flask application, execution environment, debug mode, and dotenv file directly on the command line. This improves usability by reducing reliance on environment variables.",
+    "files": [
+     "src/flask/cli.py",
+     "src/flask/helpers.py"
+    ]
+   },
+   {
+    "title": "Update documentation to use new CLI options instead of environment variables",
+    "summary": "Extensive updates to documentation files replace references to FLASK_APP, FLASK_ENV, and FLASK_DEBUG environment variables with the new --app, --env, and --debug CLI options. This includes CLI usage, quickstart, patterns, tutorials, debugging, configuration, and example READMEs, ensuring users are guided to the new recommended usage.",
+    "files": [
+     "docs/cli.rst",
+     "docs/config.rst",
+     "docs/debugging.rst",
+     "docs/patterns/appfactories.rst",
+     "docs/patterns/packages.rst",
+     "docs/quickstart.rst",
+     "docs/reqcontext.rst",
+     "docs/server.rst",
+     "docs/tutorial/database.rst",
+     "docs/tutorial/deploy.rst",
+     "docs/tutorial/factory.rst",
+     "docs/tutorial/install.rst",
+     "examples/javascript/README.rst",
+     "examples/tutorial/README.rst"
+    ]
+   },
+   {
+    "title": "Update changelog to document new CLI options",
+    "summary": "The CHANGES.rst file is updated to document the addition of --app, --env, --debug, and --env-file options to the flask CLI, highlighting the improved configuration flexibility.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Add test environment cleanup for new FLASK_ENV_FILE variable",
+    "summary": "The test conftest.py is updated to ensure the FLASK_ENV_FILE environment variable is unset during tests, preventing interference from environment state.",
+    "files": [
+     "tests/conftest.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 4974
+ },
+ "click#3266": {
+  "groups": [
+   {
+    "title": "Update GitHub Actions workflows to newer action versions",
+    "summary": "All GitHub Actions workflow files have been updated to use newer versions of actions such as actions/checkout, astral-sh/setup-uv, actions/setup-python, actions/cache, actions/upload-artifact, and actions/download-artifact. These updates ensure the workflows use the latest features and fixes.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/pre-commit.yaml",
+     ".github/workflows/publish.yaml",
+     ".github/workflows/test-flask.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Update pre-commit configuration to newer tool versions",
+    "summary": "The .pre-commit-config.yaml file has been updated to use newer revisions of ruff-pre-commit and uv-pre-commit repositories, ensuring the pre-commit hooks run with the latest improvements and bug fixes.",
+    "files": [
+     ".pre-commit-config.yaml"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2118
+ },
+ "click#3023": {
+  "groups": [
+   {
+    "title": "Refactor src/click/_termui_impl.py to lazily import shutil",
+    "summary": "Changed multiple usages of shutil and its which function to be imported locally within functions instead of at the module level, reducing unnecessary imports and improving performance.",
+    "files": [
+     "src/click/_termui_impl.py"
+    ]
+   },
+   {
+    "title": "Adjust src/click/formatting.py to lazily import shutil",
+    "summary": "Moved the import of shutil.get_terminal_size() inside the conditional block to defer importing shutil until absolutely necessary.",
+    "files": [
+     "src/click/formatting.py"
+    ]
+   },
+   {
+    "title": "Modify src/click/testing.py to lazily import shutil",
+    "summary": "Removed the top-level import of shutil and added local imports inside the relevant method to reduce initial import overhead.",
+    "files": [
+     "src/click/testing.py"
+    ]
+   },
+   {
+    "title": "Update tests/test_imports.py to reflect removal of top-level shutil import",
+    "summary": "Removed shutil from the allowed top-level imports list since it is now imported lazily within functions.",
+    "files": [
+     "tests/test_imports.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2208
+ },
+ "click#3371": {
+  "groups": [
+   {
+    "title": "Make ParamType and related classes generic with precise typing",
+    "summary": "ParamType is now a generic abstract base class parameterized by its converted value type, improving type safety. Concrete ParamType subclasses have narrowed return types for their convert methods, and related classes like CompositeParamType and FuncParamType are updated accordingly.",
+    "files": [
+     "src/click/types.py",
+     "examples/validation/validation.py"
+    ]
+   },
+   {
+    "title": "Update core Click classes and functions to use generic ParamType typing",
+    "summary": "Core classes like Parameter and Option, and functions in core.py and termui.py, are updated to use the new generic ParamType typing, ensuring consistent type annotations throughout the codebase.",
+    "files": [
+     "src/click/core.py",
+     "src/click/termui.py"
+    ]
+   },
+   {
+    "title": "Update documentation to reflect ParamType generic typing improvements",
+    "summary": "Documentation files are updated to explain the new generic ParamType class and how to use it, including examples and version change notes to inform users about the typing improvements.",
+    "files": [
+     "docs/parameter-types.md",
+     "docs/shell-completion.md",
+     "docs/support-multiple-versions.md"
+    ]
+   },
+   {
+    "title": "Add changelog entry for ParamType typing improvements",
+    "summary": "The CHANGES.rst file is updated with a new unreleased entry describing the ParamType typing improvements and related changes for version 8.4.0.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Update test imports to allow new imports used in typing improvements",
+    "summary": "The test_imports.py file is updated to allow importing the 'abc' and 'uuid' modules, which are newly imported in the typing improvements.",
+    "files": [
+     "tests/test_imports.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3391
+ },
+ "click#3139": {
+  "groups": [
+   {
+    "title": "Prevent _NamedTextIOWrapper from closing owned buffers",
+    "summary": "Modified _NamedTextIOWrapper to override close() as a no-op to avoid closing buffers owned by StreamMixer, fixing issues with stream lifecycle and logging interaction.",
+    "files": [
+     "src/click/testing.py"
+    ]
+   },
+   {
+    "title": "Add comprehensive stream lifecycle and concurrency tests",
+    "summary": "Added a large new test suite to verify correct stream ownership, lifecycle, logging interaction, multi-threaded safety, sequential invocation isolation, and stress tests for race conditions.",
+    "files": [
+     "tests/test_stream_lifecycle.py"
+    ]
+   },
+   {
+    "title": "Add stress test marker and CI job",
+    "summary": "Introduced a new pytest marker 'stress' for high-iteration stress tests and added a dedicated CI job to run these stress tests on multiple Python versions.",
+    "files": [
+     ".github/workflows/tests.yaml",
+     "pyproject.toml"
+    ]
+   },
+   {
+    "title": "Update changelog with stream lifecycle fixes and tests",
+    "summary": "Documented the prevention of _NamedTextIOWrapper closing streams owned by StreamMixer and the addition of comprehensive stream lifecycle tests and stress testing in the changelog.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3142
+ },
+ "click#2884": {
+  "groups": [
+   {
+    "title": "Update GitHub Actions workflows for CI",
+    "summary": "Updated the pre-commit and test workflows to use newer versions of actions for improved stability and features.",
+    "files": [
+     ".github/workflows/pre-commit.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Upgrade pre-commit hook versions",
+    "summary": "Bumped the version of the ruff-pre-commit hook to a newer release to leverage updated linting capabilities.",
+    "files": [
+     ".pre-commit-config.yaml"
+    ]
+   },
+   {
+    "title": "Minor code style fix in source code",
+    "summary": "Fixed a trailing whitespace issue in src/click/core.py to maintain code style consistency.",
+    "files": [
+     "src/click/core.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2339
+ },
+ "click#2918": {
+  "groups": [
+   {
+    "title": "Integrate 'uv' into project configuration and dependency management",
+    "summary": "The project configuration is updated to use 'uv' for dependency groups and task execution, replacing legacy requirements files and tox.ini. This centralizes dependency management and standardizes task running with 'uv'.",
+    "files": [
+     "pyproject.toml",
+     "requirements/build.in",
+     "requirements/build.txt",
+     "requirements/dev.in",
+     "requirements/dev.txt",
+     "requirements/docs.in",
+     "requirements/docs.txt",
+     "requirements/tests.in",
+     "requirements/tests.txt",
+     "requirements/typing.in",
+     "requirements/typing.txt",
+     "tox.ini"
+    ]
+   },
+   {
+    "title": "Update GitHub Actions workflows to use 'uv'",
+    "summary": "GitHub Actions workflows for locking dependencies, pre-commit checks, publishing, and testing are modified to set up and run 'uv' commands. This ensures consistent environment setup and leverages 'uv' for running tests, builds, and pre-commit hooks.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/pre-commit.yaml",
+     ".github/workflows/publish.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Update documentation build configuration to use 'uv'",
+    "summary": "The ReadTheDocs configuration is updated to use Ubuntu 24.04 and run documentation builds through 'uv', ensuring consistent environment and build process.",
+    "files": [
+     ".readthedocs.yaml"
+    ]
+   },
+   {
+    "title": "Update pre-commit configuration to include 'uv' hooks",
+    "summary": "The pre-commit configuration is updated to add 'uv-lock' hook from the 'uv-pre-commit' repository, integrating 'uv' into the pre-commit checks.",
+    "files": [
+     ".pre-commit-config.yaml"
+    ]
+   },
+   {
+    "title": "Clean up .gitignore and fix minor test utility issue",
+    "summary": "The .gitignore file is cleaned to remove redundant entries, and a minor fix is made in test_utils.py to correctly handle unicode filename formatting.",
+    "files": [
+     ".gitignore",
+     "tests/test_utils.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3808
+ },
+ "click#2570": {
+  "groups": [
+   {
+    "title": "Fix Fish shell completion script syntax",
+    "summary": "Added missing semicolons at the end of lines in the Fish shell completion function to correct syntax errors and ensure proper script execution.",
+    "files": [
+     "src/click/shell_completion.py"
+    ]
+   },
+   {
+    "title": "Update Fish shell completion usage in documentation",
+    "summary": "Modified the shell completion documentation to update the example command for Fish shell, reflecting the correct way to source the completion script.",
+    "files": [
+     "docs/shell-completion.rst"
+    ]
+   },
+   {
+    "title": "Add changelog entry for Fish shell completion fix",
+    "summary": "Added an entry in the changelog to document the fix for the Fish shell completion script issue.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2068
+ },
+ "click#2581": {
+  "groups": [
+   {
+    "title": "Fix regex flags argument in shell completion code",
+    "summary": "Correct the usage of the 'flags' argument in re.sub call to properly pass regex flags, ensuring shell completion scripts are generated correctly.",
+    "files": [
+     "src/click/shell_completion.py"
+    ]
+   },
+   {
+    "title": "Minor code style adjustment in compatibility module",
+    "summary": "Add a noqa comment to suppress a linter warning on a function redefinition in the compatibility module, improving code clarity.",
+    "files": [
+     "src/click/_compat.py"
+    ]
+   },
+   {
+    "title": "Update changelog with bug fix entry",
+    "summary": "Add an entry to the changelog documenting the fix related to regex flags in shell completion, improving release notes accuracy.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 1925
+ },
+ "click#2857": {
+  "groups": [
+   {
+    "title": "Rewrite testing documentation from RST to MyST Markdown",
+    "summary": "The testing documentation for Click applications was rewritten and moved from docs/testing.rst to docs/testing.md using MyST Markdown format. This improves readability and maintainability of the docs while leveraging MyST features.",
+    "files": [
+     "docs/api.rst",
+     "docs/testing.rst",
+     "docs/testing.md"
+    ]
+   },
+   {
+    "title": "Update Sphinx configuration to support MyST parser",
+    "summary": "The Sphinx configuration (docs/conf.py) was updated to include the myst_parser extension, enabling support for MyST Markdown files in the documentation build.",
+    "files": [
+     "docs/conf.py"
+    ]
+   },
+   {
+    "title": "Update development and documentation dependencies for MyST support",
+    "summary": "The requirements files (requirements/dev.in, requirements/dev.txt, requirements/docs.in, requirements/docs.txt) were updated to add myst-parser and sphinx-autobuild, and to upgrade various dependencies. This ensures the documentation build environment supports MyST and related tooling.",
+    "files": [
+     "requirements/dev.in",
+     "requirements/dev.txt",
+     "requirements/docs.in",
+     "requirements/docs.txt"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2771
+ },
+ "click#2312": {
+  "groups": [
+   {
+    "title": "Add 'cls' parameter to '@argument' decorator",
+    "summary": "Modified the '@argument' decorator to accept an optional 'cls' parameter that defaults to the 'Argument' class. This allows users to specify a custom argument class, making the decorator reusable with different argument types.",
+    "files": [
+     "src/click/decorators.py"
+    ]
+   },
+   {
+    "title": "Add test for reusability of '@argument' decorator with 'cls'",
+    "summary": "Added a test to verify that the '@argument' decorator can be reused multiple times with a custom 'cls' argument class, ensuring the parameter class is preserved across uses.",
+    "files": [
+     "tests/test_arguments.py"
+    ]
+   },
+   {
+    "title": "Update changelog to document 'cls' parameter addition",
+    "summary": "Updated CHANGES.rst to document the addition of the 'cls' parameter to '@argument' and '@option' decorators, highlighting the improved reusability.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2750
+ },
+ "click#2107": {
+  "groups": [
+   {
+    "title": "Support pathlib.Path(\"-\") as standard stream in open_file and open_stream",
+    "summary": "The open_file and open_stream functions are updated to recognize pathlib.Path(\"-\") as equivalent to the string \"-\", allowing standard stream handling to work seamlessly with pathlib.Path inputs. This ensures that passing Path(\"-\") opens stdin/stdout as expected.",
+    "files": [
+     "src/click/_compat.py",
+     "src/click/utils.py"
+    ]
+   },
+   {
+    "title": "Enhance Path parameter type to document allow_dash behavior",
+    "summary": "The Path parameter type's docstring is improved to clarify the allow_dash parameter, explaining that it permits a single dash to indicate a standard stream without opening it, and recommending open_file for opening such values.",
+    "files": [
+     "src/click/types.py"
+    ]
+   },
+   {
+    "title": "Update changelog to document support for pathlib.Path(\"-\")",
+    "summary": "The changelog is updated to note that open_file now recognizes pathlib.Path(\"-\") as a standard stream, matching the behavior of the string \"-\".",
+    "files": [
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Add and update tests for Path allow_dash and pathlib.Path(\"-\") support",
+    "summary": "Tests are added and renamed to verify that Path with allow_dash=True works correctly and that open_file correctly handles pathlib.Path(\"-\") as a standard stream, ensuring the new behavior is covered.",
+    "files": [
+     "tests/test_arguments.py",
+     "tests/test_utils.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3013
+ },
+ "click#2543": {
+  "groups": [
+   {
+    "title": "Switch build backend to flit_core",
+    "summary": "Changed the build system from setuptools to flit_core in pyproject.toml and CHANGES.rst, removing setuptools-specific configuration and adding flit-specific settings. This modernizes the packaging and build process.",
+    "files": [
+     "CHANGES.rst",
+     "pyproject.toml"
+    ]
+   },
+   {
+    "title": "Remove setuptools setup.py files and add flit pyproject.toml for examples",
+    "summary": "Removed all setuptools setup.py files from example projects and replaced them with pyproject.toml files configured for flit_core. This aligns example projects with the new build backend and simplifies packaging.",
+    "files": [
+     "examples/aliases/setup.py",
+     "examples/colors/setup.py",
+     "examples/completion/setup.py",
+     "examples/complex/setup.py",
+     "examples/imagepipe/setup.py",
+     "examples/inout/setup.py",
+     "examples/naval/setup.py",
+     "examples/repo/setup.py",
+     "examples/termui/setup.py",
+     "examples/validation/setup.py",
+     "examples/aliases/pyproject.toml",
+     "examples/colors/pyproject.toml",
+     "examples/completion/pyproject.toml",
+     "examples/complex/pyproject.toml",
+     "examples/imagepipe/pyproject.toml",
+     "examples/inout/pyproject.toml",
+     "examples/naval/pyproject.toml",
+     "examples/repo/pyproject.toml",
+     "examples/termui/pyproject.toml",
+     "examples/validation/pyproject.toml"
+    ]
+   },
+   {
+    "title": "Update documentation to reflect switch to flit and entry points",
+    "summary": "Updated documentation to remove references to setuptools and pip/setuptools upgrade instructions, added new docs on packaging entry points with flit, and modified quickstart and other docs to reflect the new packaging approach. This ensures users have accurate guidance for the new build system.",
+    "files": [
+     "CONTRIBUTING.rst",
+     "docs/commands.rst",
+     "docs/entry-points.rst",
+     "docs/index.rst",
+     "docs/quickstart.rst",
+     "docs/setuptools.rst",
+     "docs/shell-completion.rst"
+    ]
+   },
+   {
+    "title": "Remove MANIFEST.in and update CI workflow",
+    "summary": "Removed MANIFEST.in as it is not needed with flit, and simplified the GitHub Actions workflow by removing pip and setuptools upgrade steps. These changes streamline the build and test process under the new build backend.",
+    "files": [
+     "MANIFEST.in",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Update examples README and completion example",
+    "summary": "Removed outdated instructions about setuptools from examples README and added a code block example for completion usage. These minor updates improve clarity and usability of examples.",
+    "files": [
+     "examples/README",
+     "examples/completion/README"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 4903
+ },
+ "werkzeug#3104": {
+  "groups": [
+   {
+    "title": "Refactor SSL context temporary file handling",
+    "summary": "Replaced manual tempfile creation and atexit cleanup with context managers for temporary files in generate_adhoc_ssl_context to improve resource cleanup and code clarity.",
+    "files": [
+     "src/werkzeug/serving.py"
+    ]
+   },
+   {
+    "title": "Update tests to use context managers for resource cleanup",
+    "summary": "Modified tests in test_send_file.py, test_datastructures.py, and test_test.py to use context managers when handling files and streams, ensuring proper closing of resources and preventing leaks.",
+    "files": [
+     "tests/test_send_file.py",
+     "tests/test_datastructures.py",
+     "tests/test_test.py"
+    ]
+   },
+   {
+    "title": "Remove unnecessary warning filter in test_formparser.py",
+    "summary": "Removed a pytest warning filter decorator that was no longer needed, cleaning up the test code.",
+    "files": [
+     "tests/test_formparser.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2402
+ },
+ "werkzeug#3308": {
+  "groups": [
+   {
+    "title": "Refactor Response conditional and range handling",
+    "summary": "Split the deprecated `make_conditional` method into `apply_conditions` and `apply_range` on the Response class to better handle HTTP preconditions and range requests. This change ensures correct evaluation order, proper handling of ETags and ranges, and raises appropriate exceptions on failure.",
+    "files": [
+     "src/werkzeug/wrappers/response.py"
+    ]
+   },
+   {
+    "title": "Enhance Range and IfRange classes with validation and checking",
+    "summary": "Improve the Range class to clamp range values, use only the first range, and support units other than bytes. Add a new `check` method to the IfRange class to validate ETag or date conditions.",
+    "files": [
+     "src/werkzeug/datastructures/range.py"
+    ]
+   },
+   {
+    "title": "Deprecate old utility functions and update imports",
+    "summary": "Mark `is_resource_modified` and `is_byte_range_valid` as deprecated and redirect to new internal implementations. Update imports and warnings to reflect these deprecations.",
+    "files": [
+     "src/werkzeug/http.py",
+     "src/werkzeug/sansio/http.py"
+    ]
+   },
+   {
+    "title": "Update send_file utility for better file-like object support",
+    "summary": "Enhance `send_file` to reset file-like objects to start position and accept ETag objects. Improve type annotations and documentation for parameters.",
+    "files": [
+     "src/werkzeug/utils.py"
+    ]
+   },
+   {
+    "title": "Fix ETagSet initialization and minor datastructure cleanup",
+    "summary": "Simplify ETagSet constructor logic to always use frozenset for strong etags, fixing a minor inconsistency.",
+    "files": [
+     "src/werkzeug/datastructures/etag.py"
+    ]
+   },
+   {
+    "title": "Add tests for apply_conditions and apply_range methods",
+    "summary": "Add new test modules to verify the behavior of the new `apply_conditions` and `apply_range` methods on Response, covering various HTTP precondition and range request scenarios.",
+    "files": [
+     "tests/test_apply_conditions.py",
+     "tests/test_apply_range.py"
+    ]
+   },
+   {
+    "title": "Other changes",
+    "summary": "Files not grouped by the model.",
+    "files": [
+     "CHANGES.rst",
+     "docs/quickstart.rst",
+     "src/werkzeug/middleware/shared_data.py",
+     "src/werkzeug/test.py",
+     "tests/test_http.py",
+     "tests/test_send_file.py",
+     "tests/test_wrappers.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5393
+ },
+ "werkzeug#3286": {
+  "groups": [
+   {
+    "title": "Refactor and clarify HTTP header parsing and data structures",
+    "summary": "Improved parsing and representation of HTTP headers such as ETags, Cache-Control, Content-Security-Policy, Range, and Authorization. Deprecated some methods and properties, added clearer docstrings, and enhanced type annotations for better usage and maintenance.",
+    "files": [
+     "src/werkzeug/datastructures/etag.py",
+     "src/werkzeug/datastructures/cache_control.py",
+     "src/werkzeug/datastructures/csp.py",
+     "src/werkzeug/datastructures/range.py",
+     "src/werkzeug/datastructures/auth.py",
+     "src/werkzeug/datastructures/accept.py",
+     "src/werkzeug/datastructures/structures.py"
+    ]
+   },
+   {
+    "title": "Improve FileStorage and Request content type handling",
+    "summary": "Refactored FileStorage class to use header_property for content-type and content-length headers, added cached parsing of content type and mimetype properties to Request and FileStorage for consistency and efficiency.",
+    "files": [
+     "src/werkzeug/datastructures/file_storage.py",
+     "src/werkzeug/sansio/request.py"
+    ]
+   },
+   {
+    "title": "Standardize capitalization and terminology in docs and code",
+    "summary": "Standardized capitalization of 'ETag' and related terms in documentation and code comments for consistency. Updated changelog and docs to reflect deprecations and new usage recommendations.",
+    "files": [
+     "docs/datastructures.rst",
+     "docs/quickstart.rst",
+     "docs/wrappers.rst",
+     "CHANGES.rst",
+     "src/werkzeug/http.py",
+     "src/werkzeug/sansio/response.py",
+     "src/werkzeug/sansio/utils.py",
+     "src/werkzeug/urls.py",
+     "src/werkzeug/utils.py",
+     "src/werkzeug/middleware/lint.py",
+     "src/werkzeug/sansio/http.py"
+    ]
+   },
+   {
+    "title": "Fix imports to use internal module paths",
+    "summary": "Updated imports of HeaderSet and Headers to use internal submodules for better modularization and clarity.",
+    "files": [
+     "src/werkzeug/_header_property.py"
+    ]
+   },
+   {
+    "title": "Update Response range handling to use new content range methods",
+    "summary": "Modified Response wrapper to use the new Range.make_content_range method instead of deprecated range_for_length and to_content_range_header methods for handling partial content responses.",
+    "files": [
+     "src/werkzeug/wrappers/response.py"
+    ]
+   },
+   {
+    "title": "Remove redundant test for Range validation",
+    "summary": "Removed a test that checked Range constructor validation since validation now occurs only in from_header method, aligning with new behavior.",
+    "files": [
+     "tests/test_datastructures.py"
+    ]
+   },
+   {
+    "title": "Other changes",
+    "summary": "Files not grouped by the model.",
+    "files": [
+     "tests/test_http.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5311
+ },
+ "werkzeug#3250": {
+  "groups": [
+   {
+    "title": "Refine string whitespace stripping and delimiter handling in HTTP header parsing and related utilities",
+    "summary": "Replaced generic strip() calls with strip(\" \\t\") and used partition() instead of split() in parsing HTTP headers, cookies, MIME types, and other string inputs to more precisely handle whitespace and delimiters. This improves robustness and consistency in parsing various HTTP-related strings.",
+    "files": [
+     "src/werkzeug/http.py",
+     "src/werkzeug/datastructures/accept.py",
+     "src/werkzeug/datastructures/auth.py",
+     "src/werkzeug/sansio/multipart.py",
+     "src/werkzeug/sansio/response.py",
+     "src/werkzeug/test.py"
+    ]
+   },
+   {
+    "title": "Improve string handling in routing and matching modules",
+    "summary": "Replaced string slicing comparisons with startswith() and endswith() for clarity and correctness in routing and matching logic.",
+    "files": [
+     "src/werkzeug/routing/map.py",
+     "src/werkzeug/routing/matcher.py",
+     "src/werkzeug/routing/rules.py"
+    ]
+   },
+   {
+    "title": "Enhance string handling in Werkzeug debug and internal modules",
+    "summary": "Improved string splitting and prefix checks in debug and internal modules to use partition() and startswith()/endswith() for better clarity and correctness.",
+    "files": [
+     "src/werkzeug/_internal.py",
+     "src/werkzeug/debug/__init__.py",
+     "src/werkzeug/debug/repr.py"
+    ]
+   },
+   {
+    "title": "Refine string handling in Werkzeug serving and file storage modules",
+    "summary": "Updated string stripping and prefix/suffix checks in serving and file storage modules to use strip(\" \\t\") and startswith()/endswith() for improved correctness and readability.",
+    "files": [
+     "src/werkzeug/serving.py",
+     "src/werkzeug/datastructures/file_storage.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 4035
+ },
+ "werkzeug#2963": {
+  "groups": [
+   {
+    "title": "Replace pytest-xprocess with custom ephemeral port reservation and dev server management",
+    "summary": "The core change replaces pytest-xprocess with ephemeral_port_reserve for port management and introduces a new DevServerClient class to manage live dev server processes and requests, supporting TCP, Unix sockets, and SSL contexts.",
+    "files": [
+     "tests/conftest.py"
+    ]
+   },
+   {
+    "title": "Update test code to use new dev server client and remove pytest-xprocess warnings",
+    "summary": "Test files are updated to remove pytest-xprocess usage and related warnings, and to use the new DevServerClient interface with type annotations and improved test structure.",
+    "files": [
+     "tests/test_serving.py",
+     "tests/middleware/test_http_proxy.py",
+     "tests/test_debug.py"
+    ]
+   },
+   {
+    "title": "Remove pytest-xprocess from dependency files and add ephemeral-port-reserve",
+    "summary": "The dependency files are updated to remove pytest-xprocess and psutil, and add ephemeral-port-reserve, reflecting the new approach to managing ephemeral ports and server processes.",
+    "files": [
+     "requirements/dev.txt",
+     "requirements/tests.in",
+     "requirements/tests.txt",
+     "pyproject.toml"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2446
+ },
+ "werkzeug#2936": {
+  "groups": [
+   {
+    "title": "Update mypy version in requirements",
+    "summary": "The mypy version is updated from 1.10.0 to 1.11.1 in both dev and typing requirements to leverage improvements and fixes in the newer version.",
+    "files": [
+     "requirements/dev.txt",
+     "requirements/typing.txt"
+    ]
+   },
+   {
+    "title": "Adjust type annotations and ignore comments for mypy compatibility",
+    "summary": "Minor changes in type annotations and addition of type ignore comments are made in source files to ensure compatibility with the updated mypy version and to suppress false positives.",
+    "files": [
+     "src/werkzeug/debug/__init__.py",
+     "src/werkzeug/routing/rules.py",
+     "src/werkzeug/wrappers/request.py"
+    ]
+   },
+   {
+    "title": "Refine tox commands for dependency compilation",
+    "summary": "The tox.ini commands for pip-compile are updated to use a quieter and more explicit syntax, improving clarity and potentially reducing noise during builds.",
+    "files": [
+     "tox.ini"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2548
+ },
+ "werkzeug#3386395b": {
+  "groups": [
+   {
+    "title": "Restrict debugger access to trusted hosts",
+    "summary": "Added a trusted hosts list to the DebuggedApplication to limit debugger requests to localhost, .localhost subdomains, 127.0.0.1, and the specified hostname. Requests from untrusted hosts return a SecurityError, improving security by reducing attack surface.",
+    "files": [
+     "src/werkzeug/debug/__init__.py",
+     "src/werkzeug/serving.py",
+     "src/werkzeug/sansio/utils.py"
+    ]
+   },
+   {
+    "title": "Update debugger JavaScript to use full URL for requests",
+    "summary": "Modified debugger JavaScript to use the full document.location URL instead of pathname for PIN authentication and logging requests, aligning with the new trusted host restrictions.",
+    "files": [
+     "src/werkzeug/debug/shared/debugger.js"
+    ]
+   },
+   {
+    "title": "Update documentation to explain trusted hosts feature",
+    "summary": "Enhanced debugger documentation to describe the new trusted hosts feature, its default values, usage, and security implications. Added changelog entry to highlight this security improvement.",
+    "files": [
+     "docs/debug.rst",
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3049
+ },
+ "werkzeug#2712": {
+  "groups": [
+   {
+    "title": "Update core code for Python 3.12 compatibility",
+    "summary": "Modified core modules to replace deprecated APIs and adapt to changes in Python 3.12, such as replacing pkgutil.get_loader with importlib.util.find_spec and updating AST node usage from ast.Str to ast.Constant.",
+    "files": [
+     "src/werkzeug/middleware/shared_data.py",
+     "src/werkzeug/routing/rules.py",
+     "src/werkzeug/datastructures/auth.py"
+    ]
+   },
+   {
+    "title": "Update tests for Python 3.12 compatibility",
+    "summary": "Adjusted tests to align with changes in behavior or warnings under Python 3.12, including fixing assertion placement and removing redundant assertions.",
+    "files": [
+     "tests/test_routing.py"
+    ]
+   },
+   {
+    "title": "Update project metadata and warnings for Python 3.12",
+    "summary": "Updated changelog to note Python 3.12 compatibility and modified pyproject.toml to adjust warning filters to reflect changes in Python 3.12 beta.",
+    "files": [
+     "CHANGES.rst",
+     "pyproject.toml"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2512
+ },
+ "werkzeug#3041": {
+  "groups": [
+   {
+    "title": "Replace Python setup and dependency management with 'uv' in CI workflows",
+    "summary": "The GitHub Actions workflows for pre-commit, publish, and tests now use 'astral-sh/setup-uv' to set up Python environments with caching enabled, and run commands via 'uv' to ensure consistent dependency resolution and environment reproducibility. Legacy requirements files and tox.ini are removed in favor of dependency groups defined in pyproject.toml.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/pre-commit.yaml",
+     ".github/workflows/publish.yaml",
+     ".github/workflows/tests.yaml",
+     "pyproject.toml",
+     "requirements/build.in",
+     "requirements/build.txt",
+     "requirements/dev.in",
+     "requirements/dev.txt",
+     "requirements/docs.in",
+     "requirements/docs.txt",
+     "requirements/tests.in",
+     "requirements/tests.txt",
+     "requirements/typing.in",
+     "requirements/typing.txt",
+     "tox.ini"
+    ]
+   },
+   {
+    "title": "Update pre-commit configuration to include uv lock hook",
+    "summary": "The .pre-commit-config.yaml is updated to add the 'uv-lock' hook from the 'astral-sh/uv-pre-commit' repository, enabling lockfile validation and management as part of pre-commit checks.",
+    "files": [
+     ".pre-commit-config.yaml"
+    ]
+   },
+   {
+    "title": "Update .readthedocs.yaml to use Ubuntu 24.04 and 'uv' for docs build",
+    "summary": "The ReadTheDocs configuration is updated to use Ubuntu 24.04 and Python 3.13, and installs 'uv' via asdf to run the Sphinx build command through 'uv' for consistent environment management.",
+    "files": [
+     ".readthedocs.yaml"
+    ]
+   },
+   {
+    "title": "Minor code style and formatting cleanups",
+    "summary": "Several source files have minor formatting fixes such as line breaks, assertion formatting, and adding noqa comments to imports to suppress linter warnings. These changes improve code readability and maintainability without changing behavior.",
+    "files": [
+     "src/werkzeug/_internal.py",
+     "src/werkzeug/datastructures/cache_control.py",
+     "src/werkzeug/datastructures/file_storage.py",
+     "src/werkzeug/datastructures/headers.py",
+     "src/werkzeug/datastructures/range.py",
+     "src/werkzeug/datastructures/structures.py",
+     "src/werkzeug/debug/tbtools.py",
+     "src/werkzeug/exceptions.py",
+     "src/werkzeug/http.py",
+     "src/werkzeug/routing/rules.py",
+     "src/werkzeug/sansio/http.py"
+    ]
+   },
+   {
+    "title": "Fix test warnings and update test code",
+    "summary": "Test files are updated to fix broken repr formatting and add TODO comments for unresolved resource warnings in multipart tests, improving test output clarity and maintainability.",
+    "files": [
+     "tests/test_debug.py",
+     "tests/test_formparser.py"
+    ]
+   },
+   {
+    "title": "Clean up .gitignore to remove redundant entries",
+    "summary": "The .gitignore file is simplified by removing redundant entries for virtual environments and pytest cache directories, keeping it concise and focused.",
+    "files": [
+     ".gitignore"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5050
+ },
+ "werkzeug#2468": {
+  "groups": [
+   {
+    "title": "Fix route matching for rules without strict slashes",
+    "summary": "Modified the StateMachineMatcher to allow rules that do not enforce strict slashes to match paths with trailing slashes, ensuring that routes like '/path' match '/path/' when strict slashes are disabled.",
+    "files": [
+     "src/werkzeug/routing/matcher.py"
+    ]
+   },
+   {
+    "title": "Restore ValidationError import and update routing exports",
+    "summary": "Re-exported ValidationError from converters in the routing module to maintain backward compatibility and updated the changelog to document this restoration.",
+    "files": [
+     "src/werkzeug/routing/__init__.py",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Add tests for matching behavior with trailing slashes",
+    "summary": "Added test cases to verify that rules without strict slashes correctly match paths with trailing slashes, ensuring the new matching logic works as intended.",
+    "files": [
+     "tests/test_routing.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2119
+ },
+ "werkzeug#2575": {
+  "groups": [
+   {
+    "title": "Add build, provenance, and publish GitHub Actions workflow",
+    "summary": "A new workflow is added to automate building the package, generating provenance data, creating draft releases, and publishing to PyPI with manual approval. This ensures reproducible builds and controlled publishing.",
+    "files": [
+     ".github/workflows/publish.yaml",
+     "requirements/build.in",
+     "requirements/build.txt"
+    ]
+   },
+   {
+    "title": "Update existing GitHub Actions workflows for improved reliability and permissions",
+    "summary": "The lock and test workflows are updated to pin action versions by commit SHA, add necessary permissions, and improve caching. This enhances workflow stability and security.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Add and move flake8 configuration to a dedicated file",
+    "summary": "flake8 configuration is extracted from setup.cfg into a new .flake8 file to centralize linting rules and ignore patterns, improving maintainability of code style settings.",
+    "files": [
+     ".flake8",
+     "setup.cfg"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2917
+ },
+ "werkzeug#2377": {
+  "groups": [
+   {
+    "title": "Fix Transfer-Encoding header logic in development server",
+    "summary": "Modified the WSGIRequestHandler to not set Transfer-Encoding: chunked for 1xx, 204, 304 responses and HEAD requests, aligning with HTTP specifications and preventing incorrect chunked encoding for responses that must not have a body.",
+    "files": [
+     "src/werkzeug/serving.py"
+    ]
+   },
+   {
+    "title": "Refactor debug repr type checking loop variable",
+    "summary": "Renamed loop variable in _add_subclass_info to avoid shadowing and improve clarity, with no behavior change.",
+    "files": [
+     "src/werkzeug/debug/repr.py"
+    ]
+   },
+   {
+    "title": "Update changelog for Transfer-Encoding fix",
+    "summary": "Added an entry to CHANGES.rst documenting the fix to the development server's Transfer-Encoding header behavior for certain HTTP responses.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3103
+ },
+ "jinja#2060": {
+  "groups": [
+   {
+    "title": "Fix minor typos and clarify wording in documentation",
+    "summary": "Corrected several small typos and improved phrasing in multiple documentation files to enhance clarity and readability for users.",
+    "files": [
+     "CHANGES.rst",
+     "docs/templates.rst",
+     "docs/tricks.rst"
+    ]
+   },
+   {
+    "title": "Fix typo in source code comment",
+    "summary": "Corrected a typo in a comment within the source code to maintain consistency and professionalism.",
+    "files": [
+     "src/jinja2/loaders.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 1860
+ },
+ "jinja#2096": {
+  "groups": [
+   {
+    "title": "Drop support for Python 3.7, 3.8, and 3.9",
+    "summary": "Removed Python 3.9 from the CI test matrix and updated documentation and changelog to reflect the new minimum Python version 3.10. This ensures the project only supports actively maintained Python versions.",
+    "files": [
+     ".github/workflows/tests.yaml",
+     "CHANGES.rst",
+     "docs/intro.rst",
+     "pyproject.toml"
+    ]
+   },
+   {
+    "title": "Modernize type annotations to use PEP 604 union syntax",
+    "summary": "Updated type annotations throughout the codebase to use the modern `X | Y` union syntax instead of `Union[X, Y]` or `Optional[X]`. This improves readability and aligns with Python 3.10+ syntax requirements.",
+    "files": [
+     "src/jinja2/async_utils.py",
+     "src/jinja2/bccache.py",
+     "src/jinja2/compiler.py",
+     "src/jinja2/debug.py",
+     "src/jinja2/defaults.py",
+     "src/jinja2/environment.py",
+     "src/jinja2/exceptions.py",
+     "src/jinja2/ext.py",
+     "src/jinja2/filters.py",
+     "src/jinja2/idtracking.py",
+     "src/jinja2/lexer.py",
+     "src/jinja2/loaders.py",
+     "src/jinja2/meta.py",
+     "src/jinja2/nativetypes.py",
+     "src/jinja2/nodes.py",
+     "src/jinja2/optimizer.py",
+     "src/jinja2/parser.py",
+     "src/jinja2/runtime.py",
+     "src/jinja2/sandbox.py",
+     "src/jinja2/utils.py",
+     "src/jinja2/visitor.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3757
+ },
+ "werkzeug#2354": {
+  "groups": [
+   {
+    "title": "Update default redirect status code to 308",
+    "summary": "Changed the default status code for append_slash_redirect from 301 to 308 to preserve the request method and body during redirects. This aligns with modern HTTP standards and previous routing changes.",
+    "files": [
+     "src/werkzeug/utils.py",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Disable automatic Location header correction by default",
+    "summary": "Modified Response to disable autocorrect_location_header by default, so relative Location headers remain relative and do not include scheme and domain unless explicitly enabled. This affects how redirects are sent to clients.",
+    "files": [
+     "src/werkzeug/wrappers/response.py"
+    ]
+   },
+   {
+    "title": "Fix test client redirect following logic and update tests",
+    "summary": "Refactored the test client to properly handle following redirects and avoid errors when not following them. Updated tests to reflect the new default redirect status code and Location header behavior, including enabling autocorrect_location_header in some tests to verify absolute URLs.",
+    "files": [
+     "src/werkzeug/test.py",
+     "tests/test_utils.py",
+     "tests/test_test.py",
+     "tests/middleware/test_proxy_fix.py"
+    ]
+   },
+   {
+    "title": "Add pytest warning filter to treat warnings as errors",
+    "summary": "Added filterwarnings setting to setup.cfg to treat warnings as errors during tests, improving test robustness.",
+    "files": [
+     "setup.cfg"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 6198
+ },
+ "werkzeug#2335": {
+  "groups": [
+   {
+    "title": "Remove embedded Ubuntu font and update CSS to use system fonts",
+    "summary": "The PR deletes the Ubuntu font file and its license, and modifies the CSS to remove references to the Ubuntu font and replace them with generic sans-serif fonts. This reduces dependencies and licensing concerns for the debugger UI.",
+    "files": [
+     "src/werkzeug/debug/shared/FONT_LICENSE",
+     "src/werkzeug/debug/shared/style.css",
+     "src/werkzeug/debug/shared/ubuntu.ttf"
+    ]
+   },
+   {
+    "title": "Fix response content type and HTML syntax in debugger",
+    "summary": "The PR changes the Response constructor to use 'mimetype' instead of 'content_type' for consistency and fixes a malformed DOCTYPE declaration in the debugger's HTML template. These changes improve correctness and consistency in the debugger's error page rendering.",
+    "files": [
+     "src/werkzeug/debug/__init__.py",
+     "src/werkzeug/debug/tbtools.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5464
+ },
+ "werkzeug#2323": {
+  "groups": [
+   {
+    "title": "Enable HTTP/1.1 with chunked transfer and keep-alive in development server",
+    "summary": "The serving module is updated to set HTTP/1.1 as the protocol version when threaded or multiprocess mode is enabled, allowing chunked transfer encoding and persistent connections. The request handler is simplified to route all HTTP methods to the WSGI application, improving maintainability.",
+    "files": [
+     "src/werkzeug/serving.py",
+     "tests/live_apps/run.py",
+     "tests/test_serving.py",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Refactor DebuggedApplication error response and static resource handling",
+    "summary": "The debug middleware now uses the Response class to generate error pages and static resources, adding proper content types, ETags, and support for HTTP caching. This improves compliance with HTTP standards and reduces duplicated code.",
+    "files": [
+     "src/werkzeug/debug/__init__.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 5994
+ },
+ "jinja#1794": {
+  "groups": [
+   {
+    "title": "Add build, provenance, and publish GitHub Actions workflow",
+    "summary": "A new workflow is added to automate building Python packages, generating provenance data for supply chain security, creating draft GitHub releases, and publishing packages to PyPI with manual approval. This enhances release automation and security.",
+    "files": [
+     ".github/workflows/publish.yaml",
+     "requirements/build.in",
+     "requirements/build.txt"
+    ]
+   },
+   {
+    "title": "Update GitHub Actions workflows for consistency and improvements",
+    "summary": "The existing lock and test workflows are updated to use specific action versions and improved caching strategies, enhancing reliability and reproducibility of CI processes.",
+    "files": [
+     ".github/workflows/lock.yaml",
+     ".github/workflows/tests.yaml"
+    ]
+   },
+   {
+    "title": "Add and move flake8 configuration to dedicated file",
+    "summary": "flake8 linting configuration is extracted from setup.cfg into a dedicated .flake8 file, improving configuration clarity and maintainability.",
+    "files": [
+     ".flake8",
+     "setup.cfg"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2760
+ },
+ "jinja#1647": {
+  "groups": [
+   {
+    "title": "Add missing parameters to Environment.overlay method",
+    "summary": "The overlay method in Environment now accepts newline_sequence, keep_trailing_newline, and enable_async parameters to align with the __init__ method, allowing overlays to fully customize these options. This change improves feature parity and flexibility when creating overlay environments.",
+    "files": [
+     "src/jinja2/environment.py",
+     "CHANGES.rst"
+    ]
+   },
+   {
+    "title": "Fix variable naming in NodeVisitor.generic_visit",
+    "summary": "Corrected the loop variable name in generic_visit from 'node' to 'child_node' to avoid shadowing the input parameter and improve code clarity.",
+    "files": [
+     "src/jinja2/visitor.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2469
+ },
+ "jinja#1617": {
+  "groups": [
+   {
+    "title": "Update context documentation in API reference",
+    "summary": "Clarified the immutability and usage of the Jinja context to help users understand how variable assignment and context modification work in templates.",
+    "files": [
+     "docs/api.rst"
+    ]
+   },
+   {
+    "title": "Revise FAQ for clarity and accuracy",
+    "summary": "Streamlined the FAQ by removing outdated content, improving explanations about Jinja's name, performance, compatibility with Django, and best practices for logic in templates.",
+    "files": [
+     "docs/faq.rst"
+    ]
+   },
+   {
+    "title": "Add integration notes for popular frameworks",
+    "summary": "Added brief integration sections for Flask and Django to guide users on how Jinja is used within these frameworks.",
+    "files": [
+     "docs/integration.rst"
+    ]
+   },
+   {
+    "title": "Rewrite switching guide from other template engines",
+    "summary": "Replaced the old, detailed Jinja 1 to Jinja 2 migration guide with a concise overview of differences between Jinja and other template engines, focusing on Django templates.",
+    "files": [
+     "docs/switching.rst"
+    ]
+   },
+   {
+    "title": "Improve template documentation on macros and includes",
+    "summary": "Enhanced explanations on macro scope behavior and the include tag's context handling, including examples and notes on ignore missing and template lists.",
+    "files": [
+     "docs/templates.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2652
+ },
+ "jinja#1793": {
+  "groups": [
+   {
+    "title": "Migrate packaging and project metadata to pyproject.toml",
+    "summary": "Replaces setup.cfg and setup.py with a pyproject.toml file that contains project metadata, dependencies, build system requirements, and tool configurations. Updates the GitHub Actions workflow to reference pyproject.toml for caching mypy results and adds a changelog entry for this migration.",
+    "files": [
+     "CHANGES.rst",
+     ".github/workflows/tests.yaml",
+     "pyproject.toml",
+     "setup.cfg",
+     "setup.py"
+    ]
+   },
+   {
+    "title": "Add and configure flake8 linting via .flake8 file",
+    "summary": "Introduces a .flake8 configuration file to specify linting rules, error ignores, and per-file ignores, replacing the previous flake8 configuration in setup.cfg. This ensures consistent linting behavior aligned with the new pyproject.toml setup.",
+    "files": [
+     ".flake8"
+    ]
+   },
+   {
+    "title": "Improve type annotations and typing consistency",
+    "summary": "Enhances type annotations across multiple source files for better type safety and clarity, including specifying generic types for iterables, unions, and callable signatures. These changes improve static analysis and maintainability without altering runtime behavior.",
+    "files": [
+     "src/jinja2/async_utils.py",
+     "src/jinja2/environment.py",
+     "src/jinja2/filters.py",
+     "src/jinja2/lexer.py",
+     "src/jinja2/loaders.py",
+     "src/jinja2/nodes.py",
+     "src/jinja2/parser.py",
+     "src/jinja2/runtime.py",
+     "src/jinja2/sandbox.py",
+     "src/jinja2/tests.py",
+     "src/jinja2/utils.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 4009
+ },
+ "jinja#1435": {
+  "groups": [
+   {
+    "title": "Update type annotations to use string literals and typing_extensions",
+    "summary": "Changed type hints to use string literals for forward references and imported typing_extensions as te for NoReturn and Deque types, improving compatibility with Python 3.6 and enhancing static type checking.",
+    "files": [
+     "src/jinja2/compiler.py",
+     "src/jinja2/environment.py",
+     "src/jinja2/lexer.py",
+     "src/jinja2/nodes.py",
+     "src/jinja2/parser.py",
+     "src/jinja2/runtime.py",
+     "src/jinja2/utils.py",
+     "src/jinja2/bccache.py"
+    ]
+   },
+   {
+    "title": "Mark top-level imports as exported for better type checking",
+    "summary": "Modified __init__.py to explicitly alias all top-level imports to themselves, marking them as exported names so type checkers recognize them in user projects.",
+    "files": [
+     "src/jinja2/__init__.py"
+    ]
+   },
+   {
+    "title": "Update changelog to reflect typing improvements",
+    "summary": "Added entries to CHANGES.rst documenting the marking of top-level names as exported and fixes to types unavailable in Python 3.6.0, providing context for the typing-related changes.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3048
+ },
+ "jinja#1531": {
+  "groups": [
+   {
+    "title": "Add Python 3.11 testing support in CI and tox",
+    "summary": "The CI workflow and tox configuration were updated to include Python 3.11, enabling tests to run on the latest Python development version to catch compatibility issues early.",
+    "files": [
+     ".github/workflows/tests.yaml",
+     "tox.ini"
+    ]
+   },
+   {
+    "title": "Update development and test dependencies",
+    "summary": "The 'py' package version was bumped from 1.10.0 to 1.11.0 in both development and test requirements to maintain compatibility with Python 3.11 and ensure dependencies are up to date.",
+    "files": [
+     "requirements/dev.txt",
+     "requirements/tests.txt"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3290
+ },
+ "jinja#1434": {
+  "groups": [
+   {
+    "title": "Update type annotations to use string literals and typing_extensions",
+    "summary": "Changed type annotations in multiple modules to use string literals for forward references and imported typing_extensions as te for NoReturn and Deque types. This improves compatibility with older Python versions and enhances type checking.",
+    "files": [
+     "src/jinja2/bccache.py",
+     "src/jinja2/compiler.py",
+     "src/jinja2/environment.py",
+     "src/jinja2/lexer.py",
+     "src/jinja2/nodes.py",
+     "src/jinja2/parser.py",
+     "src/jinja2/runtime.py",
+     "src/jinja2/utils.py"
+    ]
+   },
+   {
+    "title": "Mark top-level imports as exported for better type checking",
+    "summary": "Modified the __init__.py imports to use 'import as' syntax, marking top-level names as exported. This helps type checkers understand imports in user projects and improves type hinting.",
+    "files": [
+     "src/jinja2/__init__.py"
+    ]
+   },
+   {
+    "title": "Update changelog to reflect typing improvements",
+    "summary": "Added entries in CHANGES.rst documenting the marking of top-level names as exported and fixes to types unavailable in Python 3.6.0, improving transparency of typing-related changes.",
+    "files": [
+     "CHANGES.rst"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2781
+ },
+ "jinja#1419": {
+  "groups": [
+   {
+    "title": "Update Sphinx and related dependencies to development version",
+    "summary": "The Sphinx package is updated from version 4.0.1 to a specific development commit from the GitHub repository. Corresponding updates to Jinja2 and MarkupSafe versions are made to ensure compatibility with this newer Sphinx version, which may fix issues or add new features.",
+    "files": [
+     "requirements/dev.txt",
+     "requirements/docs.in",
+     "requirements/docs.txt"
+    ]
+   },
+   {
+    "title": "Adjust type hint in Jinja2 environment.py for compatibility",
+    "summary": "The return type hint of a method in Jinja2's environment.py is changed from 'Template' to 'Any' to avoid breaking the Sphinx build with the updated dependencies. This change ensures smoother integration with the updated Sphinx version.",
+    "files": [
+     "src/jinja2/environment.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 2925
+ },
+ "jinja#1361": {
+  "groups": [
+   {
+    "title": "Update CI workflows for consistency and coverage",
+    "summary": "Modified GitHub Actions workflow to ignore documentation files for triggering tests and added Windows and MacOS test environments for Python 3.9. Also added caching for mypy to speed up typing checks.",
+    "files": [
+     ".github/workflows/tests.yaml",
+     "tox.ini"
+    ]
+   },
+   {
+    "title": "Improve documentation structure and links",
+    "summary": "Reorganized changelog files, added a license file, updated documentation index and conf.py to include new project links such as Donate and Twitter, and enhanced README with donation information and updated project links.",
+    "files": [
+     "README.rst",
+     "docs/changelog.rst",
+     "docs/changes.rst",
+     "docs/conf.py",
+     "docs/index.rst",
+     "docs/license.rst",
+     ".readthedocs.yaml"
+    ]
+   },
+   {
+    "title": "Refine project metadata and type checking configuration",
+    "summary": "Moved version metadata to setup.cfg, cleaned up setup.py, and enhanced mypy configuration with stricter type checking options and added project URLs for better metadata consistency.",
+    "files": [
+     "setup.cfg",
+     "setup.py"
+    ]
+   },
+   {
+    "title": "Add typing annotations and improve code clarity",
+    "summary": "Added typing imports and annotations to multiple source files to improve code clarity and enable better static analysis, including optional types and type hints for class attributes and variables.",
+    "files": [
+     "src/jinja2/compiler.py",
+     "src/jinja2/debug.py",
+     "src/jinja2/defaults.py",
+     "src/jinja2/environment.py",
+     "src/jinja2/runtime.py",
+     "src/jinja2/utils.py"
+    ]
+   }
+  ],
+  "fallback": false,
+  "latency_ms": 3333
+ }
+}

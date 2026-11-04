@@ -9,5 +9,6 @@
 | Top-level folder (DiffLens fallback) | 0.79 | 0.60 | 0.68 | 0.23 | 7% |
 | Parent folder | 0.84 | 0.37 | 0.51 | 0.21 | 9% |
 | Parent folder + test pairing | 0.84 | 0.37 | 0.51 | 0.20 | 9% |
+| DiffLens (gpt-4.1-mini) | 0.86 | 0.60 | 0.71 | 0.33 | 12% |
 
 Regenerate: `python evals/run_eval.py` (see evals/README.md).
