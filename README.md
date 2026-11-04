@@ -13,7 +13,7 @@ that, on every pull request:
 3. **Posts a review guide as a PR comment** and links to a web view with the grouped diff and a
    "files reviewed" tracker.
 
-**Live:** <!-- add your Vercel link here --> · **Example review:** <!-- your-vercel-link/reviews/example -->
+**Live:** [diff-lens-five.vercel.app](https://diff-lens-five.vercel.app) · **Example review:** [diff-lens-five.vercel.app/reviews/example](https://diff-lens-five.vercel.app/reviews/example)
 
 <!-- Add a screenshot or GIF here: docs/demo.gif -->
 
