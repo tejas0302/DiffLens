@@ -13,6 +13,8 @@ that, on every pull request:
 3. **Posts a review guide as a PR comment** and links to a web view with the grouped diff and a
    "files reviewed" tracker.
 
+**Live:** <!-- add your Vercel link here --> · **Example review:** <!-- your-vercel-link/reviews/example -->
+
 <!-- Add a screenshot or GIF here: docs/demo.gif -->
 
 ## How it works
@@ -86,10 +88,20 @@ Run tests: `cd backend && pytest -q`
 
 ## Deploy
 
-- **Database:** create a free Postgres on Neon or Supabase; set `DATABASE_URL`.
-- **Backend:** deploy `backend/` to Railway, Render or Fly using the Dockerfile; set every variable from `.env.example`.
-- **Frontend:** import the repo into Vercel with root directory `frontend/`; set `NEXT_PUBLIC_API_URL` to the backend URL.
-- Update the GitHub App's webhook URL and the backend's `FRONTEND_URL` to the deployed addresses.
+The frontend works on its own: with no backend configured it serves the landing page and a
+built-in example review (`/reviews/example`), so the public link never breaks.
+
+1. **Frontend (Vercel):** import the repo, set **Root Directory** to `frontend`, deploy.
+2. **Example with real AI output:** `cd backend && OPENAI_API_KEY=sk-... python export_example.py`,
+   then commit `frontend/lib/example-review.json`; Vercel redeploys automatically.
+3. **Database (Neon):** create a free Postgres project and copy its connection string.
+4. **Backend (Render):** New → Blueprint → this repo. `render.yaml` sets it up; paste the values it asks for.
+5. **Connect them:** in Vercel set `NEXT_PUBLIC_API_URL` to the Render URL (and optionally
+   `NEXT_PUBLIC_INSTALL_URL` to your app's install page), redeploy; point the GitHub App's webhook at
+   `https://<render-url>/webhook`.
+
+Render's free tier sleeps after 15 idle minutes, so the first webhook after a quiet spell can take
+about a minute; GitHub's "Redeliver" button on the App's Advanced tab retries it.
 
 ## Roadmap
 - Eval harness: run on PRs with known bugs and report precision/recall of the risk flags

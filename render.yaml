@@ -1,0 +1,27 @@
+# One-click backend deploy on Render: New → Blueprint → pick this repo.
+# Render asks for each `sync: false` value during setup.
+services:
+  - type: web
+    name: difflens-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL          # Neon Postgres connection string
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GITHUB_APP_ID
+        sync: false
+      - key: GITHUB_PRIVATE_KEY    # the .pem contents, newlines written as \n
+        sync: false
+      - key: GITHUB_WEBHOOK_SECRET
+        sync: false
+      - key: FRONTEND_URL          # your Vercel URL, e.g. https://difflens.vercel.app
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: MAX_CHANGED_LINES
+        value: "2000"
