@@ -22,8 +22,8 @@ so no API access is needed. A PR is kept only if it is a clean test case:
 - commits that look like review fix-ups ("address review", "typo", "lint") never
   own a file another commit also changed
 
-**Held-out set.** `data/holdout.json` holds 48 more PRs from different projects
-(pytest, requests). The development set was inspected while improving the prompt;
+**Held-out set.** `data/holdout.json` holds 153 more PRs from four different
+projects (pytest, pip, setuptools, requests). The development set was inspected while improving the prompt;
 the held-out set never was, so **held-out scores are the honest result**.
 
 ## Prompt versions
@@ -66,7 +66,6 @@ reproducible and re-runs are free.
 
 - Commits are a proxy for intent, not a perfect label: some authors commit by
   time, not by topic. Filtering removes the noisiest cases but not all.
-- Four projects from one organisation share conventions; results may not
-  transfer to other codebases or languages.
-- About 50 PRs per set is enough to compare methods, not to measure small differences;
-  every comparison is reported with a bootstrap 95% confidence interval.
+- All eight projects are Python; results may not transfer to other languages.
+- Every comparison is reported with a paired bootstrap 95% confidence interval;
+  small differences need more PRs than these sets hold.

@@ -105,8 +105,9 @@ about a minute; GitHub's "Redeliver" button on the App's Advanced tab retries it
 
 ## Evaluation
 
-Grouping is scored on 56 real merged PRs from Flask, Click, Werkzeug and Jinja, using each
-PR author's own commits as the answer key, against five baselines. Method, metrics and
+Grouping is scored on real merged PRs from eight open-source Python projects, using each PR
+author's own commits as the answer key, against five baselines, with a held-out set of 153
+PRs that was never inspected while developing prompts. Method, metrics and
 limitations: [evals/README.md](evals/README.md) · results: [evals/results/RESULTS.md](evals/results/RESULTS.md).
 
 ## Roadmap
