@@ -10,25 +10,37 @@
     "additions": 26,
     "deletions": 3
   },
-  "risk_count": 5,
+  "risk_count": 7,
   "high_risk_count": 2,
-  "created_at": "2026-11-04T00:38:41.616779+00:00",
+  "created_at": "2026-11-04T01:27:48.278235+00:00",
   "head_sha": "9f3c2ab7e1d04c55",
   "pr_url": "",
-  "summary": "AI summary unavailable (RuntimeError); grouped by directory instead.",
+  "summary": "This PR adds rate limiting to the login process by locking accounts for 15 minutes after 5 failed login attempts, improving security against brute force attacks.",
   "groups": [
     {
-      "title": "Changes in src",
-      "summary": "3 file(s) changed.",
+      "title": "Implement rate limiting logic for failed login attempts",
+      "summary": "Introduces a new module to track and count failed login attempts within a 15-minute window, enabling account lockout after too many failures.",
       "files": [
-        "src/auth/login.py",
-        "src/auth/rate_limit.py",
+        "src/auth/rate_limit.py"
+      ]
+    },
+    {
+      "title": "Integrate rate limiting into login flow",
+      "summary": "Modifies the login function to check for too many failed attempts and raise an error if the limit is exceeded, and records each login attempt's success or failure.",
+      "files": [
+        "src/auth/login.py"
+      ]
+    },
+    {
+      "title": "Handle rate limit errors in API route",
+      "summary": "Updates the login API route to catch the rate limit exception and respond with a 429 status code and appropriate error message.",
+      "files": [
         "src/api/routes.py"
       ]
     },
     {
-      "title": "Changes in (root)",
-      "summary": "1 file(s) changed.",
+      "title": "Add redis dependency to requirements",
+      "summary": "Adds the redis package to requirements.txt, presumably for future use or related to rate limiting.",
       "files": [
         "requirements.txt"
       ]
@@ -69,6 +81,20 @@
       "path": "src/auth/login.py",
       "message": "1 added line(s) look like debug output or TODOs.",
       "source": "rule"
+    },
+    {
+      "severity": "medium",
+      "path": "src/auth/login.py",
+      "message": "The login function raises PermissionError on too many attempts; ensure callers handle this exception properly.",
+      "kind": "llm",
+      "source": "llm"
+    },
+    {
+      "severity": "medium",
+      "path": "src/api/routes.py",
+      "message": "The login_route now returns HTTP 429 on rate limit; verify clients handle this new response code.",
+      "kind": "llm",
+      "source": "llm"
     }
   ],
   "files": [
@@ -181,7 +207,7 @@
       ]
     }
   ],
-  "model": "fallback",
-  "latency_ms": 0,
+  "model": "gpt-4.1-mini",
+  "latency_ms": 4232,
   "error": ""
 }
